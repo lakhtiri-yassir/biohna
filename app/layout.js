@@ -12,6 +12,6 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>{children}</Providers>
       </body>
-    <html lang="fr" dir="ltr">
+    </html>
   );
 }

@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation'
 
 import { useState, useEffect } from 'react'
 import { useIsNarrow } from '@/hooks/useIsNarrow.js'
@@ -179,11 +178,8 @@ export default function ProductDetail() {
     return [...others, ...extras].slice(0, 4)
   })()
 
-  const cameFromVendeur = location.state?.from === 'vendeur'
-  const backLabel = cameFromVendeur
-    ? t('detail.back_artisan', { name: artisan.name })
-    : t('detail.back_catalog')
-  const backTarget = cameFromVendeur ? `/vendeurs/${artisan.id}` : '/produits'
+  const backLabel = t('detail.back_catalog')
+  const backTarget = '/produits'
 
   const TABS = [
     { id: 'description', label: t('detail.tab_desc') },

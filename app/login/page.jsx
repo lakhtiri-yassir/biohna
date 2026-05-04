@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation'
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
