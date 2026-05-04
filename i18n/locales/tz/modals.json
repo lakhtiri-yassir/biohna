@@ -1,0 +1,94 @@
+{
+  "categories": {
+    "heading": "ⵜⵉⵙⵏⴰⵜⵉⵏ",
+    "search_placeholder": "ⵔⵣⵓ ⵜⴰⵙⵏⴰⵜ…",
+    "products_count": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ",
+    "see_all": "ⵙⵏⴼⵍ ⵎⴰⵕⵕⴰ ←",
+    "sections": {
+      "featured_label": "ⵉⵙⵜⴰⵢⵏ",
+      "food_label": "ⵉⵎⵏⵙⵉ",
+      "spices_label": "ⵉⵔⴰⵔ ⴷ ⵉⴳⵔⵔⴰⵡⵏ",
+      "beauty_label": "ⵜⵉⵙⵓⵔⵙⵉⵏ"
+    },
+    "items": {
+      "featured": "ⵉⵎⵏⵥⴰⵡⵏ ⵉⵙⵜⴰⵢⵏ",
+      "honey": "ⵜⵉⵎⴰⴷⴷⵓⵡⵉⵏ",
+      "grains": "ⵉⵖⵔⴷⴰⵏⵏ",
+      "nuts": "ⵉⵣⵣⵓⴳⴳⵣⵏ",
+      "butters": "ⵉⵎⵙⴽⵉⵏ",
+      "spices": "ⵉⵔⴰⵔ ⵉⵙⵏⴰⵏ",
+      "herbs": "ⵉⴳⵔⵔⴰⵡⵏ",
+      "oils": "ⵉⵥⵥⵉⵡⵏ",
+      "soap": "ⵜⴰⵙⴰⴱⵓⵏⵜ ⵜⴰⴱⵍⴷⵉⵜ"
+    }
+  },
+  "contact": {
+    "label": "ⵜⵉⵡⵓⵔⵉⵡⵉⵏ",
+    "heading": "ⵎⵇⵇⵍ ⴷⴰⵖ",
+    "description": "ⵉⵔⵓ ⵏⵏⵖ ⵉⵔⴰⵔⵓ ⴳ 24h.",
+    "phone_label": "📱 ⵜⴰⵏⴼⵓⵙⵜ",
+    "phone_value": "+212 6 00 00 00",
+    "email_label": "✉ ⵉⵎⵉⵍ",
+    "email_value": "contact@biohna.ma",
+    "whatsapp_label": "💬 ⵡⴰⵜⵙⴰⴱ",
+    "whatsapp_status": "ⵉⵍⵍⴰ",
+    "tabs": {
+      "message": "ⵜⴰⴱⵔⴰⵜ",
+      "order": "ⵜⵓⵣⵣⵡⴰ",
+      "partnership": "ⵜⵉⵔⵎⵉⵜ"
+    },
+    "form": {
+      "name": "ⵉⵙⵎ",
+      "name_placeholder": "ⵉⵙⵎ ⵏⵏⴽ",
+      "email": "ⵉⵎⵉⵍ",
+      "email_placeholder": "ⵉⵎⵉⵍ ⵏⵏⴽ",
+      "subject": "ⴰⵙⵓⵍ",
+      "subject_placeholder": "ⵎⴰ ⵜⵔⵉⴷ?",
+      "message": "ⵜⴰⴱⵔⴰⵜ",
+      "message_placeholder": "ⴰⵔⵓ ⵜⴰⴱⵔⴰⵜ ⵏⵏⴽ…"
+    },
+    "cancel": "ⵙⵔ",
+    "submit": "ⴰⵣⵏ ←"
+  },
+  "favorites": {
+    "heading": "ⵉⵃⵍⴰⵏ ⵉⵏⵓ",
+    "subheading": "ⵉⵥⵥⴰⵏ ⴷ ⵉⵃⵍⴰⵏ",
+    "list_header": "ⵉⵜⵜⵓⵖ ⴷⴰⵖⵉ — {{count}}",
+    "rebuy": "+ ⴰⵔⵔ",
+    "see_all": "ⵙⵏⴼⵍ ⵎⴰⵕⵕⴰ ←"
+  },
+  "panier": {
+    "heading": "ⴰⵣⵍⴰⴼ ⵉⵏⵓ",
+    "empty": "ⴰⵣⵍⴰⴼ ⵏⵏⴽ ⵉⵥⵍⵍⵉ",
+    "see_all": "ⵙⵏⴼⵍ ⴰⵣⵍⴰⴼ ←",
+    "subtotal": "ⴰⴳⴰⵎ ⴰⵎⵣⵡⴰⵔⵓ",
+    "shipping": "ⵜⵉⵏⵡⵉⴷⵉ",
+    "shipping_free": "ⴱⵍⴰ ⵜⵓⵜⵍⴰⵢⵜ",
+    "total": "ⴰⴳⴰⵎ",
+    "checkout_btn": "← ⵙⵙⴳⵎⵉ",
+    "continue": "ⵙⵓⴼⵓⵍ ⴰⵙⵓⵖⵏ →"
+  },
+  "vendeurs": {
+    "heading": "ⵉⵎⵙⵏⴰⵏ ⵏⵏⵖ",
+    "search_placeholder": "ⵔⵣⵓ ⴰⵎⵙⵏⴰⵏ…",
+    "region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "all_regions": "ⵎⴰⵕⵕⴰ",
+    "tabs": {
+      "all": "ⵎⴰⵕⵕⴰ",
+      "food": "ⵉⵎⵏⵙⵉ",
+      "oils": "ⵉⵥⵥⵉⵡⵏ",
+      "beauty": "ⵜⵉⵙⵓⵔⵙⵉⵏ",
+      "spices": "ⵉⵔⴰⵔ"
+    },
+    "artisan_count_one": "{{count}} ⴰⵎⵙⵏⴰⵏ",
+    "artisan_count_other": "{{count}} ⵉⵎⵙⵏⴰⵏ",
+    "empty": "ⵓⵔ ⵉⵜⵜⵓⴼⴰ ⵡⴰⵎⵙⵏⴰⵏ",
+    "products_count": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ",
+    "see_all": "← ⵙⵏⴼⵍ ⵉⵎⵙⵏⴰⵏ ⵏⵏⵖ",
+    "become_partner": "ⵉⵍⵉ ⴰⵎⴰⵣⵣⵓⵔ",
+    "hover_to_discover": "ⵔⵣⵓ ⴰⵏⵎⵓⵇⵇⴰⵔ ⴰⴷ ⵜⵙⵏⵎⴰⵍⴰⵢⵜ ⴰⵎⵙⵏⴰⵏ",
+    "member_since": "ⴰⵎⵣⴷⴰⵖ ⴳ",
+    "view_profile": "ⵙⵏⴼⵍ ⴰⴼⵔⴷⵉⵙ",
+    "filter_region_placeholder": "ⵎⴰⵕⵕⴰ ⵜⵉⵎⵏⴰⴹⵉⵏ"
+  }
+}

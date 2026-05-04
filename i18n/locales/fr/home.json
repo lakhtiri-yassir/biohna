@@ -1,0 +1,108 @@
+{
+  "hero": {
+    "tagline": "L'authenticité marocaine, livrée chez vous",
+    "description": "Les saveurs, les soins et l'âme du Maroc — façonnés par ses femmes, livrés intacts jusqu'à vous",
+    "search_placeholder": "Rechercher un produit, une artisane…",
+    "search_btn": "Chercher",
+    "cta_products": "Découvrir les produits",
+    "cta_join": "Rejoindre la famille",
+    "scroll": "Scroll"
+  },
+  "featured": {
+    "label": "Nos coups de cœur",
+    "heading": "Produits Vedettes",
+    "see_all": "Voir tous les produits →"
+  },
+  "cooperatives": {
+    "label": "Nos partenaires",
+    "heading": "Les Coopératives",
+    "visit_btn": "Visiter la coopérative",
+    "count": "{{count}} coopératives",
+    "bestseller_label": "Produit phare"
+  },
+  "badge": {
+    "popular": "Populaire",
+    "new": "Nouveau",
+    "organic": "Bio"
+  },
+  "stats": {
+    "artisans": "Artisanes partenaires",
+    "regions": "Régions du Maroc",
+    "natural": "Produits naturels",
+    "clients": "Clients satisfaits",
+    "artisans_val": "200+",
+    "regions_val": "35+",
+    "natural_val": "100%",
+    "clients_val": "5 000+"
+  },
+  "about": {
+    "label": "À propos de nous",
+    "heading": "Notre Histoire",
+    "quote": "« L'âme du Maroc, façonnée par ses femmes, livrée intacte jusqu'à vous »",
+    "text": "Biohna est une plateforme qui connecte directement les femmes artisanes marocaines aux consommateurs qui cherchent l'authenticité. Chaque produit est 100% naturel, fait main, et raconte une histoire.",
+    "mission": "Notre mission : valoriser le savoir-faire ancestral tout en offrant une source de revenus juste et digne à ces femmes exceptionnelles."
+  },
+  "family": {
+    "label": "La Famille Biohna",
+    "heading": "Là pour vous.",
+    "subheading": "Tout près de vous, partout au Maroc",
+    "join_btn": "Devenez membre de la FAMILLE BIOHNA"
+  },
+  "carousel_items": [
+    { "name": "9er3a dyal L3ssel Beldi", "vendor": "Lalla Fatima — Meknès" },
+    { "name": "Huile d'Argan Pure",       "vendor": "Coopérative Aït Baha" },
+    { "name": "Savon Beldi Eucalyptus",   "vendor": "Khadija — Essaouira" },
+    { "name": "Amlou Artisanal",          "vendor": "Nadia — Taroudant" },
+    { "name": "Ras el Hanout Premium",    "vendor": "Coopérative Fès" },
+    { "name": "Ghee Artisanal",           "vendor": "Zahra — Ifrane" }
+  ],
+  "cooperatives_items": [
+    { "name": "Coopérative Aït Baha",       "region": "Souss-Massa",       "bio": "Fondée en 2003 par 34 femmes berbères, Aït Baha est la référence mondiale de l'huile d'argan cosmétique. Leur pressage à froid préserve toutes les vertus de l'or liquide du Maroc.", "bestseller": "Huile d'Argan Pure — 320 DHs",    "badge": "Argan"   },
+    { "name": "Coopérative Tifawin",         "region": "Tiznit",            "bio": "Tifawin (« lumière » en tamazight) regroupe 60 artisanes spécialisées dans la cosmétique naturelle. Leur savon beldi cuit au bois de figuier est reconnu pour ses vertus purifiantes exceptionnelles.", "bestseller": "Savon Beldi Premium — 95 DHs",    "badge": "Savon"   },
+    { "name": "Dar Lalla Fatima",            "region": "Meknès",            "bio": "Depuis 1998, Lalla Fatima réunit les apicultrices des plaines du Moyen Atlas. Leur miel beldi de thym sauvage est récolté deux fois par an selon les cycles lunaires.", "bestseller": "Miel de Thym Sauvage — 500 DHs",  "badge": "Miel"    },
+    { "name": "Coopérative Amalou",          "region": "Taroudant",         "bio": "Quinze femmes de la vallée du Souss perpétuent la recette ancestrale de l'amlou — cette pâte d'amande, argan et miel que les Berbères offrent aux mariées. Chaque pot est broyé à la pierre.", "bestseller": "Amlou Artisanal — 180 DHs",       "badge": "Amlou"   },
+    { "name": "Coopérative Zitoun",          "region": "Marrakech",         "bio": "Nichée dans les palmeraies de Marrakech, Zitoun transforme les olives de variétés anciennes en huiles vierges extra d'une richesse aromatique rare. Extraction le jour même de la cueillette.", "bestseller": "Huile d'Olive Picholine — 210 DHs", "badge": "Olive"   },
+    { "name": "Coopérative Zaafrane",        "region": "Taliouine",         "bio": "Taliouine produit 95% du safran marocain. Les 80 femmes de Zaafrane récoltent les pistils à la main, avant l'aube, pendant les trois semaines de floraison annuelle.", "bestseller": "Safran Premium — 380 DHs",        "badge": "Safran"  },
+    { "name": "Coopérative Hanane",          "region": "Fès",               "bio": "Dans la médina de Fès, Hanane perpétue l'art du couscous roulé à la main. Chaque grain de semoule est travaillé selon une gestuelle transmise de mère en fille depuis sept générations.", "bestseller": "Couscous Maison — 120 DHs",       "badge": "Grains"  },
+    { "name": "Coopérative Amassine",        "region": "Ouarzazate",        "bio": "Au cœur du désert, Amassine cultive les dattes Medjool et Boufeggous dans les palmeraies oasiennes. Séchage solaire naturel et conditionnement sans conservateurs.", "bestseller": "Dattes Medjool — 160 DHs",         "badge": "Dattes"  },
+    { "name": "Coopérative Tamazight",       "region": "Azilal",            "bio": "Les tisserandes d'Azilal créent des tapis berbères au motif géométrique unique — le zellige textile. Laine de brebis Atlas, teinture végétale à la garance et au henné.", "bestseller": "Tapis Berbère — 1 200 DHs",       "badge": "Artisan" },
+    { "name": "Coopérative Argan Haut Atlas","region": "Al Haouz",          "bio": "À 1 800 m d'altitude, ces femmes produisent un argan de montagne à la saveur plus intense. La rareté de l'altitude confère à leur huile culinaire une note toastée incomparable.", "bestseller": "Argan Culinaire — 290 DHs",       "badge": "Argan"   },
+    { "name": "Coopérative Nour",            "region": "Tétouan",           "bio": "Nour réunit les herboristes du Rif. Leur savoir-faire en distillation à la vapeur produit des eaux florales — rose de Damas, fleur d'oranger, lavande — d'une pureté incomparable.", "bestseller": "Eau de Rose Pure — 85 DHs",        "badge": "Fleurs"  },
+    { "name": "Coopérative Belhda",          "region": "Chefchaouen",       "bio": "Dans la ville bleue, Belhda produit le fromage de chèvre frais aux herbes du Rif. Élevage en plein air, alimentation 100% naturelle, affinage en cave de pierre.", "bestseller": "Fromage de Chèvre — 75 DHs",       "badge": "Lait"    },
+    { "name": "Coopérative Laârouss",        "region": "Essaouira",         "bio": "Sur la côte atlantique ventée, Laârouss cultive les câpres sauvages et les algues marines. Leurs condiments iodés apportent le goût de l'Atlantique marocain dans votre cuisine.", "bestseller": "Câpres Sauvages — 55 DHs",         "badge": "Mer"     },
+    { "name": "Coopérative Tissage Drâa",    "region": "Zagora",            "bio": "Le long de la vallée du Drâa, 45 femmes tissent les haïks et les gandouras de coton biologique. Leurs créations mêlent motifs nomades et sobriété contemporaine.", "bestseller": "Haïk de Coton Bio — 450 DHs",      "badge": "Tissage" },
+    { "name": "Coopérative Ghassoul",        "region": "Moulouya",          "bio": "La seule coopérative extractrice de ghassoul brut au monde. Cette argile volcanique du Moyen Atlas nettoie et minéralise la peau et les cheveux sans détergent chimique.", "bestseller": "Ghassoul Brut — 65 DHs",           "badge": "Argile"  },
+    { "name": "Coopérative Agdal",           "region": "Ifrane",            "bio": "Sous les cèdres du Moyen Atlas, Agdal élève les abeilles mellifères dans des ruches traditionnelles en liège. Leur miel de cèdre est le plus rare et le plus prisé du Maroc.", "bestseller": "Miel de Cèdre — 650 DHs",          "badge": "Miel"    },
+    { "name": "Coopérative Amazigh Beauty",  "region": "Igherm",            "bio": "Amazigh Beauty formule des soins visage à partir de plantes endémiques du Haut Atlas : argania, euphorbe, arganier sauvage. Aucun conservateur, formulation 100% locavore.", "bestseller": "Crème Visage Atlas — 195 DHs",    "badge": "Beauté"  },
+    { "name": "Coopérative Tagnaoute",       "region": "Kelâa des Sraghna", "bio": "Spécialisée dans les épices du Maroc central, Tagnaoute produit le ras el hanout selon une composition de 27 plantes gardée secrète. Mouture à la meule de pierre le jour de la commande.", "bestseller": "Ras el Hanout 27 épices — 110 DHs", "badge": "Épices"  },
+    { "name": "Coopérative Arfoud Dattes",   "region": "Errachidia",        "bio": "Dans les oasis de Tafilalet, Arfoud produit les dattes Boufeggous et Jihel séchées au soleil du désert. Leur sirop de dattes fermenté est un trésor de la cuisine saharienne.", "bestseller": "Sirop de Dattes — 130 DHs",        "badge": "Dattes"  },
+    { "name": "Coopérative Timghoula",       "region": "Midelt",            "bio": "À la jonction du Moyen et du Haut Atlas, Timghoula cultive les pommiers de variétés anciennes et en transforme le jus en vinaigre de cidre naturel, fermenté six mois en bonbonne de verre.", "bestseller": "Vinaigre de Cidre — 90 DHs",       "badge": "Fruit"   }
+  ],
+  "marquee": {
+    "items": ["Miel Beldi","Huile d'Argan","Savon Beldi","Couscous Maison","Ghee Artisanal","Amlou","Msemen","Ras el Hanout"]
+  },
+  "footer": {
+    "copyright": "© 2024 BIOHNA. L'AUTHENTICITÉ MAROCAINE, LIVRÉE CHEZ VOUS.",
+    "tagline": "FAÇONNÉ PAR SES FEMMES.",
+    "brand_desc": "Cultivating authentic Moroccan craft through women artisans, slow production, and uncompromising quality.",
+    "company_label": "La Maison",
+    "our_story": "Notre Histoire",
+    "artisans": "Artisanes",
+    "sustainability": "Durabilité",
+    "press": "Presse",
+    "shop_label": "Boutique",
+    "all_products": "Tous les produits",
+    "cosmetics": "Soins & Beauté",
+    "epicerie": "Épicerie Beldi",
+    "cart": "Mon Panier",
+    "support_label": "Contact",
+    "service": "Service Client",
+    "delivery": "Livraison & Retours",
+    "privacy": "Politique de confidentialité",
+    "sell": "Vendre sur Biohna",
+    "follow_label": "Suivez-nous",
+    "instagram": "Instagram",
+    "pinterest": "Pinterest",
+    "vimeo": "Vimeo"
+  }
+}

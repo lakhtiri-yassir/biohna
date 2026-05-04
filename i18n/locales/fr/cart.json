@@ -1,0 +1,95 @@
+{
+  "steps": {
+    "cart": "Mon Panier",
+    "delivery": "Livraison",
+    "payment": "Paiement"
+  },
+  "heading": "MON PANIER",
+  "by_vendor": "par {{vendor}}",
+  "summary": {
+    "heading": "RÉSUMÉ",
+    "subtotal": "Sous-total",
+    "delivery": "Livraison",
+    "free": "Gratuite",
+    "total": "Total",
+    "promo_placeholder": "Code promo",
+    "promo_apply": "Appliquer",
+    "checkout": "Passer la commande →",
+    "continue": "← Continuer mes achats"
+  },
+  "delivery": {
+    "heading": "LIVRAISON",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "phone": "Téléphone",
+    "phone_placeholder": "+212 6XX XXX XXX ou +212 7XX XXX XXX",
+    "phone_hint": "Format : +212 6XX ou 7XX XXX XXX",
+    "address": "Adresse",
+    "city": "Ville",
+    "postal": "Code postal",
+    "note": "Note pour le livreur (optionnel)",
+    "note_placeholder": "Ex : portail bleu, code immeuble…",
+    "shipping_method": "Mode de livraison",
+    "standard": "Livraison Standard",
+    "standard_desc": "5–7 jours ouvrables",
+    "standard_price": "Gratuite dès 500 MAD · 35 MAD sinon",
+    "express": "Livraison Express",
+    "express_desc": "2–3 jours ouvrables",
+    "express_price": "65 MAD",
+    "continue": "Continuer vers le paiement →",
+    "required": "Ce champ est requis"
+  },
+  "payment": {
+    "heading": "PAIEMENT",
+    "method_label": "Paiement",
+    "cod": "Paiement à la livraison",
+    "cod_desc": "Payez en espèces à la réception de votre colis",
+    "cod_badge": "Recommandé · Populaire au Maroc",
+    "card": "Carte bancaire",
+    "card_desc": "Paiement sécurisé via CMI — toutes cartes acceptées",
+    "card_number": "Numéro de carte",
+    "card_name": "Nom sur la carte",
+    "card_expiry": "Date d'expiration",
+    "card_cvv": "CVV",
+    "card_security": "Vos données de carte ne sont pas stockées sur nos serveurs.",
+    "transfer": "Virement bancaire",
+    "transfer_desc": "Virement vers notre compte CIH Bank",
+    "transfer_note": "Votre commande sera traitée après confirmation du virement (1–2 jours ouvrables).",
+    "legal": "Vos informations sont protégées. Aucune donnée bancaire n'est stockée sur nos serveurs.",
+    "confirm": "Confirmer la commande →",
+    "confirmed_heading": "Commande confirmée !",
+    "confirmed_desc": "Nous vous contacterons sous 24h au numéro fourni.",
+    "back_home": "Retour à l'accueil"
+  },
+  "favorites": {
+    "subtitle": "Vos coups de cœur",
+    "heading": "Mes Favoris",
+    "description": "Produits achetés et appréciés — rachetez en un clic",
+    "empty": "Aucun favori dans cette catégorie",
+    "rebuy": "↻ Racheter",
+    "products_count_one": "{{count}} produit",
+    "products_count_other": "{{count}} produits",
+    "tabs": {
+      "all": "Tous",
+      "food": "Alimentation",
+      "oils": "Huiles",
+      "beauty": "Cosmétiques",
+      "spices": "Épices"
+    },
+    "sort": {
+      "recent": "Récemment achetés",
+      "most_ordered": "Plus commandés",
+      "price_asc": "Prix croissant",
+      "price_desc": "Prix décroissant"
+    },
+    "order_badge": "Commandé {{count}}× · Il y a {{timeframe}}"
+  },
+  "timeframes": {
+    "days_one": "{{count}} jour",
+    "days_other": "{{count}} jours",
+    "weeks_one": "{{count}} semaine",
+    "weeks_other": "{{count}} semaines",
+    "month_one": "{{count}} mois",
+    "month_other": "{{count}} mois"
+  }
+}

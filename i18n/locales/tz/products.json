@@ -1,0 +1,57 @@
+{
+  "page": {
+    "heading": "ⵉⵎⵏⵥⴰⵡⵏ ⵏⵏⵖ",
+    "subtitle": "ⴰⵎⴰⴳⵔⴰⴷ ⴰⴳⵔⴰⵡ",
+    "results": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ",
+    "filters_btn": "ⵙⵙⵡⴰⵙ",
+    "add_cart": "+ ⴰⵣⵍⴰⴼ",
+    "filters_header": "ⵜⵉⵙⵡⴰⵙⵉⵏ"
+  },
+  "sort": {
+    "label": "ⵙⵙⵔⴰ: ",
+    "popularity": "ⴰⵎⵓⵙⵙⵓ",
+    "price_asc": "ⴰⵣⵡⴰⵍ: ⵉⵙⵙ",
+    "price_desc": "ⴰⵣⵡⴰⵍ: ⵉⴼⵍⵍⴰ",
+    "newest": "ⴰⵎⴰⵢⵏⵓ"
+  },
+  "filters": {
+    "categories": "ⵜⵉⵙⵏⴰⵜⵉⵏ",
+    "price": "ⴰⵣⵡⴰⵍ (ⴷⵔⵀⵎ)",
+    "region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "all": "ⵎⴰⵕⵕⴰ"
+  },
+  "categories": {
+    "food": "ⵉⵎⵏⵙⵉ",
+    "cosmetics": "ⵜⵉⵙⵓⵔⵙⵉⵏ",
+    "oils": "ⵉⵥⵥⵉ",
+    "spices": "ⵉⵔⴰⵔ"
+  },
+  "detail": {
+    "not_found": "ⴰⵎⵏⵥⵉ ⵓⵔ ⵢⵓⴼⵉⵏ",
+    "back_catalog": "← ⵓⵔⴰⵔ",
+    "back_artisan": "ⵓⵔⴰⵔ ⵖⵔ {{name}}",
+    "add_favorites": "ⵔⵏⵓ ⵖⵔ ⵉⵃⵍⴰⵏ",
+    "add_cart": "ⵔⵏⵓ ⵖⵔ ⴰⵣⵍⴰⴼ",
+    "buy_now": "ⵥⵥ ⴷⴰⵖⵉ",
+    "tab_desc": "ⴰⵙⵎⴰⴳⵍ",
+    "tab_composition": "ⵉⵎⴰⵙⵙⵏ",
+    "tab_origin": "ⴰⵙⴳⵓⵍ",
+    "tab_delivery": "ⴰⵙⵍⴽⵎ",
+    "default_composition": "ⴰⵎⵏⵥⵉ ⴰⵙⵏⴰ 100%",
+    "delivery_text": "ⴰⵙⵍⴽⵎ ⵙ ⵓⵙⵏⴼⵍ ⴼ ⵍⵎⵖⵔⵉⴱ ⴳ 48-72 ⵜⵉⵙⵔⴰⴳⵉⵏ.",
+    "origin_coop": "ⵉⵜⵜⵓⴼⴽ ⵙ {{name}}, ⵜⴰⵎⵙⵏⵜⴰⵢⵜ ⵜⴰⵎⵣⵣⵉ ⵜⵉⵙⵔⴰⵜ ⴳ {{year}}.",
+    "origin_artisan": "ⵉⵜⵜⵓⴼⴽ ⵙ ⵉⴼⴰⵙⵙⵏ ⵏ {{name}}, ⵜⴰⵎⵏⴰⴹⵜ ⵏ {{region}}.",
+    "trust_delivery": "ⴰⵙⵍⴽⵎ — ⵍⵎⵖⵔⵉⴱ 48h",
+    "trust_payment": "ⵜⵉⵔⵎⵉⵜ ⵙ ⵓⵙⵍⴽⵎ",
+    "trust_certified": "ⴰⵎⵏⵥⵉ ⴰⵙⵏⴰ ⴰⵙⵎⵉⴷ",
+    "by_prefix": "ⵙ",
+    "meet_artisan": "ⵙⵙⵏ ⵜⴰⵎⵙⵏⴰⵜ",
+    "cooperative": "ⵜⴰⵎⵙⵏⵜⴰⵢⵜ",
+    "member_since": "ⴰⵢⵜⵎⴰⵜ ⵅⴼ",
+    "see_workshop": "ⵙⵏⴼⵍ ⵜⴰⵡⵓⵔⵉ ⵏⵏⵙ ←",
+    "other_creations": "ⵉⵙⵓⵔⵙⵏ ⵢⴰⴹⵏ ⵏ {{name}}",
+    "same_category": "ⴳ ⵜⵙⵏⴰⵜ ⵏⵏⴰⵜ",
+    "to_discover": "ⴰⴷ ⵜⵙⵙⵏⴼⵍⴷ",
+    "more_creations": "+ {{count}} ⵉⵙⵓⵔⵙⵏ ⢹ⴰⴹⵏ"
+  }
+}

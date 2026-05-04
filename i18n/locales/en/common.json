@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "Products",
+    "vendors": "Artisans",
+    "categories": "Categories",
+    "contact": "Contact",
+    "login": "Login",
+    "favorites": "My Favorites",
+    "cart": "Cart",
+    "search": "Search",
+    "menu": "Menu"
+  },
+  "profile_menu": {
+    "my_profile": "My Profile",
+    "my_orders": "My Orders",
+    "my_favorites": "My Favorites",
+    "soon": "soon",
+    "logout": "Sign Out",
+    "my_account": "My Account",
+    "client": "Customer",
+    "vendor": "Vendor"
+  },
+  "mobile_menu": {
+    "products": "Products",
+    "vendors": "Artisans",
+    "categories": "Categories",
+    "contact": "Contact",
+    "favorites": "Favorites ♡",
+    "my_profile": "My Profile",
+    "login": "Login"
+  },
+  "btn": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "apply": "Apply",
+    "send": "Send",
+    "confirm": "Confirm",
+    "back": "Back",
+    "close": "Close",
+    "continue": "Continue →",
+    "update": "Update"
+  },
+  "badge": {
+    "popular": "Popular",
+    "new": "New",
+    "bio": "Organic",
+    "limited": "Limited",
+    "promo": "Sale",
+    "coop": "Coop."
+  },
+  "price": "{{amount}} MAD",
+  "products_count": "{{count}} product",
+  "products_count_plural": "{{count}} products"
+}

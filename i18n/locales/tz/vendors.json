@@ -1,0 +1,40 @@
+{
+  "page": {
+    "subtitle": "+200 ⵜⵉⵎⵙⵏⴰⵜ · 35 ⵜⵉⵎⵏⴰⴹⵉⵏ",
+    "heading": "ⵉⵜⵜⵓⴼⴽ ⵙ ⵉⴼⴰⵙⵙⵏ ⵉⵎⵖⵔⵉⴱⵉⵏ",
+    "description": "ⴽⵓ ⵜⴰⵎⵙⵏⴰⵜ ⵖ ⴱⵉⵓⵀⵏⴰ ⴷ ⵜⴰⵜⵜⵓⵢⵜ ⵏ ⵓⵙⵙⴰⵏ ⴰⵎⵣⵡⴰⵔⵓ.",
+    "results_one": "{{count}} ⵜⴰⵎⵙⵏⴰⵜ",
+    "results_other": "{{count}} ⵜⵉⵎⵙⵏⴰⵜ",
+    "empty": "ⵓⵔ ⵜⵍⵍⵉ ⵜⴰⵎⵙⵏⴰⵜ",
+    "clear_filters": "✕ ⵙⵔ ⵜⵉⵙⵡⴰⵙⵉⵏ",
+    "filters_btn": "ⵙⵡⴰⵙ",
+    "see_workshop": "ⵙⵏⴼⵍ ⵜⴰⵡⵓⵔⵉ ⵏⵏⵙ ←",
+    "creations": "{{count}} ⵉⵙⵓⵔⵙⵏ"
+  },
+  "filters": {
+    "specialty": "ⵜⴰⵙⵎⵓⵏⵉ",
+    "region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "type": "ⴰⵏⴰⵡ",
+    "type_individual": "ⵜⵉⵎⴳⴳⵉⵜ",
+    "type_cooperative": "ⵜⴰⵎⵙⴰⵔⵜ",
+    "apply": "ⵙⵙⴽⵔ",
+    "title": "ⵙⵡⴰⵙ"
+  },
+  "cta": {
+    "heading": "ⵉⵙ ⵜⴳⴰⴷ ⵜⴰⵎⵙⵏⴰⵜ?",
+    "description": "ⴽⵛⵎ ⵖⵔ ⵜⵡⴰⵛⵓⵏⵜ ⵏ ⴱⵉⵓⵀⵏⴰ.",
+    "btn": "ⴽⵛⵎ ⵖⵔ ⵜⵡⴰⵛⵓⵏⵜ ←"
+  },
+  "profile": {
+    "not_found": "ⵜⴰⵎⵙⵏⴰⵜ ⵓⵔ ⵜⵢⵓⴼⵉ",
+    "back": "← ⵓⵔⴰⵔ",
+    "creations_heading": "ⵉⵙⵓⵔⵙⵏ ⵏⵏⵙ",
+    "products_count": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ",
+    "more_creations": "+ {{count}} ⵉⵙⵓⵔⵙⵏ ⢹ⴰⴹⵏ",
+    "stat_creations": "ⵉⵙⵓⵔⵙⵏ",
+    "stat_member": "ⴰⵢⵜⵎⴰⵜ ⵅⴼ",
+    "stat_region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "cooperative": "ⵜⴰⵎⵙⵏⴰⵜ ⵜⴰⵎⵙⴰⵔⵜ",
+    "add_to_cart": "+ ⴰⵙⴷⴷⵉ"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "Produits",
+    "vendors": "Vendeurs",
+    "categories": "Catégories",
+    "contact": "Contact",
+    "login": "Connexion",
+    "favorites": "Mes favoris",
+    "cart": "Panier",
+    "search": "Rechercher",
+    "menu": "Menu"
+  },
+  "profile_menu": {
+    "my_profile": "Mon Profil",
+    "my_orders": "Mes Commandes",
+    "my_favorites": "Mes Favoris",
+    "soon": "bientôt",
+    "logout": "Déconnexion",
+    "my_account": "Mon compte",
+    "client": "Client",
+    "vendor": "Vendeur"
+  },
+  "mobile_menu": {
+    "products": "Produits",
+    "vendors": "Vendeurs",
+    "categories": "Catégories",
+    "contact": "Contact",
+    "favorites": "Favoris ♡",
+    "my_profile": "Mon Profil",
+    "login": "Connexion"
+  },
+  "btn": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "apply": "Appliquer",
+    "send": "Envoyer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "close": "Fermer",
+    "continue": "Continuer →",
+    "update": "Mettre à jour"
+  },
+  "badge": {
+    "popular": "Populaire",
+    "new": "Nouveau",
+    "bio": "Bio",
+    "limited": "Limité",
+    "promo": "Promo",
+    "coop": "Coop."
+  },
+  "price": "{{amount}} DHs",
+  "products_count": "{{count}} produit",
+  "products_count_plural": "{{count}} produits"
+}

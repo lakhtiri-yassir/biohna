@@ -1,0 +1,44 @@
+{
+  "page": {
+    "subtitle": "+200 حرفية · 35 منطقة",
+    "heading": "صُنع بأيدٍ مغربية",
+    "description": "كل حرفية خلف بيوهنا حارسة لمعرفة موروثة تتناقلها الأجيال.",
+    "results_zero": "لا حرفيات",
+    "results_one": "حرفية واحدة",
+    "results_two": "حرفيتان",
+    "results_few": "{{count}} حرفيات",
+    "results_many": "{{count}} حرفية",
+    "results_other": "{{count}} حرفية",
+    "empty": "لا توجد حرفية تطابق هذه المعايير",
+    "clear_filters": "✕ مسح التصفية",
+    "filters_btn": "تصفية",
+    "see_workshop": "شاهد ورشتها ←",
+    "creations": "{{count}} إبداعات"
+  },
+  "filters": {
+    "specialty": "التخصص",
+    "region": "المنطقة",
+    "type": "النوع",
+    "type_individual": "فردية",
+    "type_cooperative": "تعاونية",
+    "apply": "تطبيق",
+    "title": "التصفية"
+  },
+  "cta": {
+    "heading": "هل أنتِ حرفية؟",
+    "description": "انضمي إلى عائلة بيوهنا وشاركي مهارتك مع العالم.",
+    "btn": "انضمي إلى عائلة بيوهنا ←"
+  },
+  "profile": {
+    "not_found": "الحرفية غير موجودة",
+    "back": "← العودة إلى الحرفيات",
+    "creations_heading": "إبداعاتها",
+    "products_count": "{{count}} منتج حرفي",
+    "more_creations": "+ {{count}} إبداعات أخرى متاحة عند الطلب",
+    "stat_creations": "الإبداعات",
+    "stat_member": "عضو منذ",
+    "stat_region": "المنطقة",
+    "cooperative": "تعاونية",
+    "add_to_cart": "+ السلة"
+  }
+}

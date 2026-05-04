@@ -1,0 +1,57 @@
+{
+  "page": {
+    "heading": "Nos Produits",
+    "subtitle": "Catalogue complet",
+    "results": "{{count}} produits trouvés",
+    "filters_btn": "Filtres",
+    "add_cart": "+ Panier",
+    "filters_header": "FILTRES"
+  },
+  "sort": {
+    "label": "Trier : ",
+    "popularity": "Popularité",
+    "price_asc": "Prix croissant",
+    "price_desc": "Prix décroissant",
+    "newest": "Nouveautés"
+  },
+  "filters": {
+    "categories": "Catégories",
+    "price": "Prix (DHs)",
+    "region": "Région",
+    "all": "Tous"
+  },
+  "categories": {
+    "food": "Alimentation",
+    "cosmetics": "Cosmétiques",
+    "oils": "Huiles",
+    "spices": "Épices"
+  },
+  "detail": {
+    "not_found": "PRODUIT INTROUVABLE",
+    "back_catalog": "← Retour au catalogue",
+    "back_artisan": "Retour chez {{name}}",
+    "add_favorites": "Ajouter aux favoris",
+    "add_cart": "Ajouter au panier",
+    "buy_now": "Acheter maintenant",
+    "tab_desc": "Description",
+    "tab_composition": "Composition",
+    "tab_origin": "Origine & terroir",
+    "tab_delivery": "Livraison",
+    "default_composition": "Produit 100% artisanal",
+    "delivery_text": "Livraison soignée dans tout le Maroc sous 48 à 72 heures. Chaque colis est emballé dans un papier kraft et scellé au cachet de l'artisane. Paiement à la livraison disponible. Retours acceptés sous 7 jours en cas de défaut de fabrication.",
+    "origin_coop": "Produit par la {{name}}, coopérative féminine fondée en {{year}}.",
+    "origin_artisan": "Fabriqué à la main par {{name}}, dans la région de {{region}}.",
+    "trust_delivery": "Livraison soignée — Maroc 48h",
+    "trust_payment": "Paiement à la livraison disponible",
+    "trust_certified": "Produit artisanal certifié",
+    "by_prefix": "Par",
+    "meet_artisan": "Rencontrez l'artisane",
+    "cooperative": "Coopérative",
+    "member_since": "Membre depuis",
+    "see_workshop": "Voir son atelier →",
+    "other_creations": "Autres créations de {{name}}",
+    "same_category": "Dans la même catégorie",
+    "to_discover": "à découvrir",
+    "more_creations": "+ {{count}} autres créations disponibles sur commande"
+  }
+}

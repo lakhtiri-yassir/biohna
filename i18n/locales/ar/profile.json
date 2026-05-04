@@ -1,0 +1,88 @@
+{
+  "access_denied": "وصول مقيّد",
+  "login_redirect": "→ تسجيل الدخول",
+  "personal_info": "المعلومات الشخصية",
+  "fields": {
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "phone_placeholder": "+212 6..."
+  },
+  "actions": {
+    "cancel": "إلغاء",
+    "edit": "تعديل",
+    "save": "حفظ",
+    "saved": "✓ تم حفظ التغييرات",
+    "update": "تحديث",
+    "updated": "✓ تم تحديث كلمة المرور"
+  },
+  "password": {
+    "section": "كلمة المرور",
+    "current": "كلمة المرور الحالية",
+    "new": "كلمة المرور الجديدة",
+    "confirm": "تأكيد كلمة المرور",
+    "error_length": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل.",
+    "error_match": "كلمتا المرور غير متطابقتين."
+  },
+  "vendor_info": {
+    "section": "معلومات البائع",
+    "coop_name": "اسم التعاونية / العلامة",
+    "region": "المنطقة",
+    "specialty": "التخصص",
+    "select_placeholder": "— اختر —",
+    "description": "الوصف",
+    "description_placeholder": "صف نشاطك..."
+  },
+  "danger": {
+    "section": "منطقة الخطر",
+    "irreversible": "هذا الإجراء لا يمكن التراجع عنه. سيُحذف حسابك نهائياً.",
+    "confirm_delete": "تأكيد الحذف",
+    "cancel": "إلغاء",
+    "delete_description": "حذف حسابك وجميع بياناتك المرتبطة به نهائياً.",
+    "delete_btn": "حذف حسابي"
+  },
+  "notifications": {
+    "section": "الإشعارات",
+    "description": "اختر الاتصالات التي تريد استقبالها.",
+    "orders": "تتبع الطلبات",
+    "orders_desc": "التأكيدات والشحن والتسليم",
+    "offers": "العروض والترقيات",
+    "offers_desc": "خصومات حصرية وتخفيضات فلاش",
+    "newsletter": "نشرة بيوهنا",
+    "newsletter_desc": "أخبار ووصفات ونصائح العناية",
+    "new_artisans": "حرفيات جديدة",
+    "new_artisans_desc": "تنبيهات عند انضمام حرفيات جديدة إلى بيوهنا"
+  },
+  "privacy": {
+    "section": "الخصوصية",
+    "description": "تحكم في ظهور ملفك الشخصي.",
+    "public_profile": "ملف شخصي عام",
+    "public_profile_desc": "ملفك الشخصي مرئي للأعضاء الآخرين",
+    "show_email": "إظهار البريد الإلكتروني",
+    "show_email_desc": "مرئي في صفحة ملفك الشخصي العام"
+  },
+  "currency": {
+    "section": "العملة",
+    "description": "العملة المعروضة للأسعار على المنصة.",
+    "mad": "درهم — MAD",
+    "eur": "يورو — EUR",
+    "usd": "دولار — USD"
+  },
+  "address": {
+    "section": "عنوان التوصيل",
+    "street": "الشارع / العنوان",
+    "city": "المدينة",
+    "zip": "الرمز البريدي",
+    "country": "البلد",
+    "street_placeholder": "123 شارع الحرفيين",
+    "city_placeholder": "مراكش",
+    "zip_placeholder": "40000",
+    "country_placeholder": "المغرب",
+    "empty": "لا يوجد عنوان محفوظ",
+    "saved": "✓ تم حفظ العنوان"
+  },
+  "image_error": "الصورة كبيرة جداً (الحد الأقصى 2 ميغا بايت)",
+  "change_banner": "تغيير اللافتة",
+  "member_since": "عضو منذ"
+}

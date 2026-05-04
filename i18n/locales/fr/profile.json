@@ -1,0 +1,88 @@
+{
+  "access_denied": "ACCÈS RESTREINT",
+  "login_redirect": "→ Connexion",
+  "personal_info": "Informations Personnelles",
+  "fields": {
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "email": "Adresse Email",
+    "phone": "Téléphone",
+    "phone_placeholder": "+212 6..."
+  },
+  "actions": {
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "saved": "✓ Modifications enregistrées",
+    "update": "Mettre à jour",
+    "updated": "✓ Mot de passe mis à jour"
+  },
+  "password": {
+    "section": "Mot de Passe",
+    "current": "Mot de passe actuel",
+    "new": "Nouveau mot de passe",
+    "confirm": "Confirmer le mot de passe",
+    "error_length": "Le mot de passe doit contenir au moins 8 caractères.",
+    "error_match": "Les mots de passe ne correspondent pas."
+  },
+  "vendor_info": {
+    "section": "Informations Vendeur",
+    "coop_name": "Nom de la coopérative / marque",
+    "region": "Région",
+    "specialty": "Spécialité",
+    "select_placeholder": "— Sélectionner —",
+    "description": "Description",
+    "description_placeholder": "Décrivez votre activité..."
+  },
+  "danger": {
+    "section": "Zone de Danger",
+    "irreversible": "Cette action est irréversible. Votre compte sera supprimé définitivement.",
+    "confirm_delete": "Confirmer la suppression",
+    "cancel": "Annuler",
+    "delete_description": "Supprimer définitivement votre compte et toutes vos données associées.",
+    "delete_btn": "Supprimer mon compte"
+  },
+  "notifications": {
+    "section": "Notifications",
+    "description": "Choisissez les communications que vous souhaitez recevoir.",
+    "orders": "Suivi de commandes",
+    "orders_desc": "Confirmations, expéditions et livraisons",
+    "offers": "Offres & Promotions",
+    "offers_desc": "Réductions exclusives et ventes flash",
+    "newsletter": "Newsletter Biohna",
+    "newsletter_desc": "Actualités, recettes et conseils bien-être",
+    "new_artisans": "Nouvelles artisanes",
+    "new_artisans_desc": "Alertes quand de nouvelles créatrices rejoignent Biohna"
+  },
+  "privacy": {
+    "section": "Confidentialité",
+    "description": "Contrôlez la visibilité de votre profil.",
+    "public_profile": "Profil public",
+    "public_profile_desc": "Votre profil est visible par les autres membres",
+    "show_email": "Afficher l'adresse email",
+    "show_email_desc": "Visible sur votre page profil publique"
+  },
+  "currency": {
+    "section": "Devise",
+    "description": "Devise affichée pour les prix sur la plateforme.",
+    "mad": "Dirham — MAD",
+    "eur": "Euro — EUR",
+    "usd": "Dollar — USD"
+  },
+  "address": {
+    "section": "Adresse de Livraison",
+    "street": "Rue / Adresse",
+    "city": "Ville",
+    "zip": "Code Postal",
+    "country": "Pays",
+    "street_placeholder": "123 Rue des Artisans",
+    "city_placeholder": "Marrakech",
+    "zip_placeholder": "40000",
+    "country_placeholder": "Maroc",
+    "empty": "Aucune adresse enregistrée",
+    "saved": "✓ Adresse enregistrée"
+  },
+  "image_error": "Image trop volumineuse (max 2 Mo)",
+  "change_banner": "Changer la bannière",
+  "member_since": "Membre depuis"
+}

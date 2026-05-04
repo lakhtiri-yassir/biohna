@@ -1,0 +1,108 @@
+{
+  "hero": {
+    "tagline": "Moroccan authenticity, delivered to your door",
+    "description": "The flavors, care and soul of Morocco — shaped by its women, delivered intact to you",
+    "search_placeholder": "Search a product, an artisan…",
+    "search_btn": "Search",
+    "cta_products": "Explore products",
+    "cta_join": "Join the family",
+    "scroll": "Scroll"
+  },
+  "featured": {
+    "label": "Our favorites",
+    "heading": "Featured Products",
+    "see_all": "View all products →"
+  },
+  "cooperatives": {
+    "label": "Our partners",
+    "heading": "The Cooperatives",
+    "visit_btn": "Visit cooperative",
+    "count": "{{count}} cooperatives",
+    "bestseller_label": "Best seller"
+  },
+  "badge": {
+    "popular": "Popular",
+    "new": "New",
+    "organic": "Organic"
+  },
+  "stats": {
+    "artisans": "Partner artisans",
+    "regions": "Regions of Morocco",
+    "natural": "Natural products",
+    "clients": "Happy clients",
+    "artisans_val": "200+",
+    "regions_val": "35+",
+    "natural_val": "100%",
+    "clients_val": "5,000+"
+  },
+  "about": {
+    "label": "About us",
+    "heading": "Our Story",
+    "quote": "\"The soul of Morocco, shaped by its women, delivered intact to you\"",
+    "text": "Biohna is a platform that directly connects Moroccan women artisans with consumers seeking authenticity. Every product is 100% natural, handmade, and tells a story.",
+    "mission": "Our mission: to value ancestral know-how while providing a fair and dignified source of income for these exceptional women."
+  },
+  "family": {
+    "label": "The Biohna Family",
+    "heading": "Here for you.",
+    "subheading": "Close to you, everywhere in Morocco",
+    "join_btn": "Become a member of the BIOHNA FAMILY"
+  },
+  "carousel_items": [
+    { "name": "Wild Honey Jar",           "vendor": "Lalla Fatima — Meknès" },
+    { "name": "Pure Argan Oil",           "vendor": "Aït Baha Cooperative" },
+    { "name": "Eucalyptus Beldi Soap",    "vendor": "Khadija — Essaouira" },
+    { "name": "Artisanal Amlou",          "vendor": "Nadia — Taroudant" },
+    { "name": "Premium Ras el Hanout",    "vendor": "Fès Cooperative" },
+    { "name": "Artisanal Ghee",           "vendor": "Zahra — Ifrane" }
+  ],
+  "cooperatives_items": [
+    { "name": "Aït Baha Cooperative",       "region": "Souss-Massa",       "bio": "Founded in 2003 by 34 Berber women, Aït Baha is the world reference for cosmetic argan oil. Their cold pressing preserves all the properties of Morocco's liquid gold.", "bestseller": "Pure Argan Oil — 320 DHs",         "badge": "Argan"   },
+    { "name": "Tifawin Cooperative",         "region": "Tiznit",            "bio": "Tifawin ('light' in Tamazight) brings together 60 artisans specializing in natural cosmetics. Their beldi soap, cooked over fig wood, is renowned for its exceptional purifying properties.", "bestseller": "Premium Beldi Soap — 95 DHs",      "badge": "Soap"    },
+    { "name": "Dar Lalla Fatima",            "region": "Meknès",            "bio": "Since 1998, Lalla Fatima unites the beekeepers of the Middle Atlas plains. Their wild thyme raw honey is harvested twice a year according to lunar cycles.", "bestseller": "Wild Thyme Honey — 500 DHs",       "badge": "Honey"   },
+    { "name": "Amalou Cooperative",          "region": "Taroudant",         "bio": "Fifteen women from the Souss valley perpetuate the ancestral recipe for amlou — the almond, argan and honey paste that Berbers offer to brides. Each jar is stone-ground.", "bestseller": "Artisanal Amlou — 180 DHs",         "badge": "Amlou"   },
+    { "name": "Zitoun Cooperative",          "region": "Marrakech",         "bio": "Nestled in the palm groves of Marrakech, Zitoun transforms ancient olive varieties into extra virgin oils of rare aromatic richness. Extraction on the day of harvest.", "bestseller": "Picholine Olive Oil — 210 DHs",     "badge": "Olive"   },
+    { "name": "Zaafrane Cooperative",        "region": "Taliouine",         "bio": "Taliouine produces 95% of Moroccan saffron. The 80 women of Zaafrane harvest the pistils by hand, before dawn, during the three weeks of annual flowering.", "bestseller": "Premium Saffron — 380 DHs",         "badge": "Saffron" },
+    { "name": "Hanane Cooperative",          "region": "Fès",               "bio": "In the medina of Fès, Hanane perpetuates the art of hand-rolled couscous. Each grain of semolina is worked with gestures passed from mother to daughter for seven generations.", "bestseller": "Home Couscous — 120 DHs",           "badge": "Grains"  },
+    { "name": "Amassine Cooperative",        "region": "Ouarzazate",        "bio": "At the heart of the desert, Amassine grows Medjool and Boufeggous dates in the oasis palm groves. Natural sun-drying and packaging without preservatives.", "bestseller": "Medjool Dates — 160 DHs",           "badge": "Dates"   },
+    { "name": "Tamazight Cooperative",       "region": "Azilal",            "bio": "The weavers of Azilal create Berber carpets with a unique geometric motif — the textile zellige. Atlas sheep wool, dyed with madder and henna.", "bestseller": "Berber Rug — 1,200 DHs",            "badge": "Artisan" },
+    { "name": "High Atlas Argan Cooperative","region": "Al Haouz",          "bio": "At 1,800m altitude, these women produce a mountain argan with a more intense flavor. The rarity of the altitude gives their culinary oil an incomparable toasted note.", "bestseller": "Culinary Argan — 290 DHs",          "badge": "Argan"   },
+    { "name": "Nour Cooperative",            "region": "Tétouan",           "bio": "Nour brings together the herbalists of the Rif. Their expertise in steam distillation produces floral waters — Damascus rose, orange blossom, lavender — of incomparable purity.", "bestseller": "Pure Rose Water — 85 DHs",          "badge": "Flowers" },
+    { "name": "Belhda Cooperative",          "region": "Chefchaouen",       "bio": "In the blue city, Belhda produces fresh goat cheese with Rif herbs. Free-range farming, 100% natural diet, aged in a stone cellar.", "bestseller": "Goat Cheese — 75 DHs",              "badge": "Dairy"   },
+    { "name": "Laârouss Cooperative",        "region": "Essaouira",         "bio": "On the windswept Atlantic coast, Laârouss cultivates wild capers and seaweed. Their iodine-rich condiments bring the taste of the Moroccan Atlantic to your kitchen.", "bestseller": "Wild Capers — 55 DHs",              "badge": "Sea"     },
+    { "name": "Drâa Weaving Cooperative",    "region": "Zagora",            "bio": "Along the Drâa valley, 45 women weave organic cotton haïks and gandouras. Their creations blend nomadic motifs and contemporary sobriety.", "bestseller": "Organic Cotton Haïk — 450 DHs",     "badge": "Weaving" },
+    { "name": "Ghassoul Cooperative",        "region": "Moulouya",          "bio": "The only cooperative that extracts raw ghassoul in the world. This volcanic clay from the Middle Atlas cleanses and mineralizes skin and hair without chemical detergents.", "bestseller": "Raw Ghassoul — 65 DHs",             "badge": "Clay"    },
+    { "name": "Agdal Cooperative",           "region": "Ifrane",            "bio": "Under the cedars of the Middle Atlas, Agdal raises honey bees in traditional cork hives. Their cedar honey is the rarest and most prized in Morocco.", "bestseller": "Cedar Honey — 650 DHs",             "badge": "Honey"   },
+    { "name": "Amazigh Beauty Cooperative",  "region": "Igherm",            "bio": "Amazigh Beauty formulates facial care from plants endemic to the High Atlas: argania, euphorbia, wild argan. No preservatives, 100% locavore formulation.", "bestseller": "Atlas Face Cream — 195 DHs",        "badge": "Beauty"  },
+    { "name": "Tagnaoute Cooperative",       "region": "Kelâa des Sraghna", "bio": "Specializing in central Moroccan spices, Tagnaoute produces ras el hanout according to a secret 27-plant composition. Stone-ground on the day of your order.", "bestseller": "27-Spice Ras el Hanout — 110 DHs",  "badge": "Spices"  },
+    { "name": "Arfoud Dates Cooperative",    "region": "Errachidia",        "bio": "In the oases of Tafilalet, Arfoud produces Boufeggous and Jihel dates sun-dried in the desert. Their fermented date syrup is a treasure of Saharan cuisine.", "bestseller": "Date Syrup — 130 DHs",              "badge": "Dates"   },
+    { "name": "Timghoula Cooperative",       "region": "Midelt",            "bio": "At the junction of the Middle and High Atlas, Timghoula cultivates ancient apple varieties and transforms their juice into natural apple cider vinegar, fermented six months in glass.", "bestseller": "Apple Cider Vinegar — 90 DHs",      "badge": "Fruit"   }
+  ],
+  "marquee": {
+    "items": ["Beldi Honey","Argan Oil","Beldi Soap","Home Couscous","Artisanal Ghee","Amlou","Msemen","Ras el Hanout"]
+  },
+  "footer": {
+    "copyright": "© 2024 BIOHNA. MOROCCAN AUTHENTICITY, DELIVERED TO YOUR DOOR.",
+    "tagline": "SHAPED BY HER WOMEN.",
+    "brand_desc": "Cultivating authentic Moroccan craft through women artisans, slow production, and uncompromising quality.",
+    "company_label": "The House",
+    "our_story": "Our Story",
+    "artisans": "Artisans",
+    "sustainability": "Sustainability",
+    "press": "Press",
+    "shop_label": "Shop",
+    "all_products": "All products",
+    "cosmetics": "Beauty & Care",
+    "epicerie": "Beldi Grocery",
+    "cart": "My Cart",
+    "support_label": "Contact",
+    "service": "Customer Service",
+    "delivery": "Shipping & Returns",
+    "privacy": "Privacy Policy",
+    "sell": "Sell on Biohna",
+    "follow_label": "Follow us",
+    "instagram": "Instagram",
+    "pinterest": "Pinterest",
+    "vimeo": "Vimeo"
+  }
+}

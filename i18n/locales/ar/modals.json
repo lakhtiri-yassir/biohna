@@ -1,0 +1,103 @@
+{
+  "categories": {
+    "heading": "الفئات",
+    "search_placeholder": "ابحث عن فئة…",
+    "products_count": "{{count}} منتج",
+    "see_all": "عرض جميع المنتجات ←",
+    "sections": {
+      "featured_label": "مميز",
+      "food_label": "الغذاء",
+      "spices_label": "التوابل والأعشاب",
+      "beauty_label": "الجمال والعناية"
+    },
+    "items": {
+      "featured": "المنتجات المختارة",
+      "honey": "العسل والمربى",
+      "grains": "الحبوب والقمح",
+      "nuts": "المكسرات والأملو",
+      "butters": "الزبدة والدهون",
+      "spices": "التوابل الحرفية",
+      "herbs": "الأعشاب والشاي",
+      "oils": "الزيوت النباتية",
+      "soap": "صابون بلدي"
+    }
+  },
+  "contact": {
+    "label": "الدعم والاستفسارات",
+    "heading": "اتصل بنا",
+    "description": "فريقنا يرد خلال 24 ساعة.",
+    "phone_label": "📱 الهاتف",
+    "phone_value": "+212 6 00 00 00",
+    "email_label": "✉ البريد الإلكتروني",
+    "email_value": "contact@biohna.ma",
+    "whatsapp_label": "💬 واتساب",
+    "whatsapp_status": "متاح",
+    "tabs": {
+      "message": "رسالة",
+      "order": "طلب",
+      "partnership": "شراكة"
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "اسمك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "بريدك@mail.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "مثال: سؤال عن طلبي",
+      "message": "الرسالة",
+      "message_placeholder": "اكتب رسالتك هنا…"
+    },
+    "cancel": "إلغاء",
+    "submit": "إرسال الرسالة ←"
+  },
+  "favorites": {
+    "heading": "مفضلاتي",
+    "subheading": "مشتريات حديثة ومحبوبة",
+    "list_header": "أُعيد طلبها مؤخراً — {{count}} منتجات",
+    "rebuy": "+ إعادة الطلب",
+    "see_all": "عرض جميع مفضلاتي ←"
+  },
+  "panier": {
+    "heading": "سلتي",
+    "empty": "سلتك فارغة",
+    "see_all": "عرض السلة ←",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "shipping_free": "مجاني",
+    "total": "الإجمالي",
+    "checkout_btn": "← تأكيد الطلب",
+    "continue": "متابعة التسوق →"
+  },
+  "vendeurs": {
+    "heading": "حرفياتنا",
+    "search_placeholder": "ابحث عن حرفية…",
+    "region": "المنطقة",
+    "all_regions": "الكل",
+    "tabs": {
+      "all": "الكل",
+      "food": "غذاء",
+      "oils": "زيوت",
+      "beauty": "تجميل",
+      "spices": "توابل"
+    },
+    "artisan_count_zero": "لا توجد حرفيات",
+    "artisan_count_one": "حرفية واحدة",
+    "artisan_count_two": "حرفيتان",
+    "artisan_count_few": "{{count}} حرفيات",
+    "artisan_count_many": "{{count}} حرفية",
+    "artisan_count_other": "{{count}} حرفية",
+    "empty": "لم يُعثر على حرفية",
+    "products_count_zero": "لا منتجات",
+    "products_count_one": "منتج واحد",
+    "products_count_two": "منتجان",
+    "products_count_few": "{{count}} منتجات",
+    "products_count_many": "{{count}} منتجاً",
+    "products_count_other": "{{count}} منتج",
+    "see_all": "← اكتشف جميع حرفياتنا",
+    "become_partner": "كن شريكاً",
+    "hover_to_discover": "مرّر على اسم لتاكتشف الحرفية",
+    "member_since": "عضوة منذ",
+    "view_profile": "عرض الملف",
+    "filter_region_placeholder": "كل المناطق"
+  }
+}

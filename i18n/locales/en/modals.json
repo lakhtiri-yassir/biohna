@@ -1,0 +1,94 @@
+{
+  "categories": {
+    "heading": "CATEGORIES",
+    "search_placeholder": "Search a category…",
+    "products_count": "{{count}} products",
+    "see_all": "View all products →",
+    "sections": {
+      "featured_label": "Featured",
+      "food_label": "Food",
+      "spices_label": "Spices & Herbs",
+      "beauty_label": "Beauty & Care"
+    },
+    "items": {
+      "featured": "Featured Products",
+      "honey": "Honeys & Jams",
+      "grains": "Grains & Cereals",
+      "nuts": "Nuts & Amlou",
+      "butters": "Butters & Fats",
+      "spices": "Artisanal Spices",
+      "herbs": "Herbs & Herbal Teas",
+      "oils": "Vegetable Oils",
+      "soap": "Beldi Soaps"
+    }
+  },
+  "contact": {
+    "label": "Support & Questions",
+    "heading": "CONTACT US",
+    "description": "Our team responds within 24h.",
+    "phone_label": "📱 Phone",
+    "phone_value": "+212 6 00 00 00",
+    "email_label": "✉ Email",
+    "email_value": "contact@biohna.ma",
+    "whatsapp_label": "💬 WhatsApp",
+    "whatsapp_status": "Available",
+    "tabs": {
+      "message": "Message",
+      "order": "Order",
+      "partnership": "Partnership"
+    },
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Your name",
+      "email": "Email",
+      "email_placeholder": "you@mail.com",
+      "subject": "Subject",
+      "subject_placeholder": "Ex: Question about my order",
+      "message": "Message",
+      "message_placeholder": "Write your message here…"
+    },
+    "cancel": "Cancel",
+    "submit": "Send message →"
+  },
+  "favorites": {
+    "heading": "MY FAVORITES",
+    "subheading": "Recent & loved purchases",
+    "list_header": "RECENTLY REORDERED — {{count}} products",
+    "rebuy": "+ Reorder",
+    "see_all": "View all my favorites →"
+  },
+  "panier": {
+    "heading": "MY CART",
+    "empty": "Your cart is empty",
+    "see_all": "View cart →",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_free": "Free",
+    "total": "Total",
+    "checkout_btn": "Place order →",
+    "continue": "← Continue shopping"
+  },
+  "vendeurs": {
+    "heading": "OUR ARTISANS",
+    "search_placeholder": "Search an artisan…",
+    "region": "Region",
+    "all_regions": "All",
+    "tabs": {
+      "all": "All",
+      "food": "Food",
+      "oils": "Oils",
+      "beauty": "Beauty",
+      "spices": "Spices"
+    },
+    "artisan_count_one": "{{count}} artisan",
+    "artisan_count_other": "{{count}} artisans",
+    "empty": "No artisan found",
+    "products_count": "{{count}} products",
+    "see_all": "Discover all our artisans →",
+    "become_partner": "Become a partner",
+    "hover_to_discover": "Hover a name to discover the artisan",
+    "member_since": "Member since",
+    "view_profile": "View profile",
+    "filter_region_placeholder": "All regions"
+  }
+}

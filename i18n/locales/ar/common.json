@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "products": "المنتجات",
+    "vendors": "الحرفيات",
+    "categories": "الفئات",
+    "contact": "اتصل بنا",
+    "login": "تسجيل الدخول",
+    "favorites": "مفضلاتي",
+    "cart": "السلة",
+    "search": "بحث",
+    "menu": "القائمة"
+  },
+  "profile_menu": {
+    "my_profile": "ملفي الشخصي",
+    "my_orders": "طلباتي",
+    "my_favorites": "مفضلاتي",
+    "soon": "قريباً",
+    "logout": "تسجيل الخروج",
+    "my_account": "حسابي",
+    "client": "عميل",
+    "vendor": "بائع"
+  },
+  "mobile_menu": {
+    "products": "المنتجات",
+    "vendors": "الحرفيات",
+    "categories": "الفئات",
+    "contact": "اتصل بنا",
+    "favorites": "المفضلة ♡",
+    "my_profile": "ملفي الشخصي",
+    "login": "تسجيل الدخول"
+  },
+  "btn": {
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "apply": "تطبيق",
+    "send": "إرسال",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "close": "إغلاق",
+    "continue": "متابعة ←",
+    "update": "تحديث"
+  },
+  "badge": {
+    "popular": "الأكثر مبيعاً",
+    "new": "جديد",
+    "bio": "عضوي",
+    "limited": "محدود",
+    "promo": "عرض",
+    "coop": "تعاونية"
+  },
+  "price": "{{amount}} درهم",
+  "products_count_zero": "لا منتجات",
+  "products_count_one": "منتج واحد",
+  "products_count_two": "منتجان",
+  "products_count_few": "{{count}} منتجات",
+  "products_count_many": "{{count}} منتجاً",
+  "products_count_other": "{{count}} منتج"
+}

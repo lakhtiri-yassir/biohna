@@ -1,0 +1,95 @@
+{
+  "steps": {
+    "cart": "ⴰⵣⵍⴰⴼ ⵉⵏⵓ",
+    "delivery": "ⴰⵙⵍⴽⵎ",
+    "payment": "ⵜⵉⵔⵎⵉⵜ"
+  },
+  "heading": "ⴰⵣⵍⴰⴼ ⵉⵏⵓ",
+  "by_vendor": "ⵙ {{vendor}}",
+  "summary": {
+    "heading": "ⴰⵎⵍⵓ",
+    "subtotal": "ⴰⴼⵔⴰⴳ",
+    "delivery": "ⴰⵙⵍⴽⵎ",
+    "free": "ⴱⵍⴰ ⵜⵓⴷⵔⵜ",
+    "total": "ⴰⴳⴰⵎ",
+    "promo_placeholder": "ⴰⵡⴰⵍ ⵏ ⵜⵏⴼⵍⵓⵜ",
+    "promo_apply": "ⵙⵙⵓⴼⵖ",
+    "checkout": "ⵙⵙⴳⵎⵉ ⵜⵓⵣⵣⵡⴰ ←",
+    "continue": "→ ⵙⵓⴼⵍ ⵜⵉⵙⵏⴰⵜⵉⵏ"
+  },
+  "delivery": {
+    "heading": "ⴰⵙⵍⴽⵎ",
+    "first_name": "ⵉⵙⵎ ⴰⵎⵣⵡⴰⵔⵓ",
+    "last_name": "ⵉⵙⵎ ⵏ ⵜⴳⵎⵎⵉ",
+    "phone": "ⵜⵉⵍⵉⴼⵓⵏ",
+    "phone_placeholder": "+212 6XX XXX XXX ⵏⵖ +212 7XX XXX XXX",
+    "phone_hint": "ⵜⴰⵙⵏⴰ: +212 6XX ⵏⵖ 7XX XXX XXX",
+    "address": "ⵜⴰⵏⵙⴰ",
+    "city": "ⵜⵉⵎⴷⵉⵏⵜ",
+    "postal": "ⴰⵔⵇⴰⵎ ⵏ ⵜⴱⵔⵉⴷⵜ",
+    "note": "ⵜⴰⵍⵖⵓⵜ ⵉ ⵓⵙⵍⴽⴰⵎ (ⵓⵔ ⵉⵍⵍⴰ ⵓⵓⵊⵉⴱ)",
+    "note_placeholder": "ⴰⴷ ⵜⴳⵉⵜ: ⵜⴰⴱⵔⵉⴷⵜ ⵜⴰⵣⴳⵣⵡⵜ…",
+    "shipping_method": "ⴰⴽⴰⵍ ⵏ ⵓⵙⵍⴽⵎ",
+    "standard": "ⴰⵙⵍⴽⵎ ⴰⵎⴰⵜⴰⵢ",
+    "standard_desc": "5–7 ⵓⵙⵙⴰⵏ ⵏ ⵜⵡⵓⵔⵉ",
+    "standard_price": "ⴱⵍⴰ ⵜⵓⴷⵔⵜ ⵙⴳ 500 MAD · 35 MAD ⵉⴷ ⵓⵔ",
+    "express": "ⴰⵙⵍⴽⵎ ⴰⵎⵍⵍⴰⵍ",
+    "express_desc": "2–3 ⵓⵙⵙⴰⵏ ⵏ ⵜⵡⵓⵔⵉ",
+    "express_price": "65 MAD",
+    "continue": "ⵙⵓⴼⵍ ⵖⵔ ⵜⵉⵔⵎⵉⵜ ←",
+    "required": "ⴰⵙⵙⵓⴼⵖ ⴰⴷ ⵉⵍⵍⴰ"
+  },
+  "payment": {
+    "heading": "ⵜⵉⵔⵎⵉⵜ",
+    "method_label": "ⴰⴽⴰⵍ ⵏ ⵜⵉⵔⵎⵉⵜ",
+    "cod": "ⵜⵉⵔⵎⵉⵜ ⵙ ⵓⵙⵍⴽⵎ",
+    "cod_desc": "ⴰⴽⴽ ⴷ ⵓⴽⵓⵔ ⵏⵏⴽ",
+    "cod_badge": "ⵉⵜⵜⵓⵡⵙⵙⴰⵏ · ⵉⵃⵍⴰ ⴳ ⵍⵎⵖⵔⵉⴱ",
+    "card": "ⵜⴰⴽⴰⵔⴹⵜ ⵏ ⵓⵙⵏⴼⴰⵍ",
+    "card_desc": "ⵜⵉⵔⵎⵉⵜ ⵜⴰⵎⵏⵉⵖⵜ ⵙ CMI",
+    "card_number": "ⴰⵔⵇⴰⵎ ⵏ ⵜⴽⴰⵔⴹⵜ",
+    "card_name": "ⵉⵙⵎ ⵖⴼ ⵜⴽⴰⵔⴹⵜ",
+    "card_expiry": "ⴰⵙⵇⴰⴷ ⵏ ⵓⵏⵣⵖⵓ",
+    "card_cvv": "CVV",
+    "card_security": "ⵉⵎⴰⵍⴰⵙⵙ ⵏ ⵜⴽⴰⵔⴹⵜ ⵓⵔ ⵜⵜⵓⵙⴽⵍⵏ ⵖⴼ ⵉⵙⵓⴳⴰⵎ ⵏⵏⵖ.",
+    "transfer": "ⴰⵙⵏⴼⵍ ⵏ ⵓⵙⵏⴼⴰⵍ",
+    "transfer_desc": "ⴰⵙⵏⴼⵍ ⵖⵔ ⵓⵙⵉⵡⴹ ⵏⵏⵖ ⴳ CIH Bank",
+    "transfer_note": "ⵜⵓⵣⵣⵡⴰ ⵏⵏⴽ ⵜⵜⵓⵙⴽⴰⵔ ⵡⴰⵔ ⵓⵙⵙⵔⵜⵎ ⵏ ⵓⵙⵏⴼⵍ (1–2 ⵓⵙⵙⴰⵏ).",
+    "legal": "ⵉⵎⴰⵍⴰⵙⵙ ⵏⵏⴽ ⵉⵜⵜⵓⵙⴳⴷ. ⵓⵔ ⵜⵜⵓⵙⴽⵍⵏ ⵉⵎⴰⵍⴰⵙⵙ ⵏ ⵓⵙⵏⴼⴰⵍ.",
+    "confirm": "ⵙⵙⵔⵜⵎ ⵜⵓⵣⵣⵡⴰ ←",
+    "confirmed_heading": "ⵜⵓⵣⵣⵡⴰ ⵜⵜⵓⵙⵔⵜⵎ !",
+    "confirmed_desc": "ⴰⴷ ⴰⵖ-ⴷ-ⵜⵙⵙⵓⵖⵓ ⴳ 24 ⵜⵉⵙⵔⴰⴳⵉⵏ ⵖⴼ ⵓⵔⵇⴰⵎ.",
+    "back_home": "ⵖⵔ ⵜⵓⴷⴷⵉⵔⵜ"
+  },
+  "favorites": {
+    "subtitle": "ⵉⵃⵍⴰⵏ ⵏⵏⴽ",
+    "heading": "ⵉⵃⵍⴰⵏ ⵉⵏⵓ",
+    "description": "ⵉⵎⵏⵥⴰⵡⵏ ⵉⵜⵜⵓⵥⵥⴰⵏ ⴷ ⵉⵃⵍⴰⵏ",
+    "empty": "ⵓⵔ ⵉⵍⵍⵉ ⵓⵃⵍⵉ ⴳ ⵜⵙⵏⴰⵜ ⴰⴷ",
+    "rebuy": "↻ ⴰⵔⵔ ⵜⵓⵣⵣⵡⴰ",
+    "products_count_one": "{{count}} ⴰⵎⵏⵥⵉ",
+    "products_count_other": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ",
+    "tabs": {
+      "all": "ⵎⴰⵕⵕⴰ",
+      "food": "ⵉⵎⵏⵙⵉ",
+      "oils": "ⵉⵥⵥⵉⵡⵏ",
+      "beauty": "ⵜⵉⵙⵓⵔⵙⵉⵏ",
+      "spices": "ⵉⵔⴰⵔ"
+    },
+    "sort": {
+      "recent": "ⵉⵥⵥⴰⵏ ⴰⵔⵎⵉ ⴷⴰⵖⵉ",
+      "most_ordered": "ⵉⵜⵜⵓⵖ ⴰⴳⴳⴰⵔ",
+      "price_asc": "ⴰⵣⵡⴰⵍ: ⵉⵙⵙ",
+      "price_desc": "ⴰⵣⵡⴰⵍ: ⵉⴼⵍⵍⴰ"
+    },
+    "order_badge": "ⵉⵜⵜⵓⵖ {{count}} ⵜⵉⴽⴽⴰⵍ · ⵅⴼ {{timeframe}}"
+  },
+  "timeframes": {
+    "days_one": "ⵓⵙⵙⴰⵏ",
+    "days_other": "{{count}} ⵓⵙⵙⴰⵏ",
+    "weeks_one": "ⵉⵎⴰⵍⴰⵙⵙ",
+    "weeks_other": "{{count}} ⵉⵎⴰⵍⴰⵙⵙ",
+    "month_one": "ⵡⴰⵢⵢⵓⵔ",
+    "month_other": "{{count}} ⵉⵢⵢⵔⴰⵡⵏ"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "artisan": {
+    "lalla-fatima": {
+      "specialtyLabel": "Honey & Argan",
+      "story": "Heir to a beekeeping tradition passed down mother to daughter for four generations, Lalla Fatima tends her hives in the hills of Meknès with an unwavering love for nature and living things.",
+      "quote": "\"Every jar of honey is a love letter addressed to the earth that feeds us.\""
+    },
+    "coop-ait-baha": {
+      "specialtyLabel": "Vegetable Oils",
+      "story": "Founded by twelve Berber women from Souss-Massa, the Aït Baha Cooperative transforms argan into liquid gold using age-old methods, preserving every nuance of the terroir.",
+      "quote": "\"Argan is not just an oil — it is the soul of our grandmothers.\""
+    },
+    "khadija-essaouira": {
+      "specialtyLabel": "Beldi Soaps",
+      "story": "In her small workshop facing the Atlantic, Khadija crafts old-style beldi soaps infused with eucalyptus and locally hand-harvested oils. Each soap is a ritual skincare.",
+      "quote": "\"Beldi soap does not merely cleanse — it purifies, restores, heals.\""
+    },
+    "nadia-taroudant": {
+      "specialtyLabel": "Amlou & Nuts",
+      "story": "A native of Taroudant, the city of a thousand ramparts, Nadia prepares her amlou following her mother's recipe — toasted Souss almonds, cold-pressed argan, and wild thyme honey.",
+      "quote": "\"Amlou is our own treasure, but it nourishes the soul as much as the body.\""
+    },
+    "touria-fes": {
+      "specialtyLabel": "Spices & Herbs",
+      "story": "Touria blends her spice mixes in the medina of Fès, steps away from the spice souk. Her Ras el Hanout contains 27 ingredients, each selected according to the season.",
+      "quote": "\"Spices are the secret language of Moroccan cooking.\""
+    },
+    "aicha-meknes": {
+      "specialtyLabel": "Butters & Fats",
+      "story": "Aicha prepares her smen in the fertile plains of Saïs, carrying on a centuries-old tradition of fermenting and maturing Moroccan clarified butter.",
+      "quote": "\"Good smen is made in winter and savoured all year long.\""
+    },
+    "zahra-beni-mellal": {
+      "specialtyLabel": "Grains & Cereals",
+      "story": "At the foot of the Atlas mountains, Zahra cultivates and processes ancestral Berber cereals — from medium-grain couscous to fine semolina — in a stone-mill.",
+      "quote": "\"Friday couscous is a whole family gathered around one dish.\""
+    },
+    "coop-ouarzazate": {
+      "specialtyLabel": "Shea & Skincare",
+      "story": "At the gateway to the desert, this cooperative of Saharan women extracts and refines shea butter using methods passed down for centuries, yielding a product of exceptional purity and richness.",
+      "quote": "\"Shea has fed us, protected us — and now it sets us free.\""
+    }
+  },
+  "product": {
+    "1": {
+      "name": "Wild Beldi Honey",
+      "tagline": "Wild honey from the hills of Meknès, hand-harvested",
+      "description": "A raw, unpasteurised honey harvested in spring from Lalla Fatima's family hives. Deep floral notes, a finish of wild rosemary and carob.",
+      "longDescription": "This honey comes from a spring transhumance in the wooded hills north of Meknès, where carob, rosemary and wild thyme bloom in abundance. The hives, made of Atlas cedar wood, are tended by Lalla Fatima and her daughters with gestures unchanged for four generations. No hot extraction, no mechanical filtering — only gravity and patience.\n\nServed on barley semolina beldi bread, stirred into mint tea, or simply eaten from the spoon, this honey accompanies the Moroccan table at its sweetest moments.",
+      "composition": ["100% natural raw honey", "Unpasteurised", "Mechanically unfiltered", "No additives whatsoever"],
+      "origin": "Wooded hills of Meknès — spring harvest"
+    },
+    "2": { "name": "Wild Thyme Honey" },
+    "3": { "name": "Euphorbia Honey" },
+    "4": {
+      "name": "Pure Argan Oil",
+      "tagline": "The liquid gold of Souss-Massa, cold-pressed",
+      "description": "Culinary argan oil extracted from lightly roasted kernels. Deep roasted hazelnut aroma, perfect as a finishing drizzle over couscous, salads, or homemade amlou.",
+      "longDescription": "Every litre represents nearly 40 kg of fruit hand-picked by the cooperative's women. The nuts are cracked one by one between two stones, the kernels are gently roasted then cold-pressed in a single pass — no solvents, no refining, no excessive heat.\n\nThe result: a dense, golden oil of incomparable flavour that turns a simple bowl of couscous into a celebration. Store away from light and consume within six months of opening to preserve all the aromas.",
+      "composition": ["100% culinary argan oil", "First cold press", "Traditionally roasted kernels", "No additives or preservatives"],
+      "origin": "Argan grove of Souss-Massa (Tiznit, Aït Baha)"
+    },
+    "5": { "name": "Cosmetic Argan Oil" },
+    "6": { "name": "Argan Oil Soap" },
+    "7": {
+      "name": "Eucalyptus Beldi Soap",
+      "tagline": "Hammam ritual care, infused with Atlantic eucalyptus",
+      "description": "A rich, smooth soap paste made from saponified olive oil and fresh eucalyptus. Exfoliates, purifies and clears the airways — the beldi gesture in its purest truth.",
+      "longDescription": "Beldi soap is not an ordinary soap: it is a black, dense paste, rich in olive oil and vegetable potash, that transforms into a gentle lather in the steam of the hammam. Khadija prepares hers in her ocean-facing workshop, cold-infusing fresh eucalyptus leaves hand-picked from the woods of Diabat.\n\nApplied to warm, damp skin, left for five minutes, then rinsed off with a kessa mitt, it reveals new, clean, infinitely soft skin. The eucalyptus adds a deep breath — a complete care for body and breath.",
+      "composition": ["Saponified olive oil", "Fresh eucalyptus infusion", "Vegetable potash", "Diabat spring water"],
+      "origin": "Khadija's workshop, facing the ocean — Essaouira"
+    },
+    "8": { "name": "Rose & Rosemary Beldi Soap" },
+    "9": { "name": "Traditional Hammam Kit" },
+    "10": {
+      "name": "Artisanal Almond Amlou",
+      "tagline": "The 'Moroccan butter' — toasted almonds, argan and honey",
+      "description": "A dense, silky paste of stone-ground toasted Souss almonds, bound with cold-pressed argan oil and wild thyme honey.",
+      "longDescription": "Amlou is a treasure of Berber cuisine from the Souss, long prepared only for distinguished guests and family celebrations. Nadia follows her mother's recipe to the letter: almonds selected one by one, toasted on a hot plate until their fragrance is released, then stone-ground to preserve the essential oils.\n\nShe then combines just three ingredients and nothing else: her almond paste, argan oil from the neighbouring cooperative, and a drizzle of wild thyme honey. Enjoy at breakfast on warm bread, alongside beghrir pancakes, or — by tradition — simply from the spoon.",
+      "composition": ["Toasted Souss almonds", "Cold-pressed argan oil", "Wild thyme honey", "No added sugar or preservatives"],
+      "origin": "Taroudant — Souss valley"
+    },
+    "11": { "name": "Walnut & Argan Amlou" },
+    "12": { "name": "Souss Nut Mix" },
+    "13": {
+      "name": "Home Ras el Hanout — 27 Spices",
+      "tagline": "Twenty-seven hand-sorted spices from the Fès medina",
+      "description": "Ras el hanout literally means 'head of the shop' — the very best of what the spice merchant has to offer. Touria's blend contains twenty-seven spices assembled in a mortar according to the seasons.",
+      "longDescription": "Touria composes her blend at the back of the Attarine souk in Fès, steps from her father who taught her the gestures. Each spice is chosen whole, never powdered — Ceylon cinnamon, green cardamom, rose buds, galangal, dried ginger, grains of selim, cubeb, mace, long pepper… the list stretches over two pages of her notebook.\n\nThe proportions shift with the seasons: more heat in winter, more flowers in summer. The blend is ground just before sale to preserve the essential oils. Ideal for lamb and prune tagines, pastillas and festive couscous.",
+      "composition": ["27 whole selected spices", "Ground to order in a mortar", "No added flavourings", "No flavour enhancers"],
+      "origin": "Fès medina — Attarine souk"
+    },
+    "14": { "name": "Chermoula Blend" },
+    "15": { "name": "Berber Mint-Sage Herbal Tea" },
+    "16": { "name": "Traditional Smen" },
+    "17": { "name": "Artisanal Ghee" },
+    "18": { "name": "Cumin-Spiced Smen" },
+    "19": { "name": "Artisanal Berber Couscous" },
+    "20": { "name": "Fine Medium-Grain Semolina" },
+    "21": { "name": "Wholegrain Barley Flour" },
+    "22": {
+      "name": "Pure Shea Butter",
+      "tagline": "Raw, unrefined, hand-churned at the gateway to the desert",
+      "description": "A 100% pure shea butter of rare creaminess, obtained by hand-churning following the Saharan method. Ivory-coloured, natural woody scent, melts instantly on contact with skin.",
+      "longDescription": "The shea butter of the Ouarzazate Cooperative is cold-extracted, without solvents, by a fully manual process that takes nearly three days: the nuts are crushed, lightly roasted, reduced to a paste, then slowly churned with spring water until the fat rises to the surface.\n\nThis raw butter retains all its essential fatty acids, its vitamin E and its original woody fragrance — fundamentally different from the white, odourless shea sold in supermarkets. A true skincare: face, body, hair, lips, scars, stretch marks. One pot for the whole family.",
+      "composition": ["100% raw shea butter", "Unrefined, undeodorised", "Hand-churned", "Certified organic"],
+      "origin": "Ouarzazate region — gateway to the desert"
+    },
+    "23": { "name": "Shea & Rose Cream" },
+    "24": { "name": "Liquid Shea Oil" }
+  }
+}

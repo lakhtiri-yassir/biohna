@@ -1,0 +1,57 @@
+{
+  "page": {
+    "heading": "Our Products",
+    "subtitle": "Full catalog",
+    "results": "{{count}} products found",
+    "filters_btn": "Filters",
+    "add_cart": "+ Cart",
+    "filters_header": "FILTERS"
+  },
+  "sort": {
+    "label": "Sort: ",
+    "popularity": "Popularity",
+    "price_asc": "Price: low to high",
+    "price_desc": "Price: high to low",
+    "newest": "Newest"
+  },
+  "filters": {
+    "categories": "Categories",
+    "price": "Price (MAD)",
+    "region": "Region",
+    "all": "All"
+  },
+  "categories": {
+    "food": "Food",
+    "cosmetics": "Cosmetics",
+    "oils": "Oils",
+    "spices": "Spices"
+  },
+  "detail": {
+    "not_found": "PRODUCT NOT FOUND",
+    "back_catalog": "← Back to catalog",
+    "back_artisan": "Back to {{name}}",
+    "add_favorites": "Add to favorites",
+    "add_cart": "Add to cart",
+    "buy_now": "Buy now",
+    "tab_desc": "Description",
+    "tab_composition": "Composition",
+    "tab_origin": "Origin & terroir",
+    "tab_delivery": "Delivery",
+    "default_composition": "100% artisanal product",
+    "delivery_text": "Careful delivery throughout Morocco within 48 to 72 hours. Each package is wrapped in kraft paper and sealed with the artisan's stamp. Cash on delivery available. Returns accepted within 7 days for manufacturing defects.",
+    "origin_coop": "Produced by {{name}}, a women's cooperative founded in {{year}}.",
+    "origin_artisan": "Handcrafted by {{name}}, in the {{region}} region.",
+    "trust_delivery": "Careful delivery — Morocco 48h",
+    "trust_payment": "Cash on delivery available",
+    "trust_certified": "Certified artisanal product",
+    "by_prefix": "By",
+    "meet_artisan": "Meet the artisan",
+    "cooperative": "Cooperative",
+    "member_since": "Member since",
+    "see_workshop": "See her workshop →",
+    "other_creations": "Other creations by {{name}}",
+    "same_category": "In the same category",
+    "to_discover": "to discover",
+    "more_creations": "+ {{count}} more creations available on order"
+  }
+}

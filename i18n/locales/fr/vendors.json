@@ -1,0 +1,40 @@
+{
+  "page": {
+    "subtitle": "200+ artisanes · 35 régions",
+    "heading": "FAÇONNÉES PAR DES MAINS MAROCAINES",
+    "description": "Chaque artisane derrière Biohna est une gardienne de savoir-faire ancestraux, transmis de génération en génération.",
+    "results_one": "{{count}} artisane trouvée",
+    "results_other": "{{count}} artisanes trouvées",
+    "empty": "Aucune artisane ne correspond à ces critères",
+    "clear_filters": "✕ Effacer les filtres",
+    "filters_btn": "Filtres",
+    "see_workshop": "Voir son atelier →",
+    "creations": "{{count}} créations"
+  },
+  "filters": {
+    "specialty": "Spécialité",
+    "region": "Région",
+    "type": "Type",
+    "type_individual": "Individuelle",
+    "type_cooperative": "Coopérative",
+    "apply": "Appliquer",
+    "title": "FILTRES"
+  },
+  "cta": {
+    "heading": "VOUS ÊTES ARTISANE ?",
+    "description": "Rejoignez la famille Biohna et partagez votre savoir-faire avec le monde.",
+    "btn": "Rejoindre la famille Biohna →"
+  },
+  "profile": {
+    "not_found": "ARTISANE INTROUVABLE",
+    "back": "← Retour aux artisanes",
+    "creations_heading": "SES CRÉATIONS",
+    "products_count": "{{count}} produits artisanaux",
+    "more_creations": "+ {{count}} autres créations disponibles sur commande",
+    "stat_creations": "Créations",
+    "stat_member": "Membre depuis",
+    "stat_region": "Région",
+    "cooperative": "Coopérative",
+    "add_to_cart": "+ Panier"
+  }
+}

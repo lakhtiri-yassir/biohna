@@ -1,0 +1,88 @@
+{
+  "access_denied": "ⵓⵔ ⵉⵍⵍⵉ ⵓⵡⵔⵉ",
+  "login_redirect": "→ ⴽⵛⵎ",
+  "personal_info": "ⵉⵏⴼⵓⵙⵏ ⵉⵏⴰⵏ",
+  "fields": {
+    "first_name": "ⵉⵙⵎ ⴰⵎⵣⵡⴰⵔⵓ",
+    "last_name": "ⴰⵄⵕⴰⴱ",
+    "email": "ⵉⵎⵉⵍ",
+    "phone": "ⵜⴰⵏⴼⵓⵙⵜ",
+    "phone_placeholder": "+212 6..."
+  },
+  "actions": {
+    "cancel": "ⵙⵔ",
+    "edit": "ⵙⵏⴼⵍ",
+    "save": "ⵃⴼⴹ",
+    "saved": "✓ ⵉⵜⵜⵓⵃⴼⴹ",
+    "update": "ⴰⵔⵔ",
+    "updated": "✓ ⵉⵜⵜⵓⴰⵔⵔⴰ"
+  },
+  "password": {
+    "section": "ⴰⵡⴰⵍ ⵏ ⵓⵡⵔⵉ",
+    "current": "ⴰⵡⴰⵍ ⴰⵎⵣⵡⴰⵔⵓ",
+    "new": "ⴰⵡⴰⵍ ⴰⵎⴰⵢⵏⵓ",
+    "confirm": "ⵙⵏⵓⴱⴱⵜ",
+    "error_length": "ⴰⵡⴰⵍ ⵉⵇⵇⴰⵏ ⴰⴷ ⵉⵍⵉ 8 ⵉⵡⵔⵉⴽⵏ.",
+    "error_match": "ⵉⵡⵔⴰⴽⵏ ⵓⵔ ⴽⴽⴰⵏ."
+  },
+  "vendor_info": {
+    "section": "ⵉⵏⴼⵓⵙⵏ ⵏ ⵓⵏⵥⴰⵡ",
+    "coop_name": "ⵉⵙⵎ ⵏ ⵜⵎⵙⵏⵜⴰⵢⵜ",
+    "region": "ⵜⴰⵎⵏⴰⴹⵜ",
+    "specialty": "ⵜⴰⵙⵎⵓⵏⵉ",
+    "select_placeholder": "— ⵔⴱⵉ —",
+    "description": "ⴰⵙⵎⴰⴳⵍ",
+    "description_placeholder": "ⵙⵎⴰⴳⵍ ⵜⵡⵓⵔⵉ ⵏⵏⴽ..."
+  },
+  "danger": {
+    "section": "ⵜⴰⵡⵓⵔⵉ ⵜⵓⵔⴰⵔⵜ",
+    "irreversible": "ⴰⵛⴽⵓ ⴰⴷ ⵓⵔ ⵉⵜⵜⵓⵔⴰⵔ. ⴰⵃⵙⴰⴱ ⵏⵏⴽ ⴰⴷ ⵉⵜⵜⵓⴽⵛⵎ.",
+    "confirm_delete": "ⵙⵏⵓⴱⴱⵜ ⴰⴽⵛⵎ",
+    "cancel": "ⵙⵔ",
+    "delete_description": "ⴽⵛⵎ ⴰⵃⵙⴰⴱ ⵏⵏⴽ ⵎⴰⵕⵕⴰ.",
+    "delete_btn": "ⴽⵛⵎ ⵓⵃⵙⴰⴱ ⵉⵏⵓ"
+  },
+  "notifications": {
+    "section": "ⵜⵉⵏⴱⴰⴹⵉⵏ",
+    "description": "ⵔⴱⵉ ⵜⵉⵏⵙⵙⵉⵔⵉⵏ ⵉⵇⵇⴰⵏⵏⵉⵏ.",
+    "orders": "ⵜⴰⵡⴰⵍⴰ ⵏ ⵜⵓⵣⵣⵡⴰ",
+    "orders_desc": "ⵜⵉⵏⵓⴱⴱⴹⵉⵏ ⴷ ⴰⵙⵍⴽⵎ",
+    "offers": "ⵜⵉⵏⴼⵍⵓⵜⵉⵏ",
+    "offers_desc": "ⵜⵉⵏⴼⵍⵓⵜⵉⵏ ⵉⵃⵍⴰⵏ",
+    "newsletter": "ⵜⵉⵏⵙⵙⵉⵔⵜ ⵏ ⴱⵉⵓⵀⵏⴰ",
+    "newsletter_desc": "ⵜⵉⵣⵔⵉⵡⵉⵏ ⴷ ⵜⵡⵓⵔⵉⵡⵉⵏ",
+    "new_artisans": "ⵜⵉⵎⵙⵏⴰⵜ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ",
+    "new_artisans_desc": "ⵜⵉⵏⴱⴰⴹⵉⵏ ⵎⴰ ⵜⴽⵛⵎⵏ ⵜⵉⵎⵙⵏⴰⵜ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ"
+  },
+  "privacy": {
+    "section": "ⵜⵉⵎⵙⵉ",
+    "description": "ⴳ ⵓⴷⵎ ⵏⵏⴽ.",
+    "public_profile": "ⵓⴷⵎ ⴰⵎⵓⵢⵔⴰ",
+    "public_profile_desc": "ⵓⴷⵎ ⵏⵏⴽ ⵉⵜⵜⵓⵢⴰⴷⴷⴰ ⵙ ⵉⴳⵔⵔⴰⵡⵏ",
+    "show_email": "ⵙⴽⵔ ⵉⵎⵉⵍ",
+    "show_email_desc": "ⵉⵜⵜⵓⵢⴰⴷⴷⴰ ⵖ ⵓⴷⵎ ⵏⵏⴽ"
+  },
+  "currency": {
+    "section": "ⵜⴰⵖⵓⵔⵉ",
+    "description": "ⵜⴰⵖⵓⵔⵉ ⵜⵜⵓⵙⵎⵔⴰⵙⵏ.",
+    "mad": "ⴷⵔⵀⵎ — MAD",
+    "eur": "ⵢⵓⵔⵓ — EUR",
+    "usd": "ⴷⵓⵍⴰⵔ — USD"
+  },
+  "address": {
+    "section": "ⵜⴰⵙⴷⴷⴰⵏⵜ ⵏ ⵓⵙⵍⴽⵎ",
+    "street": "ⵜⴰⵎⵔⵉⵔⵜ",
+    "city": "ⵜⴰⵎⴷⵉⵏⵜ",
+    "zip": "ⵓⵟⵟⵓⵏ ⴰⴱⵔⵉⴷⴰⵏ",
+    "country": "ⵜⴰⵎⴰⵣⵉⵔⵜ",
+    "street_placeholder": "123 ⵜⴰⵎⵔⵉⵔⵜ",
+    "city_placeholder": "ⵎⵕⵕⴰⴽⵛ",
+    "zip_placeholder": "40000",
+    "country_placeholder": "ⵍⵎⵖⵔⵉⴱ",
+    "empty": "ⵓⵔ ⵉⵍⵍⵉ ⵓⵙⵡⵉⵔ",
+    "saved": "✓ ⵉⵜⵜⵓⵃⴼⴹ"
+  },
+  "image_error": "ⵜⴰⵢⵎⴰⵏⵜ ⵜⵓⵔⵔⵓⵙ (2 Mo)",
+  "change_banner": "ⵙⵏⴼⵍ ⴰⵡⴰⵏ",
+  "member_since": "ⴰⵢⵜⵎⴰⵜ ⵅⴼ"
+}

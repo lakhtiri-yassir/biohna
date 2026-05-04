@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "products": "ⵉⵎⵏⵥⴰⵡⵏ",
+    "vendors": "ⵜⵉⵎⵙⵏⴰⵜⵉⵏ",
+    "categories": "ⵜⵉⵙⵏⴰⵜⵉⵏ",
+    "contact": "ⵎⵇⵇⵍ ⴷⴰⵖ",
+    "login": "ⴽⵛⵎ",
+    "favorites": "ⵉⵃⵍⴰⵏ",
+    "cart": "ⴰⵣⵍⴰⴼ",
+    "search": "ⵔⵣⵓ",
+    "menu": "ⴰⵍⵍⵓⵙ"
+  },
+  "profile_menu": {
+    "my_profile": "ⵓⴷⵎ ⵉⵏⵓ",
+    "my_orders": "ⵜⵓⵣⵣⵡⴰ ⵉⵏⵓ",
+    "my_favorites": "ⵉⵃⵍⴰⵏ ⵉⵏⵓ",
+    "soon": "ⵓⵔ ⵉⵣⵔⵉ",
+    "logout": "ⴼⴼⵖ",
+    "my_account": "ⴰⵃⵙⴰⴱ ⵉⵏⵓ",
+    "client": "ⴰⵎⵛⵜⴰⵃ",
+    "vendor": "ⴰⵏⵥⴰⵡ"
+  },
+  "mobile_menu": {
+    "products": "ⵉⵎⵏⵥⴰⵡⵏ",
+    "vendors": "ⵜⵉⵎⵙⵏⴰⵜⵉⵏ",
+    "categories": "ⵜⵉⵙⵏⴰⵜⵉⵏ",
+    "contact": "ⵎⵇⵇⵍ ⴷⴰⵖ",
+    "favorites": "ⵉⵃⵍⴰⵏ ♡",
+    "my_profile": "ⵓⴷⵎ ⵉⵏⵓ",
+    "login": "ⴽⵛⵎ"
+  },
+  "btn": {
+    "cancel": "ⵙⵔ",
+    "save": "ⵃⴼⴹ",
+    "edit": "ⵙⵏⴼⵍ",
+    "apply": "ⵙⵙⵓⴼⵖ",
+    "send": "ⴰⵣⵏ",
+    "confirm": "ⵙⵏⵓⴱⴱⵜ",
+    "back": "ⵓⵔⴰⵔ",
+    "close": "ⵔⴳⵍ",
+    "continue": "ⵙⵓⴼⵍ ←",
+    "update": "ⴰⵔⵔ"
+  },
+  "badge": {
+    "popular": "ⴰⵎⵓⵙⵙⵓ",
+    "new": "ⴰⵎⴰⵢⵏⵓ",
+    "bio": "ⴰⴼⵔⴰⵏ",
+    "limited": "ⵉⵎⵙⵙⴰⵔⴰⵔⵏ",
+    "promo": "ⵜⴰⵏⴼⵍⵓⵜ",
+    "coop": "ⵜⴰⵎⵙⵏⵜⴰⵢⵜ"
+  },
+  "price": "{{amount}} ⴷⵔⵀⵎ",
+  "products_count": "{{count}} ⴰⵎⵏⵥⵉ",
+  "products_count_plural": "{{count}} ⵉⵎⵏⵥⴰⵡⵏ"
+}

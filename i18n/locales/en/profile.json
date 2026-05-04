@@ -1,0 +1,88 @@
+{
+  "access_denied": "ACCESS DENIED",
+  "login_redirect": "→ Sign In",
+  "personal_info": "Personal Information",
+  "fields": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone",
+    "phone_placeholder": "+212 6..."
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "save": "Save",
+    "saved": "✓ Changes saved",
+    "update": "Update",
+    "updated": "✓ Password updated"
+  },
+  "password": {
+    "section": "Password",
+    "current": "Current password",
+    "new": "New password",
+    "confirm": "Confirm password",
+    "error_length": "Password must be at least 8 characters.",
+    "error_match": "Passwords do not match."
+  },
+  "vendor_info": {
+    "section": "Vendor Information",
+    "coop_name": "Cooperative / brand name",
+    "region": "Region",
+    "specialty": "Specialty",
+    "select_placeholder": "— Select —",
+    "description": "Description",
+    "description_placeholder": "Describe your activity..."
+  },
+  "danger": {
+    "section": "Danger Zone",
+    "irreversible": "This action is irreversible. Your account will be permanently deleted.",
+    "confirm_delete": "Confirm deletion",
+    "cancel": "Cancel",
+    "delete_description": "Permanently delete your account and all associated data.",
+    "delete_btn": "Delete my account"
+  },
+  "notifications": {
+    "section": "Notifications",
+    "description": "Choose the communications you want to receive.",
+    "orders": "Order tracking",
+    "orders_desc": "Confirmations, shipping and delivery updates",
+    "offers": "Offers & Promotions",
+    "offers_desc": "Exclusive discounts and flash sales",
+    "newsletter": "Biohna Newsletter",
+    "newsletter_desc": "News, recipes and wellness tips",
+    "new_artisans": "New artisans",
+    "new_artisans_desc": "Alerts when new creators join Biohna"
+  },
+  "privacy": {
+    "section": "Privacy",
+    "description": "Control your profile visibility.",
+    "public_profile": "Public profile",
+    "public_profile_desc": "Your profile is visible to other members",
+    "show_email": "Show email address",
+    "show_email_desc": "Visible on your public profile page"
+  },
+  "currency": {
+    "section": "Currency",
+    "description": "Currency displayed for prices on the platform.",
+    "mad": "Dirham — MAD",
+    "eur": "Euro — EUR",
+    "usd": "Dollar — USD"
+  },
+  "address": {
+    "section": "Delivery Address",
+    "street": "Street / Address",
+    "city": "City",
+    "zip": "Postal Code",
+    "country": "Country",
+    "street_placeholder": "123 Artisans Street",
+    "city_placeholder": "Marrakech",
+    "zip_placeholder": "40000",
+    "country_placeholder": "Morocco",
+    "empty": "No address saved",
+    "saved": "✓ Address saved"
+  },
+  "image_error": "Image too large (max 2 MB)",
+  "change_banner": "Change banner",
+  "member_since": "Member since"
+}

@@ -1,0 +1,57 @@
+{
+  "page": {
+    "heading": "منتجاتنا",
+    "subtitle": "الكتالوج الكامل",
+    "results": "{{count}} منتج موجود",
+    "filters_btn": "تصفية",
+    "add_cart": "+ السلة",
+    "filters_header": "التصفية"
+  },
+  "sort": {
+    "label": "ترتيب: ",
+    "popularity": "الأكثر شعبية",
+    "price_asc": "السعر: من الأقل",
+    "price_desc": "السعر: من الأعلى",
+    "newest": "الأحدث"
+  },
+  "filters": {
+    "categories": "الفئات",
+    "price": "السعر (درهم)",
+    "region": "المنطقة",
+    "all": "الكل"
+  },
+  "categories": {
+    "food": "الغذاء",
+    "cosmetics": "مستحضرات التجميل",
+    "oils": "الزيوت",
+    "spices": "التوابل"
+  },
+  "detail": {
+    "not_found": "المنتج غير موجود",
+    "back_catalog": "← العودة إلى الكتالوج",
+    "back_artisan": "العودة إلى {{name}}",
+    "add_favorites": "إضافة إلى المفضلة",
+    "add_cart": "إضافة إلى السلة",
+    "buy_now": "اشترِ الآن",
+    "tab_desc": "الوصف",
+    "tab_composition": "المكونات",
+    "tab_origin": "المنشأ والأرض",
+    "tab_delivery": "التوصيل",
+    "default_composition": "منتج يدوي 100%",
+    "delivery_text": "توصيل عناية في جميع أنحاء المغرب خلال 48 إلى 72 ساعة. كل طرد ملفوف بورق كرافت ومختوم بختم الحرفية. الدفع عند الاستلام متاح. يُقبل الإرجاع خلال 7 أيام في حالة عيب في التصنيع.",
+    "origin_coop": "منتج من قِبل {{name}}، تعاونية نسائية تأسست عام {{year}}.",
+    "origin_artisan": "مصنوع يدوياً من قِبل {{name}}، في منطقة {{region}}.",
+    "trust_delivery": "توصيل عناية — المغرب 48 ساعة",
+    "trust_payment": "الدفع عند الاستلام متاح",
+    "trust_certified": "منتج حرفي معتمد",
+    "by_prefix": "بقلم",
+    "meet_artisan": "تعرف على الحرفية",
+    "cooperative": "تعاونية",
+    "member_since": "عضو منذ",
+    "see_workshop": "شاهد ورشتها ←",
+    "other_creations": "إبداعات أخرى لـ{{name}}",
+    "same_category": "في نفس الفئة",
+    "to_discover": "للاكتشاف",
+    "more_creations": "+ {{count}} إبداعات أخرى متاحة عند الطلب"
+  }
+}

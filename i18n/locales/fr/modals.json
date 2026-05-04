@@ -1,0 +1,94 @@
+{
+  "categories": {
+    "heading": "CATÉGORIES",
+    "search_placeholder": "Rechercher une catégorie…",
+    "products_count": "{{count}} produits",
+    "see_all": "Voir tous les produits →",
+    "sections": {
+      "featured_label": "À la une",
+      "food_label": "Alimentation",
+      "spices_label": "Épices & Herbes",
+      "beauty_label": "Beauté & Soins"
+    },
+    "items": {
+      "featured": "Produits Vedettes",
+      "honey": "Miels & Confitures",
+      "grains": "Céréales & Grains",
+      "nuts": "Noix & Amlou",
+      "butters": "Beurres & Graisses",
+      "spices": "Épices Artisanales",
+      "herbs": "Herbes & Tisanes",
+      "oils": "Huiles Végétales",
+      "soap": "Savons Beldi"
+    }
+  },
+  "contact": {
+    "label": "Support & Questions",
+    "heading": "CONTACTEZ-NOUS",
+    "description": "Notre équipe répond sous 24h.",
+    "phone_label": "📱 Téléphone",
+    "phone_value": "+212 6 00 00 00",
+    "email_label": "✉ Email",
+    "email_value": "contact@biohna.ma",
+    "whatsapp_label": "💬 WhatsApp",
+    "whatsapp_status": "Disponible",
+    "tabs": {
+      "message": "Message",
+      "order": "Commande",
+      "partnership": "Partenariat"
+    },
+    "form": {
+      "name": "Nom",
+      "name_placeholder": "Votre nom",
+      "email": "Email",
+      "email_placeholder": "vous@mail.com",
+      "subject": "Sujet",
+      "subject_placeholder": "Ex : Question sur ma commande",
+      "message": "Message",
+      "message_placeholder": "Écrivez votre message ici…"
+    },
+    "cancel": "Annuler",
+    "submit": "Envoyer le message →"
+  },
+  "favorites": {
+    "heading": "MES FAVORIS",
+    "subheading": "Achats récents & aimés",
+    "list_header": "RACHETÉS RÉCEMMENT — {{count}} produits",
+    "rebuy": "+ Racheter",
+    "see_all": "Voir tous mes favoris →"
+  },
+  "panier": {
+    "heading": "MON PANIER",
+    "empty": "Votre panier est vide",
+    "see_all": "Voir le panier →",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "shipping_free": "Gratuite",
+    "total": "Total",
+    "checkout_btn": "Passer la commande →",
+    "continue": "← Continuer mes achats"
+  },
+  "vendeurs": {
+    "heading": "NOS ARTISANES",
+    "search_placeholder": "Rechercher une artisane…",
+    "region": "Région",
+    "all_regions": "Toutes",
+    "tabs": {
+      "all": "Tout",
+      "food": "Alimentation",
+      "oils": "Huiles",
+      "beauty": "Cosmétiques",
+      "spices": "Épices"
+    },
+    "artisan_count_one": "{{count}} artisane",
+    "artisan_count_other": "{{count}} artisanes",
+    "empty": "Aucune artisane trouvée",
+    "products_count": "{{count}} produits",
+    "see_all": "Découvrir toutes nos artisanes →",
+    "become_partner": "Devenir partenaire",
+    "hover_to_discover": "Survolez un nom pour découvrir l'artisane",
+    "member_since": "Membre depuis",
+    "view_profile": "Voir le profil",
+    "filter_region_placeholder": "Toutes les régions"
+  }
+}

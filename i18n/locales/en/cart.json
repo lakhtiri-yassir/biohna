@@ -1,0 +1,95 @@
+{
+  "steps": {
+    "cart": "My Cart",
+    "delivery": "Delivery",
+    "payment": "Payment"
+  },
+  "heading": "MY CART",
+  "by_vendor": "by {{vendor}}",
+  "summary": {
+    "heading": "SUMMARY",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "free": "Free",
+    "total": "Total",
+    "promo_placeholder": "Promo code",
+    "promo_apply": "Apply",
+    "checkout": "Proceed to checkout →",
+    "continue": "← Continue shopping"
+  },
+  "delivery": {
+    "heading": "DELIVERY",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "phone": "Phone",
+    "phone_placeholder": "+212 6XX XXX XXX or +212 7XX XXX XXX",
+    "phone_hint": "Format: +212 6XX or 7XX XXX XXX",
+    "address": "Address",
+    "city": "City",
+    "postal": "Postal code",
+    "note": "Delivery note (optional)",
+    "note_placeholder": "E.g.: blue gate, building code…",
+    "shipping_method": "Shipping method",
+    "standard": "Standard Delivery",
+    "standard_desc": "5–7 business days",
+    "standard_price": "Free from 500 MAD · 35 MAD otherwise",
+    "express": "Express Delivery",
+    "express_desc": "2–3 business days",
+    "express_price": "65 MAD",
+    "continue": "Continue to payment →",
+    "required": "This field is required"
+  },
+  "payment": {
+    "heading": "PAYMENT",
+    "method_label": "Payment",
+    "cod": "Cash on delivery",
+    "cod_desc": "Pay in cash when you receive your package",
+    "cod_badge": "Recommended · Popular in Morocco",
+    "card": "Bank card",
+    "card_desc": "Secure payment via CMI — all cards accepted",
+    "card_number": "Card number",
+    "card_name": "Name on card",
+    "card_expiry": "Expiry date",
+    "card_cvv": "CVV",
+    "card_security": "Your card details are not stored on our servers.",
+    "transfer": "Bank transfer",
+    "transfer_desc": "Transfer to our CIH Bank account",
+    "transfer_note": "Your order will be processed after transfer confirmation (1–2 business days).",
+    "legal": "Your information is protected. No banking data is stored on our servers.",
+    "confirm": "Confirm order →",
+    "confirmed_heading": "Order confirmed!",
+    "confirmed_desc": "We will contact you within 24h at the number provided.",
+    "back_home": "Back to home"
+  },
+  "favorites": {
+    "subtitle": "Your favorites",
+    "heading": "My Favorites",
+    "description": "Products bought and loved — reorder in one click",
+    "empty": "No favorites in this category",
+    "rebuy": "↻ Reorder",
+    "products_count_one": "{{count}} product",
+    "products_count_other": "{{count}} products",
+    "tabs": {
+      "all": "All",
+      "food": "Food",
+      "oils": "Oils",
+      "beauty": "Beauty",
+      "spices": "Spices"
+    },
+    "sort": {
+      "recent": "Recently purchased",
+      "most_ordered": "Most ordered",
+      "price_asc": "Price: low to high",
+      "price_desc": "Price: high to low"
+    },
+    "order_badge": "Ordered {{count}}× · {{timeframe}} ago"
+  },
+  "timeframes": {
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "weeks_one": "{{count}} week",
+    "weeks_other": "{{count}} weeks",
+    "month_one": "{{count}} month",
+    "month_other": "{{count}} months"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "page": {
+    "subtitle": "200+ artisans · 35 regions",
+    "heading": "SHAPED BY MOROCCAN HANDS",
+    "description": "Every artisan behind Biohna is a guardian of ancestral know-how, passed down from generation to generation.",
+    "results_one": "{{count}} artisan found",
+    "results_other": "{{count}} artisans found",
+    "empty": "No artisan matches these criteria",
+    "clear_filters": "✕ Clear filters",
+    "filters_btn": "Filters",
+    "see_workshop": "See her workshop →",
+    "creations": "{{count}} creations"
+  },
+  "filters": {
+    "specialty": "Specialty",
+    "region": "Region",
+    "type": "Type",
+    "type_individual": "Individual",
+    "type_cooperative": "Cooperative",
+    "apply": "Apply",
+    "title": "FILTERS"
+  },
+  "cta": {
+    "heading": "ARE YOU AN ARTISAN?",
+    "description": "Join the Biohna family and share your know-how with the world.",
+    "btn": "Join the Biohna family →"
+  },
+  "profile": {
+    "not_found": "ARTISAN NOT FOUND",
+    "back": "← Back to artisans",
+    "creations_heading": "HER CREATIONS",
+    "products_count": "{{count}} artisanal products",
+    "more_creations": "+ {{count}} more creations available on order",
+    "stat_creations": "Creations",
+    "stat_member": "Member since",
+    "stat_region": "Region",
+    "cooperative": "Cooperative",
+    "add_to_cart": "+ Cart"
+  }
+}
