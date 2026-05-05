@@ -14,8 +14,7 @@ export async function GET(request, { params }) {
               select: {
                 name: true,
                 pictures: {
-                  take: 1,
-                  orderBy: { displayOrder: 'asc' }
+                  take: 1
                 }
               }
             },

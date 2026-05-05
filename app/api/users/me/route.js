@@ -23,8 +23,6 @@ export async function GET(request) {
         lastName: true,
         phone: true,
         picture: true,
-        role: true,
-        isEmailVerified: true,
         createdAt: true,
         updatedAt: true,
         settings: true,
@@ -77,8 +75,6 @@ export async function PATCH(request) {
         lastName: true,
         phone: true,
         picture: true,
-        role: true,
-        isEmailVerified: true,
         createdAt: true,
         updatedAt: true
       }

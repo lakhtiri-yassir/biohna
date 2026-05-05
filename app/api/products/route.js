@@ -48,8 +48,7 @@ export async function GET(request) {
       where,
       include: {
         pictures: {
-          take: 1,
-          orderBy: { displayOrder: 'asc' }
+          take: 1
         },
         vendor: {
           select: { storeName: true, id: true }
@@ -103,9 +102,8 @@ export async function POST(request) {
         ...(pictures.length > 0 && {
           pictures: {
             createMany: {
-              data: pictures.map((url, index) => ({
-                url,
-                displayOrder: index + 1
+              data: pictures.map(url => ({
+                imageUrl: url
               }))
             }
           }

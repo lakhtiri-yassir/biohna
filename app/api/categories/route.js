@@ -13,7 +13,7 @@ export async function GET(request) {
           }
         }
       },
-      orderBy: { displayOrder: 'asc' }
+      orderBy: { name: 'asc' }
     })
 
     return successResponse(categories)

@@ -12,8 +12,7 @@ export async function GET(request, { params }) {
           where: { status: 'ACTIVE' },
           include: {
             pictures: {
-              take: 1,
-              orderBy: { displayOrder: 'asc' }
+              take: 1
             },
             category: {
               select: { name: true, slug: true }
