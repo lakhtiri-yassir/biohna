@@ -53,6 +53,8 @@
   "favorites": {
     "heading": "ⵉⵃⵍⴰⵏ ⵉⵏⵓ",
     "subheading": "ⵉⵥⵥⴰⵏ ⴷ ⵉⵃⵍⴰⵏ",
+    "empty_title": "ⵓⵍⴰⵛ ⵉⵃⵍⴰⵏ ⵢⴰⴷⵏⵏⵉ",
+    "empty_subtitle": "ⴰⴼ ⵉⵎⵏⵥⴰⵡⵏ ⴰⴷ ⵜⵣⵎⵔⴷ ⵉⵃⵍⴰⵏ ⵏⵏⴽ",
     "list_header": "ⵉⵜⵜⵓⵖ ⴷⴰⵖⵉ — {{count}}",
     "rebuy": "+ ⴰⵔⵔ",
     "see_all": "ⵙⵏⴼⵍ ⵎⴰⵕⵕⴰ ←"

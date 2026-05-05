@@ -44,6 +44,7 @@ export const authConfig = {
             firstName: user.firstName,
             lastName: user.lastName,
             fullName: `${user.firstName} ${user.lastName}`,
+            phone: user.phone,
             picture: user.picture,
             settings: user.settings || {
               language: 'fr',
@@ -78,6 +79,7 @@ export const authConfig = {
         token.firstName = user.firstName
         token.lastName = user.lastName
         token.fullName = user.fullName
+        token.phone = user.phone
         token.picture = user.picture
         token.settings = user.settings
       }
@@ -90,6 +92,7 @@ export const authConfig = {
         session.user.firstName = token.firstName
         session.user.lastName = token.lastName
         session.user.fullName = token.fullName
+        session.user.phone = token.phone
         session.user.picture = token.picture
         session.user.settings = token.settings
       }

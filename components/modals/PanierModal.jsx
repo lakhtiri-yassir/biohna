@@ -7,11 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useModal } from '../../context/ModalContext.jsx'
 import { useDirection } from '../../hooks/useDirection.js'
 
-const SAMPLE = [
-  { id:1, category:'Alimentation', name:'9ER3A DYAL L3SSEL', vendor:'Lalla Fatima', oldPrice:'MAD 650', price:'MAD 500', qty:1 },
-  { id:2, category:'Huiles', name:"Huile d'Argan Pure", vendor:'Coopérative Aït Baha', price:'MAD 320', qty:1 },
-  { id:3, category:'Cosmétiques', name:'Savon Beldi Eucalyptus', vendor:'Khadija', price:'MAD 85', qty:1 },
-]
+// Cart starts empty - no hardcoded sample data
 
 function CartItem({ item, onQty }) {
   return (
@@ -52,7 +48,7 @@ export default function PanierModal() {
   const { activeModal, setActiveModal } = useModal()
   const { t } = useTranslation('modals')
   const { flip } = useDirection()
-  const [items, setItems] = useState(SAMPLE)
+  const [items, setItems] = useState([])
   const router = useRouter()
   const isOpen = activeModal === 'panier'
 
@@ -91,34 +87,47 @@ export default function PanierModal() {
 
             {/* Items */}
             <div style={{ flex:1, overflowY:'auto' }}>
-              {items.map(it => <CartItem key={it.id} item={it} onQty={updateQty} />)}
+              {items.length === 0 ? (
+                <div style={{ padding: '60px 26px', textAlign: 'center' }}>
+                  <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '8px' }}>
+                    {t('panier.empty')}
+                  </p>
+                  <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                    Découvrez nos produits et ajoutez-les à votre panier
+                  </p>
+                </div>
+              ) : (
+                items.map(it => <CartItem key={it.id} item={it} onQty={updateQty} />)
+              )}
             </div>
 
-            {/* Footer */}
-            <div style={{ padding:'18px 26px 26px', borderTop:'1px solid var(--border-subtle)' }}>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px' }}>
-                <span>{t('panier.subtotal')}</span><span>MAD 905</span>
+            {/* Footer - only show when cart has items */}
+            {items.length > 0 && (
+              <div style={{ padding:'18px 26px 26px', borderTop:'1px solid var(--border-subtle)' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px' }}>
+                  <span>{t('panier.subtotal')}</span><span>MAD 0</span>
+                </div>
+                <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'16px' }}>
+                  <span>{t('panier.shipping')}</span><span style={{ color:'var(--accent-gold)' }}>{t('panier.shipping_free')}</span>
+                </div>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderTop:'1px solid var(--border-subtle)', paddingTop:'14px', marginBottom:'18px' }}>
+                  <span style={{ fontWeight:700, fontSize:'15px', color:'var(--text-primary)' }}>{t('panier.total')}</span>
+                  <span style={{ fontFamily:"'Anton SC', var(--font-display), sans-serif", fontSize:'24px', color:'var(--accent-gold)' }}>MAD 0</span>
+                </div>
+                <motion.button
+                  whileHover={{ y:-2, boxShadow:'0 8px 32px rgba(212,175,55,0.4)' }}
+                  whileTap={{ scale:0.98 }}
+                  onClick={() => { setActiveModal(null); router.push('/cart') }}
+                  style={{ width:'100%', padding:'15px', background:'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border:'none', borderRadius:'14px', fontWeight:700, fontSize:'15px', color:'var(--bg-base)', cursor:'pointer', boxShadow:'0 4px 20px rgba(212,175,55,0.28)' }}
+                >{t('panier.checkout_btn')}</motion.button>
+                <button
+                  onClick={() => setActiveModal(null)}
+                  style={{ width:'100%', textAlign:'center', marginTop:'12px', fontSize:'13px', color:'var(--text-muted)', cursor:'pointer', background:'none', border:'none', transition:'color 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.color='var(--accent-gold)'}
+                  onMouseLeave={e => e.currentTarget.style.color='var(--text-muted)'}
+                >{t('panier.continue')}</button>
               </div>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'16px' }}>
-                <span>{t('panier.shipping')}</span><span style={{ color:'var(--accent-gold)' }}>{t('panier.shipping_free')}</span>
-              </div>
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderTop:'1px solid var(--border-subtle)', paddingTop:'14px', marginBottom:'18px' }}>
-                <span style={{ fontWeight:700, fontSize:'15px', color:'var(--text-primary)' }}>{t('panier.total')}</span>
-                <span style={{ fontFamily:"'Anton SC', var(--font-display), sans-serif", fontSize:'24px', color:'var(--accent-gold)' }}>MAD 905</span>
-              </div>
-              <motion.button
-                whileHover={{ y:-2, boxShadow:'0 8px 32px rgba(212,175,55,0.4)' }}
-                whileTap={{ scale:0.98 }}
-                onClick={() => { setActiveModal(null); router.push('/cart') }}
-                style={{ width:'100%', padding:'15px', background:'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border:'none', borderRadius:'14px', fontWeight:700, fontSize:'15px', color:'var(--bg-base)', cursor:'pointer', boxShadow:'0 4px 20px rgba(212,175,55,0.28)' }}
-              >{t('panier.checkout_btn')}</motion.button>
-              <button
-                onClick={() => setActiveModal(null)}
-                style={{ width:'100%', textAlign:'center', marginTop:'12px', fontSize:'13px', color:'var(--text-muted)', cursor:'pointer', background:'none', border:'none', transition:'color 0.2s' }}
-                onMouseEnter={e => e.currentTarget.style.color='var(--accent-gold)'}
-                onMouseLeave={e => e.currentTarget.style.color='var(--text-muted)'}
-              >{t('panier.continue')}</button>
-            </div>
+            )}
           </motion.div>
         </motion.div>
       )}

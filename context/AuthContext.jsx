@@ -50,11 +50,11 @@ function AuthProviderInner({ children }) {
   }
 
   async function updateAvatar(base64) {
-    return updateProfile({ avatar: base64 });
+    return updateProfile({ picture: base64 });
   }
 
   async function updateBanner(base64) {
-    return updateProfile({ bannerUrl: base64 });
+    return updateProfile({ banner: base64 });
   }
 
   async function updateSettings(partialSettings) {
@@ -79,13 +79,15 @@ function AuthProviderInner({ children }) {
   const user = session?.user ? {
     id: session.user.id,
     email: session.user.email,
+    firstName: session.user.firstName || '',
+    lastName: session.user.lastName || '',
     fullName: session.user.fullName,
-    firstName: session.user.fullName?.split(' ')[0] || '',
-    lastName: session.user.fullName?.split(' ').slice(1).join(' ') || '',
-    role: session.user.role,
-    avatar: session.user.avatar,
-    avatarUrl: session.user.avatar, // alias for compatibility
-    bannerUrl: session.user.bannerUrl || null,
+    phone: session.user.phone || '',
+    picture: session.user.picture || null,
+    avatar: session.user.picture, // alias for compatibility
+    avatarUrl: session.user.picture, // alias for compatibility
+    banner: session.user.banner || null,
+    bannerUrl: session.user.banner || null,
     initials: session.user.fullName ? 
       session.user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 
       '??',

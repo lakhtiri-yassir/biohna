@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -304,6 +304,18 @@ export default function Profile() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [bannerError, setBannerError] = useState('')
   const bannerFileRef = useRef(null)
+
+  // Initialize forms with user data when available
+  useEffect(() => {
+    if (user) {
+      setInfoForm({
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        phone: user.phone || ''
+      })
+    }
+  }, [user])
 
   if (!isAuthenticated || !user) {
     return (

@@ -53,6 +53,8 @@
   "favorites": {
     "heading": "MY FAVORITES",
     "subheading": "Recent & loved purchases",
+    "empty_title": "No favorites yet",
+    "empty_subtitle": "Discover our products and add your favorites here",
     "list_header": "RECENTLY REORDERED — {{count}} products",
     "rebuy": "+ Reorder",
     "see_all": "View all my favorites →"

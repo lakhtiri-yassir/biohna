@@ -53,6 +53,8 @@
   "favorites": {
     "heading": "MES FAVORIS",
     "subheading": "Achats récents & aimés",
+    "empty_title": "Aucun favori encore",
+    "empty_subtitle": "Découvrez nos produits et ajoutez vos coups de cœur ici",
     "list_header": "RACHETÉS RÉCEMMENT — {{count}} produits",
     "rebuy": "+ Racheter",
     "see_all": "Voir tous mes favoris →"
