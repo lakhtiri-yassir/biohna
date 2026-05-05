@@ -17,11 +17,7 @@ const MOROCCAN_CITIES = [
   'Essaouira', 'Ifrane',
 ]
 
-const INITIAL_ITEMS = [
-  { id: 1, category: 'Alimentation', name: "9er3a dyal L3ssel Beldi", vendor: "Lalla Fatima", price: 500, oldPrice: 650, qty: 1 },
-  { id: 2, category: 'Huiles', name: "Huile d'Argan Pure", vendor: "Coopérative Aït Baha", price: 320, qty: 1 },
-  { id: 3, category: 'Cosmétiques', name: "Savon Beldi Eucalyptus", vendor: "Khadija", price: 85, qty: 2 },
-]
+// Cart items loaded from localStorage
 
 const panelVariants = {
   enter: (dir) => ({ x: dir * 60, opacity: 0 }),
@@ -247,7 +243,7 @@ function DeliveryPanel({ delivery, onChange, errors, t, flip, isNarrow, onBack }
   )
 }
 
-function PaymentPanel({ paymentMethod, setPaymentMethod, cardInfo, setCardInfo, confirmed, orderId, t, flip, isNarrow, onBack }) {
+function PaymentPanel({ paymentMethod, setPaymentMethod, cardInfo, setCardInfo, confirmed, orderId, checkoutError, t, flip, isNarrow, onBack }) {
   const cardInput = { ...inputBase, border: '1px solid var(--accent-gold-border-lo)' }
 
   if (confirmed) {
@@ -261,7 +257,7 @@ function PaymentPanel({ paymentMethod, setPaymentMethod, cardInfo, setCardInfo, 
         <h2 style={{ fontFamily: "'Anton SC', sans-serif", fontSize: '24px', color: 'var(--accent-gold)', letterSpacing: '2px', marginBottom: '12px' }}>{t('payment.confirmed_heading')}</h2>
         <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>{t('payment.confirmed_desc')}</p>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', fontFamily: 'monospace', marginBottom: '32px' }}>
-          Référence: #{orderId?.slice(0, 8).toUpperCase()}
+          #{orderId ? orderId.slice(0, 8).toUpperCase() : ''}
         </p>
         <Link href="/" style={{ display: 'inline-block', padding: '12px 28px', background: 'var(--accent-gold-bg)', border: '1px solid var(--accent-gold-border)', borderRadius: '12px', color: 'var(--accent-gold)', fontSize: '14px', fontWeight: 700, textDecoration: 'none' }}>
           {t('payment.back_home')}
@@ -377,7 +373,7 @@ function PaymentPanel({ paymentMethod, setPaymentMethod, cardInfo, setCardInfo, 
   )
 }
 
-function OrderSummary({ items, subtotal, shippingCost, activeStep, promo, setPromo, paymentMethod, onContinue, confirmed, t, isNarrow, flip }) {
+function OrderSummary({ items, subtotal, shippingCost, activeStep, promo, setPromo, paymentMethod, onContinue, confirmed, checkoutError, t, isNarrow, flip }) {
   const ctaLabel = [t('summary.checkout'), t('delivery.continue'), t('payment.confirm')][activeStep] ?? t('summary.checkout')
   const total = subtotal + shippingCost
 
@@ -436,12 +432,17 @@ function OrderSummary({ items, subtotal, shippingCost, activeStep, promo, setPro
       </div>
 
       {!confirmed && (
-        <motion.button
-          onClick={onContinue}
-          whileHover={{ y: -2, boxShadow: '0 8px 32px rgba(212,175,55,0.4)' }}
-          whileTap={{ scale: 0.98 }}
-          style={{ width: '100%', padding: '16px', background: 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border: 'none', borderRadius: '14px', fontWeight: 700, fontSize: '15px', color: 'var(--bg-base)', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212,175,55,0.28)' }}
-        >{ctaLabel}</motion.button>
+        <>
+          {checkoutError && (
+            <p style={{ color: 'var(--destructive)', fontSize: '13px', marginBottom: '12px', textAlign: 'center' }}>{checkoutError}</p>
+          )}
+          <motion.button
+            onClick={onContinue}
+            whileHover={{ y: -2, boxShadow: '0 8px 32px rgba(212,175,55,0.4)' }}
+            whileTap={{ scale: 0.98 }}
+            style={{ width: '100%', padding: '16px', background: 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border: 'none', borderRadius: '14px', fontWeight: 700, fontSize: '15px', color: 'var(--bg-base)', cursor: 'pointer', boxShadow: '0 4px 20px rgba(212,175,55,0.28)' }}
+          >{ctaLabel}</motion.button>
+        </>
       )}
     </motion.div>
   )
@@ -453,10 +454,20 @@ export default function CartDetails() {
   const isNarrow = useIsNarrow()
   const { user } = useAuth()
 
-  const [items, setItems] = useState(INITIAL_ITEMS)
+  const [items, setItems] = useState([])
   const [promo, setPromo] = useState('')
   const [activeStep, setActiveStep] = useState(0)
   const [orderId, setOrderId] = useState(null)
+  const [checkoutError, setCheckoutError] = useState('')
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('biohna_cart') || '[]')
+      setItems(stored)
+    } catch {
+      setItems([])
+    }
+  }, [])
   const [direction, setDirection] = useState(1)
 
   const [delivery, setDelivery] = useState({
@@ -495,62 +506,66 @@ export default function CartDetails() {
       goToStep(2)
     } else if (activeStep === 2) {
       try {
-        // Create order
+        // Map payment method to API enum
+        const paymentMethodMap = {
+          cod: 'CASH',
+          card: 'CARD',
+          transfer: 'TRANSFER'
+        }
+
+        const orderPayload = {
+          userId: user?.id,
+          paymentMethod: paymentMethodMap[paymentMethod] || 'CASH',
+          cart: items.map(item => ({
+            productId: item.id,
+            quantity: item.qty,
+            pricePerUnit: parseFloat(item.price),
+            vendorId: item.vendorId
+          })),
+          shipping: {
+            recipientName: `${delivery.firstName} ${delivery.lastName}`.trim(),
+            addressLine1: delivery.address,
+            city: delivery.city,
+            postalCode: delivery.postal,
+            phone: delivery.phone,
+            shippingMethod: delivery.shipping === 'express' ? 'EXPRESS' : 'STANDARD'
+          }
+        }
+
         const orderResponse = await fetch('/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderPayload)
+        })
+
+        const orderData = await orderResponse.json()
+
+        if (!orderData.success) {
+          console.error('Order creation failed:', orderData.error)
+          setCheckoutError(orderData.error || 'La commande a échoué. Veuillez réessayer.')
+          return
+        }
+
+        // Initiate payment stub
+        await fetch('/api/payment/initiate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            userId: user?.id,
-            items: items.map(item => ({
-              productId: item.id,
-              quantity: item.qty,
-              price: item.price
-            })),
-            shippingAddress: {
-              firstName: delivery.firstName,
-              lastName: delivery.lastName,
-              address: delivery.address,
-              city: delivery.city,
-              postalCode: delivery.postal,
-              phone: delivery.phone
-            },
-            notes: delivery.note,
-            shippingCost
+            orderId: orderData.data.id,
+            amount: subtotal + shippingCost,
+            paymentMethod: paymentMethodMap[paymentMethod] || 'CASH'
           })
         })
-        
-        const orderData = await orderResponse.json()
-        
-        if (orderData.success) {
-          // Initiate payment
-          const paymentResponse = await fetch('/api/payment/initiate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              orderId: orderData.data.id,
-              amount: subtotal + shippingCost,
-              paymentMethod
-            })
-          })
-          
-          const paymentData = await paymentResponse.json()
-          
-          if (paymentData.success) {
-            setConfirmed(true)
-            setOrderId(orderData.data.id)
-            localStorage.removeItem('biohna_cart')
-            setItems([])
-          } else {
-            console.error('Payment failed:', paymentData.error)
-            // TODO: Show error to user
-          }
-        } else {
-          console.error('Order creation failed:', orderData.error)
-          // TODO: Show error to user
-        }
+
+        // Success — clear cart and show confirmation
+        setOrderId(orderData.data.id)
+        localStorage.removeItem('biohna_cart')
+        setItems([])
+        setConfirmed(true)
+
       } catch (error) {
         console.error('Checkout error:', error)
-        // TODO: Show error to user
+        setCheckoutError('Une erreur est survenue. Veuillez réessayer.')
       }
     }
   }
@@ -645,6 +660,7 @@ export default function CartDetails() {
                   setCardInfo={setCardInfo}
                   confirmed={confirmed}
                   orderId={orderId}
+                  checkoutError={checkoutError}
                   t={t} flip={flip} isNarrow={isNarrow}
                   onBack={() => goToStep(1)}
                 />
@@ -662,6 +678,7 @@ export default function CartDetails() {
             paymentMethod={paymentMethod}
             onContinue={handleContinue}
             confirmed={confirmed}
+            checkoutError={checkoutError}
             t={t} isNarrow={isNarrow} flip={flip}
           />
         </div>

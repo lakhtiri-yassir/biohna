@@ -56,8 +56,7 @@ export async function POST(request) {
           productId: item.productId,
           vendorId: item.vendorId,
           quantity: item.quantity,
-          pricePerUnit: item.pricePerUnit,
-          subtotal: item.quantity * item.pricePerUnit
+          pricePerUnit: item.pricePerUnit
         }))
       })
 
@@ -67,7 +66,6 @@ export async function POST(request) {
           orderId: newOrder.id,
           recipientName: shipping.recipientName,
           addressLine1: shipping.addressLine1,
-          addressLine2: shipping.addressLine2,
           city: shipping.city,
           postalCode: shipping.postalCode,
           phone: shipping.phone,

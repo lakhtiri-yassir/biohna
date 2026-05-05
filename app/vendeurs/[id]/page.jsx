@@ -66,7 +66,35 @@ function ProductCard({ product, delay, addToCartLabel, flip }) {
           </div>
           <motion.button
             whileHover={{ background: 'var(--accent-gold)', color: 'var(--bg-base)', scale: 1.04 }}
-            onClick={e => { e.stopPropagation(); setActiveModal('panier') }}
+            onClick={e => { 
+              e.stopPropagation(); 
+              // Add to cart functionality
+              const cartItem = {
+                id: product.id,
+                name: product.name,
+                price: parseFloat(product.price.replace(/[^\d.-]/g, '')),
+                qty: 1,
+                category: product.category?.name || 'Product',
+                vendorId: product.vendorId,
+                vendor: product.vendor?.storeName || 'Unknown Vendor'
+              }
+              
+              try {
+                const existingCart = JSON.parse(localStorage.getItem('biohna_cart') || '[]')
+                const existingItemIndex = existingCart.findIndex(item => item.id === product.id)
+                
+                if (existingItemIndex >= 0) {
+                  existingCart[existingItemIndex].qty += 1
+                } else {
+                  existingCart.push(cartItem)
+                }
+                
+                localStorage.setItem('biohna_cart', JSON.stringify(existingCart))
+                setActiveModal('panier')
+              } catch (error) {
+                console.error('Error adding to cart:', error)
+              }
+            }}
             style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px', borderRadius: '18px', background: 'var(--accent-gold-bg)', border: '1px solid var(--accent-gold-border)', color: 'var(--accent-gold)', fontSize: '12px', fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(8px)' }}
           >{addToCartLabel}</motion.button>
         </div>
