@@ -6,13 +6,12 @@ import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { useModal } from '../../context/ModalContext.jsx'
 import { useDirection } from '../../hooks/useDirection.js'
-import { ARTISANES, SPECIALTY_COLORS, REGIONS } from '../../data/artisanes.js'
 import { useIsNarrow } from '../../hooks/useIsNarrow'
 
 // ─── Feature Panel (left 37%) ────────────────────────────────────────────────
 
 function AtelierFeaturePanel({ artisan, onViewProfile, t, flip }) {
-  const specialtyColor = artisan ? (SPECIALTY_COLORS[artisan.specialty] ?? '#d4af37') : '#d4af37'
+  const specialtyColor = '#d4af37' // Default gold color for all vendors
   const storyExcerpt = artisan
     ? artisan.story.slice(0, 130) + (artisan.story.length > 130 ? '…' : '')
     : ''
@@ -209,7 +208,7 @@ function AtelierFeaturePanel({ artisan, onViewProfile, t, flip }) {
 
 // ─── Region Dropdown ─────────────────────────────────────────────────────────
 
-function RegionDropdown({ activeRegion, onChange, placeholder, flip }) {
+function RegionDropdown({ activeRegion, onChange, placeholder, flip, regions }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -220,7 +219,7 @@ function RegionDropdown({ activeRegion, onChange, placeholder, flip }) {
     return () => document.removeEventListener('mousedown', handler)
   }, [open])
 
-  const options = [{ value: '', label: placeholder }, ...REGIONS.map(r => ({ value: r, label: r }))]
+  const options = [{ value: '', label: placeholder }, ...regions.map(r => ({ value: r, label: r }))]
   const selected = options.find(o => o.value === (activeRegion ?? '')) ?? options[0]
 
   return (
@@ -316,7 +315,7 @@ function RegionDropdown({ activeRegion, onChange, placeholder, flip }) {
 
 // ─── Directory Header ─────────────────────────────────────────────────────────
 
-function DirectoryHeader({ activeTab, setActiveTab, activeRegion, setActiveRegion, search, setSearch, onFilterChange, t, TABS, flip }) {
+function DirectoryHeader({ activeTab, setActiveTab, activeRegion, setActiveRegion, search, setSearch, onFilterChange, t, TABS, flip, regions }) {
   const handleTabClick = (id) => { setActiveTab(id); onFilterChange() }
   const handleRegionChange = (val) => { setActiveRegion(val || null); onFilterChange() }
   const handleSearchChange = (e) => { setSearch(e.target.value); onFilterChange() }
@@ -399,6 +398,7 @@ function DirectoryHeader({ activeTab, setActiveTab, activeRegion, setActiveRegio
           onChange={(val) => { handleRegionChange(val); }}
           placeholder={t('vendeurs.filter_region_placeholder')}
           flip={flip}
+          regions={regions}
         />
       </div>
     </div>
@@ -408,7 +408,7 @@ function DirectoryHeader({ activeTab, setActiveTab, activeRegion, setActiveRegio
 // ─── Directory Row ────────────────────────────────────────────────────────────
 
 function DirectoryRow({ artisan, isActive, onHover, onClick, productsLabel, flip, isNarrow }) {
-  const specialtyColor = SPECIALTY_COLORS[artisan.specialty] ?? '#d4af37'
+  const specialtyColor = '#d4af37' // Default gold color for all vendors
 
   return (
     <div
@@ -508,7 +508,7 @@ function DirectoryRow({ artisan, isActive, onHover, onClick, productsLabel, flip
 
 // ─── Directory Panel (right) ──────────────────────────────────────────────────
 
-function AtelierDirectoryPanel({ filtered, activeTab, setActiveTab, activeRegion, setActiveRegion, search, setSearch, hoveredArtisan, setHoveredArtisan, onRowClick, isNarrow, t, flip }) {
+function AtelierDirectoryPanel({ filtered, activeTab, setActiveTab, activeRegion, setActiveRegion, search, setSearch, hoveredArtisan, setHoveredArtisan, onRowClick, isNarrow, t, flip, regions }) {
   const TABS = [
     { id: 'all', label: t('vendeurs.tabs.all') },
     { id: 'Alimentation', label: t('vendeurs.tabs.food') },
@@ -532,6 +532,7 @@ function AtelierDirectoryPanel({ filtered, activeTab, setActiveTab, activeRegion
         t={t}
         TABS={TABS}
         flip={flip}
+        regions={regions}
       />
 
       {/* Count label */}
@@ -592,8 +593,50 @@ export default function VendeurModal() {
   const [activeRegion, setActiveRegion] = useState(null)
   const [search, setSearch] = useState('')
   const [hoveredArtisan, setHoveredArtisan] = useState(null)
+  const [vendors, setVendors] = useState([])
+  const [regions, setRegions] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const isOpen = activeModal === 'vendeurs'
+
+  useEffect(() => {
+    if (isOpen && vendors.length === 0) {
+      fetchVendors()
+    }
+  }, [isOpen])
+
+  async function fetchVendors() {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/vendors')
+      const data = await response.json()
+      
+      if (data.success) {
+        // Transform vendor data to match expected artisan structure
+        const transformedVendors = data.data.map(vendor => ({
+          id: vendor.id,
+          name: vendor.storeName,
+          region: vendor.storeAddress || 'Morocco',
+          story: `${vendor.storeName} is a trusted vendor providing quality Moroccan products.`,
+          specialtyLabel: 'Produits Authentiques',
+          specialty: 'all', // Default specialty for filtering
+          initials: vendor.storeName.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase(),
+          productCount: vendor.products?.length || 0,
+          memberSince: new Date(vendor.createdAt).getFullYear()
+        }))
+        
+        setVendors(transformedVendors)
+        
+        // Extract unique regions
+        const uniqueRegions = [...new Set(transformedVendors.map(v => v.region))]
+        setRegions(uniqueRegions)
+      }
+    } catch (error) {
+      console.error('Failed to fetch vendors:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const close = () => {
     setActiveModal(null)
@@ -603,7 +646,7 @@ export default function VendeurModal() {
     setHoveredArtisan(null)
   }
 
-  const filtered = ARTISANES.filter(a => {
+  const filtered = vendors.filter(a => {
     const matchTab = activeTab === 'all' || a.specialty === activeTab
     const matchRegion = !activeRegion || a.region === activeRegion
     const q = search.toLowerCase()
@@ -612,7 +655,7 @@ export default function VendeurModal() {
   })
 
   const featuredArtisan = hoveredArtisan
-    ? (ARTISANES.find(a => a.id === hoveredArtisan) ?? filtered[0] ?? null)
+    ? (vendors.find(a => a.id === hoveredArtisan) ?? filtered[0] ?? null)
     : (filtered[0] ?? null)
 
   return (
@@ -675,7 +718,7 @@ export default function VendeurModal() {
                   color: 'var(--text-muted)',
                   letterSpacing: '0.3px',
                 }}>
-                  {t('vendeurs.artisan_count', { count: ARTISANES.length })}
+                  {t('vendeurs.artisan_count', { count: vendors.length })}
                 </span>
               </div>
               <motion.button
@@ -716,6 +759,7 @@ export default function VendeurModal() {
                 isNarrow={isNarrow}
                 t={t}
                 flip={flip}
+                regions={regions}
               />
             </div>
 

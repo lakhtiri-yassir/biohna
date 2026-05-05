@@ -43,13 +43,54 @@ function cardProps(offset) {
 }
 
 function FeaturedCarousel({ isNarrow, t }) {
-  const carouselItems = t('carousel_items', { returnObjects: true, ns: 'home' })
-  const PRODUCTS = PRODUCTS_META.map((meta, i) => ({
-    ...meta,
-    name:   Array.isArray(carouselItems) ? (carouselItems[i]?.name   ?? '') : '',
-    vendor: Array.isArray(carouselItems) ? (carouselItems[i]?.vendor ?? '') : '',
-  }))
-  const n = PRODUCTS.length
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    fetchFeaturedProducts()
+  }, [])
+
+  async function fetchFeaturedProducts() {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/products?limit=6&featured=true')
+      const data = await response.json()
+      
+      if (data.success) {
+        // Transform API products to match expected structure
+        const transformedProducts = data.data.products.map((product) => ({
+          name: product.name,
+          vendor: product.vendor?.storeName || 'Vendor',
+          price: `${product.price} DHs`,
+          badgeKey: product.bioCertified ? 'organic' : null
+        }))
+        setProducts(transformedProducts)
+      } else {
+        // Fallback to i18n data if API fails
+        const carouselItems = t('carousel_items', { returnObjects: true, ns: 'home' })
+        const fallbackProducts = PRODUCTS_META.map((meta, i) => ({
+          ...meta,
+          name: Array.isArray(carouselItems) ? (carouselItems[i]?.name ?? '') : '',
+          vendor: Array.isArray(carouselItems) ? (carouselItems[i]?.vendor ?? '') : '',
+        }))
+        setProducts(fallbackProducts)
+      }
+    } catch (error) {
+      console.error('Failed to fetch featured products:', error)
+      // Fallback to i18n data
+      const carouselItems = t('carousel_items', { returnObjects: true, ns: 'home' })
+      const fallbackProducts = PRODUCTS_META.map((meta, i) => ({
+        ...meta,
+        name: Array.isArray(carouselItems) ? (carouselItems[i]?.name ?? '') : '',
+        vendor: Array.isArray(carouselItems) ? (carouselItems[i]?.vendor ?? '') : '',
+      }))
+      setProducts(fallbackProducts)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const n = products.length
   const [centerIdx, setCenterIdx] = useState(0)
   const [direction, setDirection] = useState(1)
   const pausedRef = useRef(false)
@@ -130,9 +171,21 @@ function FeaturedCarousel({ isNarrow, t }) {
           overflow: 'hidden',
         }}>
           <AnimatePresence initial={false}>
-          {SLOTS.map(offset => {
+          {products.length === 0 ? (
+            <div style={{ 
+              position: 'absolute', 
+              left: '50%', 
+              top: '50%', 
+              transform: 'translate(-50%, -50%)', 
+              color: 'var(--text-muted)', 
+              textAlign: 'center' 
+            }}>
+              {loading ? 'Loading products...' : 'No featured products available'}
+            </div>
+          ) : SLOTS.map(offset => {
             const prodIdx = (centerIdx + offset + n * 100) % n
-            const p = PRODUCTS[prodIdx]
+            const p = products[prodIdx]
+            if (!p) return null
             const { scale, opacity, blur, z } = cardProps(offset)
             const isCenter = offset === 0
 
@@ -253,7 +306,7 @@ function FeaturedCarousel({ isNarrow, t }) {
         </motion.button>
 
         <div style={{ display: 'flex', gap: '8px' }}>
-          {PRODUCTS.map((_, i) => (
+          {products.map((_, i) => (
             <motion.button
               key={i}
               onClick={() => { setDirection(i > centerIdx ? 1 : -1); setCenterIdx(i) }}
@@ -346,18 +399,69 @@ function ProgressRing({ duration, active, onComplete }) {
 
 /* ── Cooperative Spotlight ───────────────────────── */
 function CooperativeSpotlight({ isNarrow, t }) {
-  const coopItems = t('cooperatives_items', { returnObjects: true, ns: 'home' })
-  const COOPERATIVES = COOPS_META.map((meta, i) => ({
-    ...meta,
-    ...(Array.isArray(coopItems) ? (coopItems[i] ?? {}) : {}),
-  }))
+  const [cooperatives, setCooperatives] = useState([])
+  const [loading, setLoading] = useState(false)
   const [activeIdx, setActiveIdx] = useState(0)
+
+  useEffect(() => {
+    fetchCooperatives()
+  }, [])
+
+  async function fetchCooperatives() {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/vendors?limit=20')
+      const data = await response.json()
+      
+      if (data.success) {
+        // Transform vendors to cooperative format
+        const transformedCooperatives = data.data.map((vendor, i) => ({
+          id: vendor.id,
+          name: vendor.storeName,
+          region: vendor.storeAddress || 'Morocco',
+          bio: `${vendor.storeName} is a trusted partner providing authentic Moroccan products with quality and tradition.`,
+          badge: 'Premium Partner',
+          bestseller: vendor.products?.[0]?.name || 'Quality Products'
+        }))
+        setCooperatives(transformedCooperatives)
+      } else {
+        // Fallback to i18n data
+        const coopItems = t('cooperatives_items', { returnObjects: true, ns: 'home' })
+        const fallbackCooperatives = COOPS_META.map((meta, i) => ({
+          ...meta,
+          ...(Array.isArray(coopItems) ? (coopItems[i] ?? {}) : {}),
+        }))
+        setCooperatives(fallbackCooperatives)
+      }
+    } catch (error) {
+      console.error('Failed to fetch cooperatives:', error)
+      // Fallback to i18n data
+      const coopItems = t('cooperatives_items', { returnObjects: true, ns: 'home' })
+      const fallbackCooperatives = COOPS_META.map((meta, i) => ({
+        ...meta,
+        ...(Array.isArray(coopItems) ? (coopItems[i] ?? {}) : {}),
+      }))
+      setCooperatives(fallbackCooperatives)
+    } finally {
+      setLoading(false)
+    }
+  }
   const pausedRef = useRef(false)
   const sidebarRef = useRef(null)
   const DURATION = 8000
 
-  const coop = COOPERATIVES[activeIdx]
+  const coop = cooperatives[activeIdx] || {}
   const bg = BG_GRADIENTS[activeIdx % BG_GRADIENTS.length]
+
+  if (cooperatives.length === 0) {
+    return (
+      <section style={{ padding: '80px 0', textAlign: 'center' }}>
+        <div style={{ color: 'var(--text-muted)', padding: '40px' }}>
+          {loading ? 'Loading cooperatives...' : 'No cooperatives available'}
+        </div>
+      </section>
+    )
+  }
 
   function goTo(idx) {
     setActiveIdx(idx)
@@ -380,7 +484,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
 
   function onRingComplete() {
     if (!pausedRef.current) {
-      goTo((activeIdx + 1) % COOPERATIVES.length)
+      goTo((activeIdx + 1) % cooperatives.length)
     }
   }
 
@@ -531,7 +635,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
             fontSize: '9px', letterSpacing: '2.5px',
             color: 'var(--text-muted)', textTransform: 'uppercase',
           }}>
-            {t('cooperatives.count', { count: COOPERATIVES.length })}
+            {t('cooperatives.count', { count: cooperatives.length })}
           </div>
 
           {/* Scrollable list with fade mask */}
@@ -553,7 +657,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
               scrollbarWidth: 'none', msOverflowStyle: 'none',
             }}
           >
-            {COOPERATIVES.map((c, i) => {
+            {cooperatives.map((c, i) => {
               const isActive = i === activeIdx
               return (
                 <motion.div
@@ -613,7 +717,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
             padding: '12px 0', marginTop: '12px',
             scrollbarWidth: 'none', msOverflowStyle: 'none',
           }}>
-            {COOPERATIVES.map((c, i) => {
+            {cooperatives.map((c, i) => {
               const isActive = i === activeIdx
               return (
                 <motion.button
