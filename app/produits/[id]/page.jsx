@@ -346,7 +346,7 @@ export default function ProductDetail() {
             <p style={{ fontSize: '13px', color: 'var(--text-muted)',
               marginBottom: '20px', letterSpacing: '0.3px' }}>
               {t('detail.by_prefix')}{' '}
-              <Link to={`/vendeurs/${artisan.id}`} style={{
+              <Link href={`/vendeurs/${artisan.id}`} style={{
                 color: 'var(--text-secondary)', fontWeight: 600,
                 textDecoration: 'none', borderBottom: '1px solid var(--accent-gold-border)',
                 paddingBottom: '1px', transition: 'color 0.2s',
@@ -588,7 +588,7 @@ export default function ProductDetail() {
                   ? artisan.story.slice(0, 200).trimEnd() + '…'
                   : artisan.story}
               </p>
-              <Link to={`/vendeurs/${artisan.id}`} style={{
+              <Link href={`/vendeurs/${artisan.id}`} style={{
                 display: 'inline-block',
                 fontSize: '11px', fontWeight: 700, letterSpacing: '2px',
                 textTransform: 'uppercase', color: 'var(--accent-gold)',

@@ -1,0 +1,209 @@
+// prisma/schema.prisma
+// Biohna — full database schema (PostgreSQL via Neon)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String    @unique
+  phone        String?
+  passwordHash String?
+  picture      String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  settings  UserSettings?
+  orders    Order[]
+  reviews   ProductReview[]
+  addresses Address[]
+
+  @@map("user")
+}
+
+model UserSettings {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  language             String   @default("fr")
+  currency             String   @default("MAD")
+  notificationsEnabled Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model Vendor {
+  id             String   @id @default(cuid())
+  storeName      String
+  storeAddress   String?
+  storePhone     String?
+  commissionRate Decimal  @default(0.10) @db.Decimal(5, 4)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  products   Product[]
+  orderItems OrderItem[]
+
+  @@map("vendor")
+}
+
+model Category {
+  id       String  @id @default(cuid())
+  name     String  @unique
+  slug     String  @unique
+  parentId String?
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+  products Product[]
+
+  @@map("category")
+}
+
+model Product {
+  id            String        @id @default(cuid())
+  vendorId      String
+  categoryId    String?
+  name          String
+  description   String?
+  price         Decimal       @db.Decimal(10, 2)
+  stockQuantity Int           @default(0)
+  bioCertified  Boolean       @default(false)
+  status        ProductStatus @default(ACTIVE)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  vendor     Vendor          @relation(fields: [vendorId], references: [id])
+  category   Category?       @relation(fields: [categoryId], references: [id])
+  pictures   ProductPic[]
+  reviews    ProductReview[]
+  orderItems OrderItem[]
+
+  @@map("product")
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  DRAFT
+  ARCHIVED
+}
+
+model ProductPic {
+  id        String @id @default(cuid())
+  productId String
+  imageUrl  String
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_pic")
+}
+
+model ProductReview {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String
+  rating    Int
+  content   String?
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
+  @@map("product_review")
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  userId        String
+  totalAmount   Decimal       @db.Decimal(10, 2)
+  status        OrderStatus   @default(PENDING)
+  paymentMethod PaymentMethod @default(CASH)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  user     User          @relation(fields: [userId], references: [id])
+  items    OrderItem[]
+  shipping ShippingInfo?
+
+  @@map("order")
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CARD
+  CASH
+  APPEL
+  TRANSFER
+}
+
+model OrderItem {
+  id           String  @id @default(cuid())
+  orderId      String
+  productId    String
+  vendorId     String
+  quantity     Int
+  pricePerUnit Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+  vendor  Vendor  @relation(fields: [vendorId], references: [id])
+
+  @@map("order_item")
+}
+
+model ShippingInfo {
+  id             String         @id @default(cuid())
+  orderId        String         @unique
+  recipientName  String
+  addressLine1   String
+  city           String
+  postalCode     String?
+  phone          String?
+  shippingMethod ShippingMethod @default(STANDARD)
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("shipping_info")
+}
+
+enum ShippingMethod {
+  STANDARD
+  EXPRESS
+  PICKUP
+}
+
+model Address {
+  id         String  @id @default(cuid())
+  userId     String
+  rue        String
+  ville      String
+  region     String?
+  codePostal String?
+  isDefault  Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("address")
+}

@@ -42,3 +42,5 @@ next-env.d.ts
 public/fonts/
 assets/fonts/
 public/assets/
+
+/app/generated/prisma
