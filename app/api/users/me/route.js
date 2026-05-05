@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { successResponse, errorResponse } from '@/lib/response'
-import { auth } from '@/auth.config'
+import { auth } from '@/auth'
 
 export async function GET(request) {
   try {
