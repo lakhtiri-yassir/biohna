@@ -553,21 +553,23 @@ export default function SignIn() {
 
       const data = await response.json()
 
-      if (data.success) {
-        // Automatically sign in the user
-        const loginResult = await login(formData.email, formData.password)
-        
-        if (loginResult?.error) {
-          setError(loginResult.error)
+      if (!response.ok || !data.success) {
+        setError(data.error || 'Une erreur est survenue')
+        return
+      }
+
+      // Auto-login after registration
+      const signInResult = await login(formData.email, formData.password)
+      
+      if (signInResult?.ok !== false) {
+        if (role === 'vendor') {
+          setSubmitted(true)
         } else {
-          if (role === 'vendor') {
-            setSubmitted(true)
-          } else {
-            router.push('/')
-          }
+          router.push('/')
         }
       } else {
-        setError(data.error || 'Registration failed')
+        setError('Compte créé mais connexion échouée. Veuillez vous connecter.')
+        setTimeout(() => router.push('/login'), 2000)
       }
     } catch (error) {
       console.error('Registration error:', error)

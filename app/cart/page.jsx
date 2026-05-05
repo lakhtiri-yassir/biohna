@@ -8,6 +8,7 @@ import NavBar from '@/components/NavBar.jsx'
 import PageWrapper from '@/components/PageWrapper.jsx'
 import { useIsNarrow } from '@/hooks/useIsNarrow'
 import { useDirection } from '@/hooks/useDirection.js'
+import { useAuth } from '@/context/AuthContext.jsx'
 
 const MOROCCAN_CITIES = [
   'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Meknès', 'Agadir',
@@ -259,7 +260,9 @@ function PaymentPanel({ paymentMethod, setPaymentMethod, cardInfo, setCardInfo, 
         >✓</motion.div>
         <h2 style={{ fontFamily: "'Anton SC', sans-serif", fontSize: '24px', color: 'var(--accent-gold)', letterSpacing: '2px', marginBottom: '12px' }}>{t('payment.confirmed_heading')}</h2>
         <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>{t('payment.confirmed_desc')}</p>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)', fontFamily: 'monospace', marginBottom: '32px' }}>#{orderId}</p>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', fontFamily: 'monospace', marginBottom: '32px' }}>
+          Référence: #{orderId?.slice(0, 8).toUpperCase()}
+        </p>
         <Link href="/" style={{ display: 'inline-block', padding: '12px 28px', background: 'var(--accent-gold-bg)', border: '1px solid var(--accent-gold-border)', borderRadius: '12px', color: 'var(--accent-gold)', fontSize: '14px', fontWeight: 700, textDecoration: 'none' }}>
           {t('payment.back_home')}
         </Link>
@@ -448,10 +451,12 @@ export default function CartDetails() {
   const { t } = useTranslation('cart', { useSuspense: false })
   const { flip } = useDirection()
   const isNarrow = useIsNarrow()
+  const { user } = useAuth()
 
   const [items, setItems] = useState(INITIAL_ITEMS)
   const [promo, setPromo] = useState('')
   const [activeStep, setActiveStep] = useState(0)
+  const [orderId, setOrderId] = useState(null)
   const [direction, setDirection] = useState(1)
 
   const [delivery, setDelivery] = useState({
@@ -463,7 +468,6 @@ export default function CartDetails() {
   const [paymentMethod, setPaymentMethod] = useState('cod')
   const [cardInfo, setCardInfo] = useState({ number: '', expiry: '', cvv: '', name: '' })
   const [confirmed, setConfirmed] = useState(false)
-  const [orderId] = useState(`BH-${Math.floor(100000 + Math.random() * 900000)}`)
 
   const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0)
   const shippingCost = activeStep >= 1
@@ -496,7 +500,7 @@ export default function CartDetails() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            userId: 'user123', // TODO: get from auth context
+            userId: user?.id,
             items: items.map(item => ({
               productId: item.id,
               quantity: item.qty,
@@ -533,6 +537,9 @@ export default function CartDetails() {
           
           if (paymentData.success) {
             setConfirmed(true)
+            setOrderId(orderData.data.id)
+            localStorage.removeItem('biohna_cart')
+            setItems([])
           } else {
             console.error('Payment failed:', paymentData.error)
             // TODO: Show error to user
