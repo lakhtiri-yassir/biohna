@@ -66,7 +66,7 @@ function FavoriteCard({ product, delay, t, tc, flip }) {
 
       {/* Card body */}
       <div style={{ padding:'18px 20px' }}>
-        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'var(--accent-gold)', marginBottom:'5px' }}>{product.category}</p>
+        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'var(--accent-gold)', marginBottom:'5px' }}>{product.category?.name || product.category}</p>
         <p style={{ fontWeight:700, fontSize:'16px', color:'var(--text-primary)', marginBottom:'3px', lineHeight:1.3 }}>{product.name}</p>
         <p style={{ fontSize:'12px', color:'var(--text-muted)', marginBottom:'14px' }}>{product.vendor}</p>
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>

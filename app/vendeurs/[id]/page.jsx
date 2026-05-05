@@ -57,7 +57,7 @@ function ProductCard({ product, delay, addToCartLabel, flip }) {
         )}
       </div>
       <div style={{ padding: '18px 20px' }}>
-        <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent-gold)', marginBottom: '5px' }}>{product.category}</p>
+        <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent-gold)', marginBottom: '5px' }}>{product.category?.name}</p>
         <p style={{ fontWeight: 700, fontSize: '16px', color: 'var(--text-primary)', marginBottom: '14px', lineHeight: 1.3 }}>{product.name}</p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
@@ -151,7 +151,20 @@ export default function VendeurProfile() {
     )
   }
 
-  const artisan = vendor
+  // Transform vendor data to match expected artisan structure
+  const artisan = {
+    id: vendor.id,
+    name: vendor.storeName,
+    region: vendor.storeAddress || 'Morocco',
+    story: `${vendor.storeName} is a trusted vendor providing quality Moroccan products.`,
+    quote: `"Quality and authenticity in every product from ${vendor.storeName}."`,
+    specialtyLabel: 'Produits Authentiques',
+    type: 'vendor',
+    memberSince: new Date(vendor.createdAt).getFullYear(),
+    initials: vendor.storeName.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase(),
+    products: vendor.products || [],
+    productCount: vendor.products?.length || 0
+  }
   const specialtyColor = '#d4af37' // Default gold color for now
 
   const STATS = [

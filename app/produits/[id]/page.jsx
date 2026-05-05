@@ -12,7 +12,7 @@ import PageWrapper from '@/components/PageWrapper.jsx'
 import { useModal } from '@/context/ModalContext.jsx'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import { useDirection } from '@/hooks/useDirection.js'
-import { translateProduct, translateArtisan } from '@/utils/translateProduct.js'
+import { translateProduct } from '@/utils/translateProduct.js'
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -99,7 +99,7 @@ function MiniProductCard({ product, delay, onClick, isMobile, flip }) {
       </div>
       <div style={{ padding: '16px 20px' }}>
         <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px',
-          textTransform: 'uppercase', color: 'var(--accent-gold)', marginBottom: '5px' }}>{product.category}</p>
+          textTransform: 'uppercase', color: 'var(--accent-gold)', marginBottom: '5px' }}>{product.category?.name}</p>
         <p style={{ fontWeight: 700, fontSize: '15px', color: 'var(--text-primary)',
           marginBottom: '10px', lineHeight: 1.3 }}>{product.name}</p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -215,8 +215,19 @@ export default function ProductDetail() {
     )
   }
 
-  // Transform API product data to match expected structure
-  const artisan = product.vendor
+  // Transform vendor data to match expected artisan structure
+  const artisan = {
+    id: product.vendor.id,
+    name: product.vendor.storeName,
+    region: product.vendor.storeAddress || 'Morocco',
+    story: `${product.vendor.storeName} is a trusted vendor providing quality Moroccan products.`,
+    quote: null,
+    specialtyLabel: 'Produits Authentiques',
+    type: 'vendor',
+    memberSince: new Date(product.vendor.createdAt).getFullYear(),
+    initials: product.vendor.storeName.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase(),
+    products: []
+  }
   const f = withFallbacks(product, artisan, t('detail.default_composition'))
   const specialtyColor = '#d4af37' // Default gold color for now
 
@@ -376,7 +387,7 @@ export default function ProductDetail() {
             <p style={{
               fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px',
               textTransform: 'uppercase', color: 'var(--accent-gold)', marginBottom: '14px',
-            }}>{product.category}</p>
+            }}>{product.category?.name}</p>
 
             <h1 style={{
               fontFamily: "'Anton SC', var(--font-display), sans-serif",
@@ -674,7 +685,7 @@ export default function ProductDetail() {
                 fontSize: 'clamp(24px, 3vw, 38px)',
                 color: 'var(--text-primary)', letterSpacing: '2px',
               }}>
-                {artisan.products.length > 1
+                {related.length > 0
                   ? t('detail.other_creations', { name: artisan.name })
                   : t('detail.same_category')}
               </h2>
