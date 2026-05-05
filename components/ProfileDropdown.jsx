@@ -72,7 +72,7 @@ export default function ProfileDropdown({ user }) {
     router.push('/')
   }
 
-  const roleBadge = user.role === 'vendor' ? t('profile_menu.vendor') : t('profile_menu.client')
+  const roleBadge = t('profile_menu.client') // Default to client since role field doesn't exist in schema
 
   const menuItems = [
     {

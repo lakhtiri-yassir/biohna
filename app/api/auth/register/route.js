@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '@/lib/prisma.js'
 
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { email, password, fullName, role = 'CLIENT' } = body
+    const { email, password, fullName } = body
 
     // Validation
     if (!email || !password || !fullName) {
@@ -16,6 +14,11 @@ export async function POST(request) {
         { status: 400 }
       )
     }
+
+    // Split fullName into firstName and lastName
+    const nameParts = fullName.trim().split(' ')
+    const firstName = nameParts[0] || ''
+    const lastName = nameParts.slice(1).join(' ') || ''
 
     if (password.length < 6) {
       return NextResponse.json(
@@ -44,9 +47,9 @@ export async function POST(request) {
       const user = await tx.user.create({
         data: {
           email,
-          password: hashedPassword,
-          fullName,
-          role: role.toUpperCase()
+          passwordHash: hashedPassword,
+          firstName,
+          lastName
         }
       })
 
@@ -55,16 +58,7 @@ export async function POST(request) {
           userId: user.id,
           language: 'fr',
           currency: 'MAD',
-          notifications: {
-            email: true,
-            push: false,
-            marketing: false
-          },
-          privacy: {
-            profilePublic: false,
-            showEmail: false,
-            showPhone: false
-          }
+          notificationsEnabled: true
         }
       })
 

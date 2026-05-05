@@ -1,14 +1,16 @@
 import prisma from '@/lib/prisma'
 import { successResponse, errorResponse } from '@/lib/response'
+import { auth } from '@/auth.config'
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
+    const session = await auth()
     
-    if (!userId) {
-      return errorResponse('User ID is required')
+    if (!session?.user?.id) {
+      return errorResponse('Unauthorized', 401)
     }
+    
+    const userId = session.user.id
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -39,12 +41,13 @@ export async function GET(request) {
 
 export async function PATCH(request) {
   try {
-    const { searchParams } = new URL(request.url)
-    const userId = searchParams.get('userId')
+    const session = await auth()
     
-    if (!userId) {
-      return errorResponse('User ID is required')
+    if (!session?.user?.id) {
+      return errorResponse('Unauthorized', 401)
     }
+    
+    const userId = session.user.id
 
     const body = await request.json()
     const { firstName, lastName, phone, picture } = body

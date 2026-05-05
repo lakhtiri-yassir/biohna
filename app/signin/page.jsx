@@ -547,8 +547,7 @@ export default function SignIn() {
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
-          password: formData.password,
-          role: role.toUpperCase()
+          password: formData.password
         })
       })
 

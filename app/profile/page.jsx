@@ -236,8 +236,8 @@ function AvatarUpload({ user, onUpload }) {
         onClick={() => fileRef.current.click()}
         style={{ width: '110px', height: '110px', borderRadius: '50%', cursor: 'pointer', position: 'relative', border: '3px solid var(--accent-gold-border)', background: 'var(--bg-base)', overflow: 'hidden', flexShrink: 0 }}
       >
-        {user.avatarUrl ? (
-          <img src={user.avatarUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        {user.picture ? (
+          <img src={user.picture} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         ) : (
           <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--accent-gold-bg-strong), var(--accent-gold-bg))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Anek Latin', sans-serif", fontWeight: 700, fontSize: '28px', letterSpacing: '2px', color: 'var(--accent-gold)' }}>
             {initials}
@@ -325,7 +325,7 @@ export default function Profile() {
     )
   }
 
-  const roleBadge = user.role === 'vendor' ? tc('profile_menu.vendor') : tc('profile_menu.client')
+  const roleBadge = tc('profile_menu.client') // Default to client since role field doesn't exist in schema
 
   function startEditInfo() {
     setInfoForm({ firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone })
@@ -408,8 +408,8 @@ export default function Profile() {
           transition={{ duration: 0.65, ease }}
           style={{ borderRadius: '24px', height: '280px', position: 'relative', overflow: 'hidden', marginBottom: '0' }}
         >
-          {user.bannerUrl ? (
-            <img src={user.bannerUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {user.banner ? (
+            <img src={user.banner} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           ) : (
             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--accent-gold-bg-strong) 0%, var(--accent-gold-bg) 50%, var(--bg-base) 100%)' }} />
           )}
@@ -456,8 +456,7 @@ export default function Profile() {
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '18px' }}>
             {[
               { label: t('member_since'), value: user.memberSince },
-              ...(user.role === 'vendor' && user.region ? [{ label: t('vendor_info.region'), value: user.region }] : []),
-              ...(user.role === 'vendor' && user.specialty ? [{ label: t('vendor_info.specialty'), value: user.specialty }] : []),
+              // Vendor fields removed since role field doesn't exist in schema
             ].map(stat => (
               <div key={stat.label} style={{ padding: '7px 14px', borderRadius: '10px', background: 'var(--bg-surface-hover)', border: '1px solid var(--accent-gold-border-lo)' }}>
                 <p style={{ fontSize: '10px', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '3px' }}>{stat.label}</p>
@@ -542,51 +541,7 @@ export default function Profile() {
             </AnimatePresence>
           </div>
 
-          {/* ── Vendor-specific section ── */}
-          {user.role === 'vendor' && (
-            <div style={{ padding: '36px 40px', borderBottom: '1px solid var(--border-subtle)' }}>
-              <SectionHeader title={t('vendor_info.section')} editing={editingVendor} onEdit={startEditVendor} onCancel={() => setEditingVendor(false)} />
-
-              <AnimatePresence mode="wait">
-                {editingVendor ? (
-                  <motion.div key="edit" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.25, ease }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-                      <ProfileInput label={t('vendor_info.coop_name')} value={vendorForm.cooperativeName} onChange={v => setVendorForm(f => ({ ...f, cooperativeName: v }))} />
-                      <ProfileSelect label={t('vendor_info.region')} value={vendorForm.region} onChange={v => setVendorForm(f => ({ ...f, region: v }))} options={REGIONS} />
-                    </div>
-                    <div style={{ marginBottom: '16px' }}>
-                      <ProfileSelect label={t('vendor_info.specialty')} value={vendorForm.specialty} onChange={v => setVendorForm(f => ({ ...f, specialty: v }))} options={SPECIALTIES} />
-                    </div>
-                    <div style={{ marginBottom: '24px' }}>
-                      <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '8px' }}>{t('vendor_info.description')}</label>
-                      <textarea
-                        value={vendorForm.description}
-                        onChange={e => setVendorForm(f => ({ ...f, description: e.target.value }))}
-                        rows={4}
-                        placeholder={t('vendor_info.description_placeholder')}
-                        style={{ width: '100%', padding: '13px 14px', background: 'var(--bg-input)', border: '1px solid var(--accent-gold-border-lo)', borderRadius: '12px', color: 'var(--text-primary)', fontSize: '14px', fontFamily: "'Anek Latin', var(--font-body), sans-serif", outline: 'none', resize: 'vertical', lineHeight: 1.6, boxSizing: 'border-box', textAlign: flip('left', 'right') }}
-                      />
-                    </div>
-                    <SaveButton onClick={saveVendor} />
-                  </motion.div>
-                ) : (
-                  <motion.div key="view" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: user.description ? '20px' : '0' }}>
-                      <FieldRow label={t('vendor_info.coop_name')} value={user.cooperativeName} />
-                      <FieldRow label={t('vendor_info.region')} value={user.region} />
-                      <FieldRow label={t('vendor_info.specialty')} value={user.specialty} />
-                    </div>
-                    {user.description && (
-                      <div style={{ marginTop: '4px' }}>
-                        <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '8px' }}>{t('vendor_info.description')}</p>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '16px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>{user.description}</p>
-                      </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
+          {/* Vendor section temporarily disabled since role field doesn't exist in schema */}
 
           {/* ── Danger zone ── */}
           <div style={{ padding: '36px 40px' }}>

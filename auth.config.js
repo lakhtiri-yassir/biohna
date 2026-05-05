@@ -1,9 +1,7 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from './lib/prisma.js'
 
 export const authConfig = {
   providers: [
@@ -32,7 +30,7 @@ export const authConfig = {
           // Compare password
           const isPasswordValid = await bcrypt.compare(
             credentials.password, 
-            user.password
+            user.passwordHash
           )
 
           if (!isPasswordValid) {
@@ -43,9 +41,10 @@ export const authConfig = {
           return {
             id: user.id,
             email: user.email,
-            fullName: user.fullName,
-            role: user.role,
-            avatar: user.avatar,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            fullName: `${user.firstName} ${user.lastName}`,
+            picture: user.picture,
             settings: user.settings || {
               language: 'fr',
               currency: 'MAD',
@@ -76,9 +75,10 @@ export const authConfig = {
       if (user) {
         token.id = user.id
         token.email = user.email
+        token.firstName = user.firstName
+        token.lastName = user.lastName
         token.fullName = user.fullName
-        token.role = user.role
-        token.avatar = user.avatar
+        token.picture = user.picture
         token.settings = user.settings
       }
       return token
@@ -87,9 +87,10 @@ export const authConfig = {
       if (token) {
         session.user.id = token.id
         session.user.email = token.email
+        session.user.firstName = token.firstName
+        session.user.lastName = token.lastName
         session.user.fullName = token.fullName
-        session.user.role = token.role
-        session.user.avatar = token.avatar
+        session.user.picture = token.picture
         session.user.settings = token.settings
       }
       return session

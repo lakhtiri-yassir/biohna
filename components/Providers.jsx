@@ -1,5 +1,6 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ModalProvider } from "@/context/ModalContext";
@@ -70,9 +71,10 @@ function BgOrbs() {
 
 export default function Providers({ children }) {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <ModalProvider>
+    <SessionProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <ModalProvider>
           <BgOrbs />
 
           {/* Modals are portalled outside the page flow */}
@@ -83,8 +85,9 @@ export default function Providers({ children }) {
           <VendeurModal />
 
           {children}
-        </ModalProvider>
-      </AuthProvider>
-    </ThemeProvider>
+          </ModalProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
