@@ -7,9 +7,6 @@ import { useTranslation } from 'react-i18next'
 import NavBar from '@/components/NavBar.jsx'
 import PageWrapper from '@/components/PageWrapper.jsx'
 import { useAuth } from '@/context/AuthContext.jsx'
-import { computeInitials } from '@/data/defaultUser.js'
-// Remove import of static artisanes data
-import { DEFAULT_SETTINGS } from '@/data/defaultUser.js'
 import { useDirection } from '@/hooks/useDirection.js'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -219,7 +216,10 @@ function AvatarUpload({ user, onUpload }) {
   const [error, setError] = useState('')
   const fileRef = useRef(null)
   const { t } = useTranslation('profile')
-  const initials = user.initials ?? computeInitials(user.firstName, user.lastName)
+  const initials = user.initials ?? 
+    (user.fullName ? 
+      user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 
+      '??')
 
   function handleFile(e) {
     const file = e.target.files[0]
@@ -271,7 +271,20 @@ export default function Profile() {
   const { t: tc } = useTranslation('common')
   const { flip } = useDirection()
 
-  const s = user?.settings ?? DEFAULT_SETTINGS
+  const s = user?.settings ?? {
+    language: 'fr',
+    currency: 'MAD',
+    notifications: {
+      email: true,
+      push: false,
+      marketing: false
+    },
+    privacy: {
+      profilePublic: false,
+      showEmail: false,
+      showPhone: false
+    }
+  }
   const [editingAddress, setEditingAddress] = useState(false)
   const [addressForm, setAddressForm] = useState({ street: '', city: '', postal: '', country: 'Maroc' })
   const [addressSaved, setAddressSaved] = useState(false)

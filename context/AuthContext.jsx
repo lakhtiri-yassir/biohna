@@ -1,80 +1,117 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import {
-  DEFAULT_CLIENT,
-  DEFAULT_VENDOR,
-  computeInitials,
-} from "../data/defaultUser.js";
+import { createContext, useContext } from "react";
+import { useSession, signIn, signOut, SessionProvider } from "next-auth/react";
 
 const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      if (typeof window === "undefined") return null;
-      const stored = localStorage.getItem("biohna_user");
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
+// Internal component that uses NextAuth hooks
+function AuthProviderInner({ children }) {
+  const { data: session, status, update } = useSession();
 
-  useEffect(() => {
-    try {
-      if (user) {
-        localStorage.setItem("biohna_user", JSON.stringify(user));
-      } else {
-        localStorage.removeItem("biohna_user");
-      }
-    } catch {
-      // localStorage full or unavailable
+  function login(emailOrRole, password) {
+    // If called with email and password (real login)
+    if (typeof emailOrRole === 'string' && password) {
+      return signIn('credentials', { 
+        email: emailOrRole, 
+        password,
+        redirect: false 
+      });
     }
-  }, [user]);
-
-  function login(role) {
-    setUser(role === "vendor" ? { ...DEFAULT_VENDOR } : { ...DEFAULT_CLIENT });
+    
+    // Legacy support: if called with just role, redirect to login
+    // This maintains compatibility during transition
+    window.location.href = '/login';
+    return Promise.resolve();
   }
 
   function logout() {
-    setUser(null);
+    return signOut({ redirect: false });
   }
 
-  function updateProfile(partial) {
-    setUser((prev) => {
-      if (!prev) return prev;
-      const next = { ...prev, ...partial };
-      if (partial.firstName !== undefined || partial.lastName !== undefined) {
-        next.initials = computeInitials(next.firstName, next.lastName);
+  async function updateProfile(partial) {
+    if (!session?.user) return;
+    
+    try {
+      // Update user profile via API
+      const response = await fetch('/api/users/me', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(partial)
+      });
+
+      if (response.ok) {
+        // Trigger session refresh to get updated data
+        await update();
       }
-      return next;
-    });
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+    }
   }
 
-  function updateAvatar(base64) {
-    setUser((prev) => (prev ? { ...prev, avatarUrl: base64 } : prev));
+  async function updateAvatar(base64) {
+    return updateProfile({ avatar: base64 });
   }
 
-  function updateBanner(base64) {
-    setUser((prev) => (prev ? { ...prev, bannerUrl: base64 } : prev));
+  async function updateBanner(base64) {
+    return updateProfile({ bannerUrl: base64 });
   }
 
-  function updateSettings(partialSettings) {
-    setUser((prev) =>
-      prev
-        ? {
-            ...prev,
-            settings: { ...(prev.settings ?? {}), ...partialSettings },
-          }
-        : prev,
-    );
+  async function updateSettings(partialSettings) {
+    if (!session?.user) return;
+    
+    try {
+      const response = await fetch('/api/users/me/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(partialSettings)
+      });
+
+      if (response.ok) {
+        await update();
+      }
+    } catch (error) {
+      console.error('Failed to update settings:', error);
+    }
   }
+
+  // Transform NextAuth session to match expected format
+  const user = session?.user ? {
+    id: session.user.id,
+    email: session.user.email,
+    fullName: session.user.fullName,
+    firstName: session.user.fullName?.split(' ')[0] || '',
+    lastName: session.user.fullName?.split(' ').slice(1).join(' ') || '',
+    role: session.user.role,
+    avatar: session.user.avatar,
+    avatarUrl: session.user.avatar, // alias for compatibility
+    bannerUrl: session.user.bannerUrl || null,
+    initials: session.user.fullName ? 
+      session.user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 
+      '??',
+    settings: session.user.settings || {
+      language: 'fr',
+      currency: 'MAD',
+      notifications: {
+        email: true,
+        push: false,
+        marketing: false
+      },
+      privacy: {
+        profilePublic: false,
+        showEmail: false,
+        showPhone: false
+      }
+    }
+  } : null;
+
+  const isAuthenticated = status === 'authenticated' && !!session?.user;
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        isAuthenticated: !!user,
+        isAuthenticated,
         login,
         logout,
         updateProfile,
@@ -85,6 +122,15 @@ export function AuthProvider({ children }) {
     >
       {children}
     </AuthContext.Provider>
+  );
+}
+
+// Main provider that wraps SessionProvider
+export function AuthProvider({ children }) {
+  return (
+    <SessionProvider>
+      <AuthProviderInner>{children}</AuthProviderInner>
+    </SessionProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -40,14 +40,34 @@ export default function Login() {
   const router = useRouter()
   const isNarrow = useIsNarrow()
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
   useEffect(() => {
     if (isAuthenticated) router.replace('/')
   }, [isAuthenticated])
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    login('client')
-    router.push('/')
+    setError('')
+    setLoading(true)
+
+    try {
+      const result = await login(email, password)
+      
+      if (result?.error) {
+        setError(result.error)
+      } else {
+        router.push('/')
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      setError('An error occurred during login')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const inputStyle = {
@@ -164,7 +184,15 @@ export default function Login() {
                 <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'9px' }}>{t('login.email_label')}</label>
                 <div style={{ position:'relative' }}>
                   <span style={{ position:'absolute', [flip('left','right')]:'15px', top:'50%', transform:'translateY(-50%)', color:'var(--text-muted)', fontSize:'15px', pointerEvents:'none' }}>✉</span>
-                  <input className="login-input" type="email" placeholder={t('login.email_placeholder')} style={inputStyle} />
+                  <input 
+                    className="login-input" 
+                    type="email" 
+                    placeholder={t('login.email_placeholder')} 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    style={inputStyle} 
+                  />
                 </div>
               </div>
 
@@ -172,9 +200,23 @@ export default function Login() {
                 <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'9px' }}>{t('login.password_label')}</label>
                 <div style={{ position:'relative' }}>
                   <span style={{ position:'absolute', [flip('left','right')]:'15px', top:'50%', transform:'translateY(-50%)', color:'var(--text-muted)', fontSize:'15px', pointerEvents:'none' }}>⚿</span>
-                  <input className="login-input" type="password" placeholder={t('login.password_placeholder')} style={inputStyle} />
+                  <input 
+                    className="login-input" 
+                    type="password" 
+                    placeholder={t('login.password_placeholder')} 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={inputStyle} 
+                  />
                 </div>
               </div>
+
+{error && (
+                <div style={{ marginBottom: '16px', padding: '12px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '8px', color: 'var(--destructive)', fontSize: '13px' }}>
+                  {error}
+                </div>
+              )}
 
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'28px', fontSize:'13px' }}>
                 <label style={{ display:'flex', alignItems:'center', gap:'8px', color:'var(--text-muted)', cursor:'pointer' }}>
@@ -187,8 +229,21 @@ export default function Login() {
                 whileHover={{ y:-2, boxShadow:'0 8px 36px rgba(212,175,55,0.4)', filter:'brightness(1.06)' }}
                 whileTap={{ scale:0.98 }}
                 type="submit"
-                style={{ width:'100%', padding:'16px', background:'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border:'none', borderRadius:'14px', fontWeight:700, fontSize:'16px', color:'var(--bg-base)', cursor:'pointer', boxShadow:'0 4px 24px rgba(212,175,55,0.3)' }}
-              >{t('login.submit')}</motion.button>
+                disabled={loading || !email || !password}
+                style={{ 
+                  width:'100%', 
+                  padding:'16px', 
+                  background: loading ? 'var(--border-subtle)' : 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', 
+                  border:'none', 
+                  borderRadius:'14px', 
+                  fontWeight:700, 
+                  fontSize:'16px', 
+                  color:'var(--bg-base)', 
+                  cursor: loading ? 'not-allowed' : 'pointer', 
+                  boxShadow:'0 4px 24px rgba(212,175,55,0.3)',
+                  opacity: loading ? 0.6 : 1
+                }}
+              >{loading ? 'Signing in...' : t('login.submit')}</motion.button>
             </form>
 
             <div style={{ display:'flex', alignItems:'center', gap:'14px', margin:'24px 0', color:'var(--text-muted)', fontSize:'12px' }}>

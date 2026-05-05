@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useDirection } from '../hooks/useDirection.js'
-import { computeInitials } from '../data/defaultUser.js'
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -25,7 +24,10 @@ function AvatarFace({ user, size = 38, fontSize = '13px' }) {
       />
     )
   }
-  const initials = user.initials ?? computeInitials(user.firstName, user.lastName)
+  const initials = user.initials ?? 
+    (user.fullName ? 
+      user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 
+      '??')
   return (
     <div style={{
       width: `${size}px`, height: `${size}px`, borderRadius: '50%',

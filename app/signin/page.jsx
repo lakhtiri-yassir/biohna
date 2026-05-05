@@ -164,13 +164,16 @@ function StepRole({ role, setRole, onNext }) {
   )
 }
 
-function StepAccount({ role, onNext }) {
+function StepAccount({ role, onNext, formData, setFormData, loading, error }) {
   const { t } = useTranslation('auth')
   const { flip } = useDirection()
-  const [pwd, setPwd] = useState('')
-  const strength = pwd.length === 0 ? 0 : pwd.length < 5 ? 1 : pwd.length < 9 ? 2 : pwd.length < 13 ? 3 : 4
+  const strength = formData.password.length === 0 ? 0 : formData.password.length < 5 ? 1 : formData.password.length < 9 ? 2 : formData.password.length < 13 ? 3 : 4
   const strengthColor = strength <= 1 ? '#ff6b6b' : strength === 2 ? '#ffa94d' : 'var(--accent-gold)'
   const isVendor = role === 'vendor'
+
+  function updateFormData(field, value) {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
 
   const inputStyle = {
     width: '100%', padding: flip('13px 14px 13px 42px', '13px 42px 13px 14px'),
@@ -192,32 +195,24 @@ function StepAccount({ role, onNext }) {
       transition={{ duration:0.35, ease:[0.22,1,0.36,1] }}
     >
       <form onSubmit={e => { e.preventDefault(); onNext() }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px', marginBottom:'16px' }}>
-          {[
-            [t('signin.last_name'), 'Chami'],
-            [t('signin.first_name'), 'Ilyas'],
-          ].map(([label, ph]) => (
-            <div key={label}>
-              <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'8px' }}>{label}</label>
-              <div style={{ position:'relative' }}>
-                <span style={iconPos}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                </span>
-                <input className="si-input" type="text" placeholder={ph} style={inputStyle} />
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div style={{ marginBottom:'16px' }}>
-          <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'8px' }}>{t('signin.phone')}</label>
+          <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'8px' }}>{t('signin.full_name')}</label>
           <div style={{ position:'relative' }}>
             <span style={iconPos}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             </span>
-            <input className="si-input" type="tel" placeholder={t('signin.phone_placeholder')} style={inputStyle} />
+            <input 
+              className="si-input" 
+              type="text" 
+              placeholder="Your full name"
+              value={formData.fullName}
+              onChange={(e) => updateFormData('fullName', e.target.value)}
+              required
+              style={inputStyle} 
+            />
           </div>
         </div>
+
 
         <div style={{ marginBottom:'16px' }}>
           <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'8px' }}>{t('signin.email')}</label>
@@ -225,7 +220,15 @@ function StepAccount({ role, onNext }) {
             <span style={iconPos}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
             </span>
-            <input className="si-input" type="email" placeholder="exemple@gmail.com" style={inputStyle} />
+            <input 
+              className="si-input" 
+              type="email" 
+              placeholder="exemple@gmail.com"
+              value={formData.email}
+              onChange={(e) => updateFormData('email', e.target.value)}
+              required
+              style={inputStyle} 
+            />
           </div>
         </div>
 
@@ -235,7 +238,33 @@ function StepAccount({ role, onNext }) {
             <span style={iconPos}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
             </span>
-            <input className="si-input" type="password" placeholder="••••••••••••" style={inputStyle} value={pwd} onChange={e => setPwd(e.target.value)} />
+            <input 
+              className="si-input" 
+              type="password" 
+              placeholder="••••••••••••"
+              value={formData.password}
+              onChange={e => updateFormData('password', e.target.value)}
+              required
+              style={inputStyle} 
+            />
+          </div>
+        </div>
+
+        <div style={{ marginBottom:'6px' }}>
+          <label style={{ display:'block', fontSize:'11px', fontWeight:700, letterSpacing:'1.5px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'8px' }}>{t('signin.confirm_password')}</label>
+          <div style={{ position:'relative' }}>
+            <span style={iconPos}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </span>
+            <input 
+              className="si-input" 
+              type="password" 
+              placeholder="••••••••••••"
+              value={formData.confirmPassword}
+              onChange={e => updateFormData('confirmPassword', e.target.value)}
+              required
+              style={inputStyle} 
+            />
           </div>
         </div>
 
@@ -244,6 +273,12 @@ function StepAccount({ role, onNext }) {
             <div key={n} style={{ flex:1, height:'3px', borderRadius:'2px', background: n<=strength ? strengthColor : 'var(--border-subtle)', transition:'background 0.3s' }} />
           ))}
         </div>
+
+{error && (
+          <div style={{ marginBottom: '16px', padding: '12px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '8px', color: 'var(--destructive)', fontSize: '13px' }}>
+            {error}
+          </div>
+        )}
 
         <div style={{ display:'flex', alignItems:'flex-start', gap:'10px', marginBottom:'26px', fontSize:'13px', color:'var(--text-muted)' }}>
           <input type="checkbox" style={{ accentColor:'var(--accent-gold)', marginTop:'2px', flexShrink:0 }} />
@@ -254,16 +289,30 @@ function StepAccount({ role, onNext }) {
           whileHover={{ y:-2, boxShadow:'0 8px 36px rgba(212,175,55,0.4)' }}
           whileTap={{ scale:0.98 }}
           type="submit"
-          style={{ width:'100%', padding:'16px', background:'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border:'none', borderRadius:'14px', fontWeight:700, fontSize:'16px', color:'var(--bg-base)', cursor:'pointer', boxShadow:'0 4px 24px rgba(212,175,55,0.3)', fontFamily:"'Anek Latin', var(--font-body), sans-serif" }}
+          disabled={loading || !formData.email || !formData.password || !formData.fullName}
+          style={{ 
+            width:'100%', 
+            padding:'16px', 
+            background: loading ? 'var(--border-subtle)' : 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', 
+            border:'none', 
+            borderRadius:'14px', 
+            fontWeight:700, 
+            fontSize:'16px', 
+            color:'var(--bg-base)', 
+            cursor: loading ? 'not-allowed' : 'pointer', 
+            boxShadow:'0 4px 24px rgba(212,175,55,0.3)', 
+            fontFamily:"'Anek Latin', var(--font-body), sans-serif",
+            opacity: loading ? 0.6 : 1
+          }}
         >
-          {isVendor ? t('signin.continue') : t('signin.create_account')}
+          {loading ? (isVendor ? 'Creating...' : 'Creating account...') : (isVendor ? t('signin.continue') : t('signin.create_account'))}
         </motion.button>
       </form>
     </motion.div>
   )
 }
 
-function StepCandidature({ onSubmit }) {
+function StepCandidature({ onSubmit, loading, error }) {
   const { t } = useTranslation('auth')
   const { flip } = useDirection()
   const [files, setFiles] = useState([])
@@ -373,13 +422,33 @@ function StepCandidature({ onSubmit }) {
           )}
         </div>
 
+{error && (
+          <div style={{ marginBottom: '16px', padding: '12px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '8px', color: 'var(--destructive)', fontSize: '13px' }}>
+            {error}
+          </div>
+        )}
+
         <motion.button
           whileHover={{ y:-2, boxShadow:'0 8px 36px rgba(212,175,55,0.4)' }}
           whileTap={{ scale:0.98 }}
           type="submit"
-          style={{ width:'100%', padding:'16px', background:'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', border:'none', borderRadius:'14px', fontWeight:700, fontSize:'16px', color:'var(--bg-base)', cursor:'pointer', boxShadow:'0 4px 24px rgba(212,175,55,0.3)', fontFamily:"'Anek Latin', var(--font-body), sans-serif" }}
+          disabled={loading}
+          style={{ 
+            width:'100%', 
+            padding:'16px', 
+            background: loading ? 'var(--border-subtle)' : 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', 
+            border:'none', 
+            borderRadius:'14px', 
+            fontWeight:700, 
+            fontSize:'16px', 
+            color:'var(--bg-base)', 
+            cursor: loading ? 'not-allowed' : 'pointer', 
+            boxShadow:'0 4px 24px rgba(212,175,55,0.3)', 
+            fontFamily:"'Anek Latin', var(--font-body), sans-serif",
+            opacity: loading ? 0.6 : 1
+          }}
         >
-          {t('signin.submit_application')}
+          {loading ? 'Submitting...' : t('signin.submit_application')}
         </motion.button>
       </form>
     </motion.div>
@@ -428,6 +497,17 @@ export default function SignIn() {
   const [step, setStep] = useState(1)
   const [role, setRole] = useState(null)
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  
+  // Form data
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+  
   const router = useRouter()
   const { login } = useAuth()
 
@@ -436,18 +516,68 @@ export default function SignIn() {
   const steps = role === 'vendor' ? vendorSteps : clientSteps
 
   function handleStep1Next() { if (role) setStep(2) }
-  function handleStep2Next() {
+  
+  async function handleStep2Next() {
     if (role === 'vendor') {
       setStep(3)
     } else {
-      login('client')
-      router.push('/')
+      await registerUser()
     }
   }
-  function handleStep3Submit() {
-    login('vendor')
-    setSubmitted(true)
+  
+  async function handleStep3Submit() {
+    await registerUser()
   }
+
+  async function registerUser() {
+    setError('')
+    setLoading(true)
+
+    try {
+      if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match')
+        setLoading(false)
+        return
+      }
+
+      // Register user
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          role: role.toUpperCase()
+        })
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        // Automatically sign in the user
+        const loginResult = await login(formData.email, formData.password)
+        
+        if (loginResult?.error) {
+          setError(loginResult.error)
+        } else {
+          if (role === 'vendor') {
+            setSubmitted(true)
+          } else {
+            router.push('/')
+          }
+        }
+      } else {
+        setError(data.error || 'Registration failed')
+      }
+    } catch (error) {
+      console.error('Registration error:', error)
+      setError('An error occurred during registration')
+    } finally {
+      setLoading(false)
+    }
+  }
+  
   function goBack() { if (step > 1) setStep(s => s - 1) }
 
   return (
@@ -544,9 +674,16 @@ export default function SignIn() {
             ) : step === 1 ? (
               <StepRole role={role} setRole={setRole} onNext={handleStep1Next} />
             ) : step === 2 ? (
-              <StepAccount role={role} onNext={handleStep2Next} />
+              <StepAccount 
+                role={role} 
+                onNext={handleStep2Next} 
+                formData={formData}
+                setFormData={setFormData}
+                loading={loading}
+                error={error}
+              />
             ) : (
-              <StepCandidature onSubmit={handleStep3Submit} />
+              <StepCandidature onSubmit={handleStep3Submit} loading={loading} error={error} />
             )}
           </AnimatePresence>
 
