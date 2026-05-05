@@ -53,7 +53,7 @@ function FeaturedCarousel({ isNarrow, t }) {
   async function fetchFeaturedProducts() {
     try {
       setLoading(true)
-      const response = await fetch('/api/products?limit=6&featured=true')
+      const response = await fetch('/api/products?limit=6')
       const data = await response.json()
       
       if (data.success) {

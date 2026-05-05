@@ -157,7 +157,6 @@ export default function VendeurProfile() {
     name: vendor.storeName,
     region: vendor.storeAddress || 'Morocco',
     story: `${vendor.storeName} is a trusted vendor providing quality Moroccan products.`,
-    quote: `"Quality and authenticity in every product from ${vendor.storeName}."`,
     specialtyLabel: 'Produits Authentiques',
     type: 'vendor',
     memberSince: new Date(vendor.createdAt).getFullYear(),
@@ -238,12 +237,6 @@ export default function VendeurProfile() {
             </div>
           </div>
 
-          {/* Quote */}
-          <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-            <p style={{ fontFamily: "'Cormorant Garamond', var(--font-serif), serif", fontStyle: 'italic', fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--accent-gold)', lineHeight: 1.5 }}>
-              {artisan.quote}
-            </p>
-          </div>
         </motion.div>
 
         {/* Products section */}

@@ -11,7 +11,6 @@ import { useModal } from '@/context/ModalContext.jsx'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import { useIsNarrow } from '@/hooks/useIsNarrow.js'
 import { useDirection } from '@/hooks/useDirection.js'
-import { translateProduct } from '@/utils/translateProduct.js'
 
 function FilterCards({ activeCategory, setActiveCategory, categories, t, flip }) {
   return (
@@ -105,7 +104,7 @@ function ProductCard({ product, delay, isNarrow, addCartLabel, flip }) {
       <div style={{ padding: isNarrow ? '12px 14px' : '18px 20px' }}>
         <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'var(--accent-gold)', marginBottom:'5px' }}>{product.category?.name}</p>
         <p style={{ fontWeight:700, fontSize: isNarrow ? '13px' : '16px', color:'var(--text-primary)', marginBottom:'3px', lineHeight:1.3 }}>{product.name}</p>
-        <p style={{ fontSize: isNarrow ? '11px' : '12px', color:'var(--text-muted)', marginBottom: isNarrow ? '10px' : '14px' }}>{product.vendor}</p>
+        <p style={{ fontSize: isNarrow ? '11px' : '12px', color:'var(--text-muted)', marginBottom: isNarrow ? '10px' : '14px' }}>{product.vendor?.storeName || product.vendor}</p>
         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
           <div>
             {product.oldPrice && <span style={{ fontSize:'12px', color:'var(--destructive)', textDecoration:'line-through', [flip('marginRight','marginLeft')]:'6px' }}>{product.oldPrice}</span>}

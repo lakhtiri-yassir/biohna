@@ -12,7 +12,6 @@ import PageWrapper from '@/components/PageWrapper.jsx'
 import { useModal } from '@/context/ModalContext.jsx'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import { useDirection } from '@/hooks/useDirection.js'
-import { translateProduct } from '@/utils/translateProduct.js'
 
 const EASE = [0.22, 1, 0.36, 1]
 
