@@ -12,7 +12,6 @@ import PageWrapper from '@/components/PageWrapper.jsx'
 import { useModal } from '@/context/ModalContext.jsx'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import { useDirection } from '@/hooks/useDirection.js'
-import { ARTISANES, SPECIALTY_COLORS, getProductById } from '@/data/artisanes.js'
 import { translateProduct, translateArtisan } from '@/utils/translateProduct.js'
 
 const EASE = [0.22, 1, 0.36, 1]
@@ -128,19 +127,75 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('description')
   const [isFavorite, setIsFavorite] = useState(false)
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [relatedProducts, setRelatedProducts] = useState([])
   const isNarrow = useIsNarrow(900)
   const isMobile = useIsNarrow(768)
 
   useEffect(() => {
-    setQuantity(1)
-    setActiveTab('description')
-    setIsFavorite(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    async function fetchProduct() {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch(`/api/products/${id}`)
+        const data = await response.json()
+        
+        if (data.success) {
+          setProduct(data.data)
+          
+          // Fetch related products from same vendor
+          const relatedResponse = await fetch(`/api/products?vendor=${data.data.vendor.id}&limit=4`)
+          const relatedData = await relatedResponse.json()
+          
+          if (relatedData.success) {
+            // Filter out current product
+            const filtered = relatedData.data.products?.filter(p => p.id !== data.data.id) || []
+            setRelatedProducts(filtered.slice(0, 3))
+          }
+        } else {
+          setError(data.error)
+        }
+      } catch (err) {
+        console.error('Failed to fetch product:', err)
+        setError('Failed to load product')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) {
+      fetchProduct()
+      setQuantity(1)
+      setActiveTab('description')
+      setIsFavorite(false)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }, [id])
 
-  const lookup = getProductById(id)
+  if (loading) {
+    return (
+      <PageWrapper>
+        <NavBar />
+        <div style={{ padding: isMobile ? '120px 20px' : '160px 48px', textAlign: 'center' }}>
+          <div style={{ 
+            display: 'inline-block',
+            width: '40px', 
+            height: '40px', 
+            border: '4px solid var(--accent-gold-border)',
+            borderTop: '4px solid var(--accent-gold)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }} />
+          <p style={{ marginTop: '20px', color: 'var(--text-muted)' }}>Loading...</p>
+        </div>
+      </PageWrapper>
+    )
+  }
 
-  if (!lookup) {
+  if (error || !product) {
     return (
       <PageWrapper>
         <NavBar />
@@ -160,23 +215,13 @@ export default function ProductDetail() {
     )
   }
 
-  const { product: rawProduct, artisan: rawArtisan } = lookup
-  const product = translateProduct(rawProduct)
-  const artisan = translateArtisan(rawArtisan)
+  // Transform API product data to match expected structure
+  const artisan = product.vendor
   const f = withFallbacks(product, artisan, t('detail.default_composition'))
-  const specialtyColor = SPECIALTY_COLORS[rawArtisan.specialty] ?? '#d4af37'
+  const specialtyColor = '#d4af37' // Default gold color for now
 
-  const related = (() => {
-    const others = artisan.products.filter(p => p.id !== product.id)
-    if (others.length >= 3) return others.slice(0, 4)
-    const extras = []
-    for (const a of ARTISANES) {
-      if (a.id === rawArtisan.id) continue
-      if (a.specialty !== rawArtisan.specialty) continue
-      for (const p of a.products) extras.push(translateProduct(p))
-    }
-    return [...others, ...extras].slice(0, 4)
-  })()
+  // Use fetched related products
+  const related = relatedProducts
 
   const backLabel = t('detail.back_catalog')
   const backTarget = '/produits'
@@ -647,7 +692,11 @@ export default function ProductDetail() {
               {related.map((p, i) => (
                 <MiniProductCard
                   key={p.id}
-                  product={p}
+                  product={{
+                    ...p,
+                    price: `${p.price} DHs`,
+                    badgeKey: p.bioCertified ? 'bio' : null
+                  }}
                   delay={0.5 + i * 0.07}
                   onClick={() => router.push(`/produits/${p.id}`)}
                   isMobile={isMobile}

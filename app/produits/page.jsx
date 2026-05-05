@@ -13,46 +13,18 @@ import { useIsNarrow } from '@/hooks/useIsNarrow.js'
 import { useDirection } from '@/hooks/useDirection.js'
 import { translateProduct } from '@/utils/translateProduct.js'
 
-// Category IDs are stable (used as filter keys); labels come from translations
-const CATEGORY_DATA = [
-  { id: 'all',          count: 48 },
-  { id: 'Alimentation', count: 18 },
-  { id: 'Cosmétiques',  count: 14 },
-  { id: 'Huiles',       count: 9 },
-  { id: 'Épices',       count: 7 },
-]
-
-const CATEGORY_LABEL_KEYS = {
-  all:          'filters.all',
-  Alimentation: 'categories.food',
-  'Cosmétiques':'categories.cosmetics',
-  Huiles:       'categories.oils',
-  'Épices':     'categories.spices',
-}
-
-const PRODUCTS = [
-  { id:1, category:'Alimentation', name:"9er3a dyal L3ssel Beldi",         vendor:"Lalla Fatima — Meknès",    price:"500 DHs", oldPrice:"650 DHs", badgeKey:"popular" },
-  { id:2, category:'Huiles',       name:"Huile d'Argan Pure",               vendor:"Coopérative Aït Baha",     price:"320 DHs", badgeKey:"new" },
-  { id:3, category:'Cosmétiques',  name:"Savon Beldi Eucalyptus",            vendor:"Khadija — Essaouira",      price:"85 DHs" },
-  { id:4, category:'Alimentation', name:"Amlou Artisanal aux Amandes",      vendor:"Nadia — Taroudant",        price:"180 DHs", badgeKey:"bio" },
-  { id:5, category:'Épices',       name:"Ras el Hanout Maison 27 épices",   vendor:"Touria — Fès",             price:"60 DHs" },
-  { id:6, category:'Alimentation', name:"Smen Traditionnel",                vendor:"Aicha — Meknès",           price:"240 DHs", badgeKey:"limited" },
-  { id:7, category:'Alimentation', name:"Couscous Berbère Artisanal",       vendor:"Zahra — Béni Mellal",      price:"120 DHs" },
-  { id:8, category:'Cosmétiques',  name:"Beurre de Karité Pur",             vendor:"Coopérative Ouarzazate",   price:"150 DHs", badgeKey:"bio" },
-]
-
-function FilterCards({ activeCategory, setActiveCategory, t, flip }) {
+function FilterCards({ activeCategory, setActiveCategory, categories, t, flip }) {
   return (
     <>
       <div style={{ padding:'24px 20px', borderRadius:'20px', background:'var(--bg-surface)', backdropFilter:'blur(16px)', border:'1px solid var(--accent-gold-border-lo)' }}>
         <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'var(--text-muted)', marginBottom:'14px' }}>{t('filters.categories')}</p>
         <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'3px' }}>
-          {CATEGORY_DATA.map(cat => (
+          {categories.map(cat => (
             <li key={cat.id}>
-              <button onClick={() => setActiveCategory(cat.id)}
-                style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'9px 12px', borderRadius:'10px', color: activeCategory===cat.id ? 'var(--accent-gold)' : 'var(--text-secondary)', background: activeCategory===cat.id ? 'var(--accent-gold-bg)' : 'transparent', fontSize:'14px', fontWeight:500, cursor:'pointer', transition:'background 0.2s, color 0.2s', textAlign: flip('left', 'right') }}>
-                <span>{t(CATEGORY_LABEL_KEYS[cat.id])}</span>
-                <span style={{ fontSize:'11px', color:'var(--text-muted)', background:'var(--bg-surface)', padding:'2px 8px', borderRadius:'20px' }}>{cat.count}</span>
+              <button onClick={() => setActiveCategory(cat.slug)}
+                style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'9px 12px', borderRadius:'10px', color: activeCategory===cat.slug ? 'var(--accent-gold)' : 'var(--text-secondary)', background: activeCategory===cat.slug ? 'var(--accent-gold-bg)' : 'transparent', fontSize:'14px', fontWeight:500, cursor:'pointer', transition:'background 0.2s, color 0.2s', textAlign: flip('left', 'right') }}>
+                <span>{cat.name}</span>
+                <span style={{ fontSize:'11px', color:'var(--text-muted)', background:'var(--bg-surface)', padding:'2px 8px', borderRadius:'20px' }}>0</span>
               </button>
             </li>
           ))}
@@ -160,7 +132,53 @@ export default function Produits() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [sortBy, setSortBy] = useState('popular')
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const isNarrow = useIsNarrow()
+
+  // Fetch products and categories
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true)
+        
+        // Fetch categories
+        const categoriesResponse = await fetch('/api/categories')
+        const categoriesData = await categoriesResponse.json()
+        
+        if (categoriesData.success) {
+          // Flatten categories and add "all" option
+          const flatCategories = [{ id: 'all', name: t('filters.all'), slug: 'all' }]
+          categoriesData.data.forEach(cat => {
+            flatCategories.push(cat)
+            if (cat.children) {
+              flatCategories.push(...cat.children)
+            }
+          })
+          setCategories(flatCategories)
+        }
+
+        // Fetch products
+        const productsResponse = await fetch('/api/products?limit=50')
+        const productsData = await productsResponse.json()
+        
+        if (productsData.success) {
+          setProducts(productsData.data.products || [])
+        } else {
+          setError(productsData.error)
+        }
+      } catch (err) {
+        console.error('Failed to fetch data:', err)
+        setError('Failed to load products')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [t])
 
   const SORT_OPTIONS = [
     { label: t('sort.label') + t('sort.popularity'), value: 'popular' },
@@ -195,7 +213,7 @@ export default function Produits() {
         {!isNarrow && (
           <aside style={{ position:'sticky', top:'88px', height:'fit-content', display:'flex', flexDirection:'column', gap:'14px' }}>
             <motion.div initial={{ opacity:0, x:-20 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.5, delay:0.3 }}>
-              <FilterCards activeCategory={activeCategory} setActiveCategory={setActiveCategory} t={t} flip={flip} />
+              <FilterCards activeCategory={activeCategory} setActiveCategory={setActiveCategory} categories={categories} t={t} flip={flip} />
             </motion.div>
           </aside>
         )}
@@ -222,27 +240,55 @@ export default function Produits() {
                   </motion.button>
                   <SortDropdown options={SORT_OPTIONS} value={sortBy} onChange={setSortBy} compact />
                 </div>
-                <p style={{ fontSize:'13px', color:'var(--text-muted)' }}>{t('page.results', { count: PRODUCTS.length })}</p>
+                <p style={{ fontSize:'13px', color:'var(--text-muted)' }}>{t('page.results', { count: products.length })}</p>
               </div>
             ) : (
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-                <p style={{ fontSize:'13px', color:'var(--text-muted)' }}>{t('page.results', { count: PRODUCTS.length })}</p>
+                <p style={{ fontSize:'13px', color:'var(--text-muted)' }}>{t('page.results', { count: products.length })}</p>
                 <SortDropdown options={SORT_OPTIONS} value={sortBy} onChange={setSortBy} />
               </div>
             )}
           </motion.div>
 
           <div style={{ display:'grid', gridTemplateColumns: isNarrow ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(290px, 1fr))', gap: isNarrow ? '12px' : '22px' }}>
-            {PRODUCTS.map(translateProduct).map((p, i) => (
-              <ProductCard
-                key={p.id}
-                product={p}
-                delay={i * 0.06}
-                isNarrow={isNarrow}
-                addCartLabel={t('page.add_cart')}
-                flip={flip}
-              />
-            ))}
+            {loading ? (
+              // Loading skeleton
+              Array.from({ length: 8 }, (_, i) => (
+                <div key={i} style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderRadius: '20px',
+                  height: '420px',
+                  border: '1px solid var(--border-subtle)',
+                  animation: 'pulse 1.5s ease-in-out infinite'
+                }} />
+              ))
+            ) : error ? (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 20px' }}>
+                <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>{error}</p>
+              </div>
+            ) : products.length === 0 ? (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 20px' }}>
+                <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>{t('page.no_products')}</p>
+              </div>
+            ) : (
+              products
+                .filter(p => activeCategory === 'all' || p.category?.slug === activeCategory)
+                .map((p, i) => (
+                  <ProductCard
+                    key={p.id}
+                    product={{
+                      ...p,
+                      price: `${p.price} DHs`,
+                      vendor: p.vendor?.storeName || '',
+                      badgeKey: p.bioCertified ? 'bio' : null
+                    }}
+                    delay={i * 0.06}
+                    isNarrow={isNarrow}
+                    addCartLabel={t('page.add_cart')}
+                    flip={flip}
+                  />
+                ))
+            )}
           </div>
 
           <div style={{ display:'flex', justifyContent:'center', gap:'8px', paddingTop:'48px' }}>
@@ -280,7 +326,7 @@ export default function Produits() {
                 >×</motion.button>
               </div>
               <div style={{ display:'flex', flexDirection:'column', gap:'14px', marginBottom:'24px' }}>
-                <FilterCards activeCategory={activeCategory} setActiveCategory={setActiveCategory} t={t} flip={flip} />
+                <FilterCards activeCategory={activeCategory} setActiveCategory={setActiveCategory} categories={categories} t={t} flip={flip} />
               </div>
               <motion.button
                 whileTap={{ scale:0.98 }}

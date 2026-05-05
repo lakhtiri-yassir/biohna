@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import NavBar from '@/components/NavBar.jsx'
 import PageWrapper from '@/components/PageWrapper.jsx'
-import { ARTISANES, SPECIALTY_COLORS, REGIONS, SPECIALTIES } from '@/data/artisanes.js'
 import { translateArtisan } from '@/utils/translateProduct.js'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import { useIsNarrow } from '@/hooks/useIsNarrow'
@@ -30,7 +29,7 @@ function AvatarCircle({ initials, size = 64 }) {
 function ArtisanCard({ artisan, delay, seeWorkshopLabel, creationsLabel, coopLabel }) {
   const router = useRouter()
   const { isDark } = useTheme()
-  const specialtyColor = SPECIALTY_COLORS[artisan.specialty] ?? '#d4af37'
+  const specialtyColor = '#d4af37' // Default gold color for now
 
   return (
     <motion.div
@@ -121,21 +120,52 @@ export default function Vendeurs() {
   const [activeRegion, setActiveRegion] = useState(null)
   const [activeType, setActiveType] = useState(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [vendors, setVendors] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const isNarrow = useIsNarrow()
+
+  useEffect(() => {
+    async function fetchVendors() {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch('/api/vendors')
+        const data = await response.json()
+        
+        if (data.success) {
+          setVendors(data.data)
+        } else {
+          setError(data.error)
+        }
+      } catch (err) {
+        console.error('Failed to fetch vendors:', err)
+        setError('Failed to load vendors')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchVendors()
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = filtersOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [filtersOpen])
 
-  const filtered = ARTISANES
+  // Extract unique values from vendors for filtering
+  const SPECIALTIES = [...new Set(vendors.map(v => v.specialty).filter(Boolean))]
+  const REGIONS = [...new Set(vendors.map(v => v.region).filter(Boolean))]
+
+  const filtered = vendors
     .filter(a => {
       if (activeSpecialty && a.specialty !== activeSpecialty) return false
       if (activeRegion && a.region !== activeRegion) return false
       if (activeType && a.type !== activeType) return false
       return true
     })
-    .map(translateArtisan)
 
   const clearFilters = () => {
     setActiveSpecialty(null)
@@ -171,7 +201,7 @@ export default function Vendeurs() {
               >
                 <span>{spec}</span>
                 <span style={{ fontSize: '11px', color: 'var(--text-muted)', background: 'var(--bg-surface)', padding: '2px 8px', borderRadius: '20px' }}>
-                  {ARTISANES.filter(a => a.specialty === spec).length}
+                  {vendors.filter(a => a.specialty === spec).length}
                 </span>
               </button>
             </li>
@@ -308,7 +338,30 @@ export default function Vendeurs() {
           </motion.div>
 
           <AnimatePresence mode="popLayout">
-            {filtered.length === 0 ? (
+            {loading ? (
+              <motion.div
+                key="loading"
+                style={{ display: 'grid', gridTemplateColumns: isNarrow ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))', gap: isNarrow ? '14px' : '22px' }}
+              >
+                {Array.from({ length: 6 }, (_, i) => (
+                  <div key={i} style={{
+                    backgroundColor: 'var(--bg-surface)',
+                    borderRadius: '22px',
+                    height: '280px',
+                    border: '1px solid var(--border-subtle)',
+                    animation: 'pulse 1.5s ease-in-out infinite'
+                  }} />
+                ))}
+              </motion.div>
+            ) : error ? (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                style={{ textAlign: 'center', padding: '80px 0', color: 'var(--destructive)', fontSize: '15px' }}
+              >
+                {error}
+              </motion.div>
+            ) : filtered.length === 0 ? (
               <motion.div
                 key="empty"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}

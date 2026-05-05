@@ -484,10 +484,68 @@ export default function CartDetails() {
     return Object.keys(errs).length === 0
   }
 
-  const handleContinue = () => {
-    if (activeStep === 0) goToStep(1)
-    else if (activeStep === 1 && validateDelivery()) goToStep(2)
-    else if (activeStep === 2) setConfirmed(true)
+  const handleContinue = async () => {
+    if (activeStep === 0) {
+      goToStep(1)
+    } else if (activeStep === 1 && validateDelivery()) {
+      goToStep(2)
+    } else if (activeStep === 2) {
+      try {
+        // Create order
+        const orderResponse = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: 'user123', // TODO: get from auth context
+            items: items.map(item => ({
+              productId: item.id,
+              quantity: item.qty,
+              price: item.price
+            })),
+            shippingAddress: {
+              firstName: delivery.firstName,
+              lastName: delivery.lastName,
+              address: delivery.address,
+              city: delivery.city,
+              postalCode: delivery.postal,
+              phone: delivery.phone
+            },
+            notes: delivery.note,
+            shippingCost
+          })
+        })
+        
+        const orderData = await orderResponse.json()
+        
+        if (orderData.success) {
+          // Initiate payment
+          const paymentResponse = await fetch('/api/payment/initiate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: orderData.data.id,
+              amount: subtotal + shippingCost,
+              paymentMethod
+            })
+          })
+          
+          const paymentData = await paymentResponse.json()
+          
+          if (paymentData.success) {
+            setConfirmed(true)
+          } else {
+            console.error('Payment failed:', paymentData.error)
+            // TODO: Show error to user
+          }
+        } else {
+          console.error('Order creation failed:', orderData.error)
+          // TODO: Show error to user
+        }
+      } catch (error) {
+        console.error('Checkout error:', error)
+        // TODO: Show error to user
+      }
+    }
   }
 
   const STEPS = [t('steps.cart'), t('steps.delivery'), t('steps.payment')]

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -8,8 +9,6 @@ import NavBar from '@/components/NavBar.jsx'
 import PageWrapper from '@/components/PageWrapper.jsx'
 import { useModal } from '@/context/ModalContext.jsx'
 import { useTheme } from '@/context/ThemeContext.jsx'
-import { ARTISANES, SPECIALTY_COLORS } from '@/data/artisanes.js'
-import { translateArtisan } from '@/utils/translateProduct.js'
 import { useIsNarrow } from '@/hooks/useIsNarrow'
 import { useDirection } from '@/hooks/useDirection.js'
 
@@ -82,17 +81,66 @@ export default function VendeurProfile() {
   const isNarrow = useIsNarrow()
   const { t } = useTranslation('vendors')
   const { flip } = useDirection()
-  const artisan = (() => {
-    const raw = ARTISANES.find(a => a.id === id)
-    return raw ? translateArtisan(raw) : null
-  })()
+  
+  const [vendor, setVendor] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  if (!artisan) {
+  useEffect(() => {
+    async function fetchVendor() {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch(`/api/vendors/${id}`)
+        const data = await response.json()
+        
+        if (data.success) {
+          setVendor(data.data)
+        } else {
+          setError(data.error)
+        }
+      } catch (err) {
+        console.error('Failed to fetch vendor:', err)
+        setError('Failed to load vendor')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) {
+      fetchVendor()
+    }
+  }, [id])
+
+  if (loading) {
     return (
       <PageWrapper>
         <NavBar />
         <div style={{ padding: isNarrow ? '120px 16px' : '160px 48px', textAlign: 'center' }}>
-          <p style={{ fontFamily: "'Anton SC', var(--font-display), sans-serif", fontSize: '32px', color: 'var(--text-primary)', marginBottom: '16px' }}>{t('profile.not_found')}</p>
+          <div style={{ 
+            display: 'inline-block',
+            width: '40px', 
+            height: '40px', 
+            border: '4px solid var(--accent-gold-border)',
+            borderTop: '4px solid var(--accent-gold)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }} />
+          <p style={{ marginTop: '20px', color: 'var(--text-muted)' }}>Loading...</p>
+        </div>
+      </PageWrapper>
+    )
+  }
+
+  if (error || !vendor) {
+    return (
+      <PageWrapper>
+        <NavBar />
+        <div style={{ padding: isNarrow ? '120px 16px' : '160px 48px', textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Anton SC', var(--font-display), sans-serif", fontSize: '32px', color: 'var(--text-primary)', marginBottom: '16px' }}>
+            {t('profile.not_found')}
+          </p>
           <motion.button
             whileHover={{ color: 'var(--accent-gold)' }}
             onClick={() => router.push('/vendeurs')}
@@ -103,7 +151,8 @@ export default function VendeurProfile() {
     )
   }
 
-  const specialtyColor = SPECIALTY_COLORS[artisan.specialty] ?? '#d4af37'
+  const artisan = vendor
+  const specialtyColor = '#d4af37' // Default gold color for now
 
   const STATS = [
     { label: t('profile.stat_creations'), value: artisan.productCount },
@@ -200,25 +249,33 @@ export default function VendeurProfile() {
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: isNarrow ? 'repeat(2, 1fr)' : 'repeat(auto-fill, minmax(280px, 1fr))', gap: isNarrow ? '12px' : '22px' }}>
-            {artisan.products.map((p, i) => (
+            {artisan.products?.map((p, i) => (
               <ProductCard
                 key={p.id}
-                product={p}
+                product={{
+                  ...p,
+                  price: `${p.price} DHs`,
+                  badge: p.bioCertified ? 'Bio' : null
+                }}
                 delay={0.35 + i * 0.07}
                 addToCartLabel={t('profile.add_to_cart')}
                 flip={flip}
               />
-            ))}
+            )) || (
+              <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
+                {t('profile.no_products')}
+              </p>
+            )}
           </div>
 
-          {artisan.productCount > artisan.products.length && (
+          {artisan.productCount > (artisan.products?.length || 0) && (
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
               style={{ textAlign: 'center', marginTop: '40px' }}
             >
               <p style={{ fontSize: '13px', color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                {t('profile.more_creations', { count: artisan.productCount - artisan.products.length })}
+                {t('profile.more_creations', { count: artisan.productCount - (artisan.products?.length || 0) })}
               </p>
             </motion.div>
           )}

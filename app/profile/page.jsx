@@ -8,11 +8,23 @@ import NavBar from '@/components/NavBar.jsx'
 import PageWrapper from '@/components/PageWrapper.jsx'
 import { useAuth } from '@/context/AuthContext.jsx'
 import { computeInitials } from '@/data/defaultUser.js'
-import { REGIONS, SPECIALTIES } from '@/data/artisanes.js'
+// Remove import of static artisanes data
 import { DEFAULT_SETTINGS } from '@/data/defaultUser.js'
 import { useDirection } from '@/hooks/useDirection.js'
 
 const ease = [0.22, 1, 0.36, 1]
+
+// Constants for vendor specialties and regions
+const SPECIALTIES = [
+  'Céramique', 'Maroquinerie', 'Textile', 'Tapis', 'Bijoux',
+  'Cosmétiques', 'Huiles', 'Miel', 'Épices', 'Alimentation'
+]
+
+const REGIONS = [
+  'Souss-Massa', 'Marrakech-Safi', 'Fès-Meknès', 'Rabat-Salé-Kénitra',
+  'Casablanca-Settat', 'Tanger-Tétouan-Al Hoceïma', 'Oriental', 
+  'Essaouira', 'Taroudant', 'Agadir'
+]
 
 function ProfileInput({ label, value, onChange, type = 'text', placeholder = '' }) {
   const [focused, setFocused] = useState(false)
