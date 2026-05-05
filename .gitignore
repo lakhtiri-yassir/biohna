@@ -40,5 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/assets/*.mp4
-public/assets/*.webm
 /app/generated/prisma
