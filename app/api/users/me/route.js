@@ -1,10 +1,11 @@
 import prisma from '@/lib/prisma'
 import { successResponse, errorResponse } from '@/lib/response'
-import { auth } from '@/auth'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth-options'
 
 export async function GET(request) {
   try {
-    const session = await auth()
+    const session = await getServerSession(authOptions)
     
     if (!session?.user?.id) {
       return errorResponse('Unauthorized', 401)
@@ -41,7 +42,7 @@ export async function GET(request) {
 
 export async function PATCH(request) {
   try {
-    const session = await auth()
+    const session = await getServerSession(authOptions)
     
     if (!session?.user?.id) {
       return errorResponse('Unauthorized', 401)
