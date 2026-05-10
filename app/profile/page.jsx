@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -264,6 +265,125 @@ function AvatarUpload({ user, onUpload }) {
   )
 }
 
+function DeleteAccountModal({ isOpen, onClose, onConfirm, loading, error, isVendor }) {
+  const warningItems = [
+    { text: 'Vos informations personnelles (nom, téléphone, photo) seront effacées', bad: true },
+    { text: 'Vos adresses enregistrées seront supprimées', bad: true },
+    ...(isVendor ? [
+      { text: 'Vos produits non commandés seront définitivement supprimés', bad: true },
+      { text: 'Vos produits commandés seront archivés (historique conservé)', bad: true },
+    ] : []),
+    { text: "Votre historique de commandes est conservé pour des raisons légales", bad: false },
+    { text: 'Cette action est irréversible', bad: true },
+  ]
+
+  return createPortal(
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          onClick={e => { if (e.target === e.currentTarget && !loading) onClose() }}
+          style={{ position: 'fixed', inset: 0, zIndex: 3000, background: 'var(--bg-overlay)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 26, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 18, scale: 0.97 }}
+            transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            style={{ width: 'min(96vw, 480px)', display: 'flex', flexDirection: 'column', background: 'var(--bg-elevated)', backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)', border: '1px solid var(--accent-gold-border-lo)', borderRadius: '34px', boxShadow: 'var(--shadow-heavy)', overflow: 'hidden' }}
+          >
+            {/* Header */}
+            <div style={{ padding: '26px 28px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-subtle)', flexShrink: 0 }}>
+              <div>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--destructive)', fontFamily: "'Anek Latin', sans-serif", marginBottom: '4px' }}>
+                  Zone dangereuse
+                </p>
+                <span style={{ fontFamily: "'Anton SC', var(--font-display), sans-serif", fontSize: '20px', color: 'var(--text-primary)', letterSpacing: '2px' }}>
+                  Supprimer mon compte
+                </span>
+              </div>
+              <motion.button
+                whileHover={{ background: 'var(--destructive-bg)', color: 'var(--destructive)' }}
+                onClick={() => { if (!loading) onClose() }}
+                style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--bg-surface)', border: '1px solid var(--accent-gold-border-lo)', color: 'var(--text-muted)', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+              >✕</motion.button>
+            </div>
+
+            {/* Warning list */}
+            <div style={{ padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {warningItems.map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <div style={{
+                    flexShrink: 0, width: '20px', height: '20px', borderRadius: '50%', marginTop: '1px',
+                    background: item.bad ? 'var(--destructive-bg)' : 'rgba(16,185,129,0.1)',
+                    border: `1px solid ${item.bad ? 'var(--destructive)' : '#10b981'}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '9px', fontWeight: 700,
+                    color: item.bad ? 'var(--destructive)' : '#10b981',
+                  }}>
+                    {item.bad ? '✕' : '✓'}
+                  </div>
+                  <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontFamily: "'Anek Latin', sans-serif", lineHeight: 1.55 }}>
+                    {item.text}
+                  </span>
+                </div>
+              ))}
+
+              {/* API error (e.g. shipped orders blocking deletion) */}
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                    style={{ padding: '12px 14px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '12px', marginTop: '4px' }}
+                  >
+                    <p style={{ fontSize: '13px', color: 'var(--destructive)', fontFamily: "'Anek Latin', sans-serif", lineHeight: 1.5, margin: 0 }}>
+                      {error}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Footer actions */}
+            <div style={{ padding: '16px 28px 26px', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: '12px' }}>
+              <motion.button
+                whileHover={!loading ? { borderColor: 'var(--accent-gold-border)', color: 'var(--accent-gold)' } : {}}
+                onClick={() => { if (!loading) onClose() }}
+                disabled={loading}
+                style={{ flex: 1, padding: '12px', background: 'var(--bg-surface)', border: '1px solid var(--accent-gold-border-lo)', borderRadius: '16px', color: 'var(--text-muted)', fontSize: '13px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: "'Anek Latin', sans-serif", transition: 'all 0.2s' }}
+              >
+                Annuler
+              </motion.button>
+              <motion.button
+                whileHover={!loading ? { opacity: 0.85 } : {}}
+                whileTap={!loading ? { scale: 0.97 } : {}}
+                onClick={onConfirm}
+                disabled={loading}
+                style={{ flex: 1, padding: '12px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '16px', color: 'var(--destructive)', fontSize: '13px', fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', fontFamily: "'Anek Latin', sans-serif", opacity: loading ? 0.6 : 1, transition: 'all 0.2s' }}
+              >
+                {loading ? (
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                      style={{ display: 'inline-block', width: '13px', height: '13px', border: '2px solid var(--destructive)', borderTopColor: 'transparent', borderRadius: '50%' }}
+                    />
+                    Suppression…
+                  </span>
+                ) : 'Oui, supprimer'}
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
+  )
+}
+
 export default function Profile() {
   const { user, isAuthenticated, logout, updateProfile, updateAvatar, updateBanner, updateSettings } = useAuth()
   const router = useRouter()
@@ -302,6 +422,8 @@ export default function Profile() {
   const [vendorForm, setVendorForm] = useState({ cooperativeName: '', region: '', specialty: '', description: '' })
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
   const [bannerError, setBannerError] = useState('')
   const bannerFileRef = useRef(null)
 
@@ -337,7 +459,7 @@ export default function Profile() {
     )
   }
 
-  const roleBadge = tc('profile_menu.client') // Default to client since role field doesn't exist in schema
+  const roleBadge = user.isVendor ? tc('profile_menu.vendor') : tc('profile_menu.client')
 
   function startEditInfo() {
     setInfoForm({ firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone })
@@ -400,9 +522,24 @@ export default function Profile() {
     setTimeout(() => setAddressSaved(false), 3000)
   }
 
-  function confirmDelete() {
-    logout()
-    router.push('/')
+  async function confirmDelete() {
+    setDeleteLoading(true)
+    setDeleteError('')
+    try {
+      const res = await fetch('/api/users/me', { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json()
+        setDeleteError(data.error || 'Une erreur est survenue.')
+        setDeleteLoading(false)
+        return
+      }
+      await logout()
+      router.push('/')
+      router.refresh()
+    } catch {
+      setDeleteError('Une erreur est survenue. Veuillez réessayer.')
+      setDeleteLoading(false)
+    }
   }
 
   return (
@@ -560,46 +697,26 @@ export default function Profile() {
             <h3 style={{ fontFamily: "'Anton SC', var(--font-display), sans-serif", fontSize: '16px', color: 'var(--destructive)', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '16px' }}>
               {t('danger.section')}
             </h3>
-
-            <AnimatePresence mode="wait">
-              {showDeleteConfirm ? (
-                <motion.div key="confirm" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2, ease }}>
-                  <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '18px', fontFamily: "'Anek Latin', sans-serif" }}>
-                    {t('danger.irreversible')}
-                  </p>
-                  <div style={{ display: 'flex', gap: '12px' }}>
-                    <motion.button
-                      whileHover={{ y: -1, boxShadow: '0 4px 16px rgba(255,80,80,0.3)' }}
-                      onClick={confirmDelete}
-                      style={{ padding: '10px 22px', background: 'var(--destructive-bg)', border: '1px solid var(--destructive)', borderRadius: '10px', color: 'var(--destructive)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', fontFamily: "'Anek Latin', sans-serif" }}
-                    >
-                      {t('danger.confirm_delete')}
-                    </motion.button>
-                    <motion.button
-                      whileHover={{ borderColor: 'var(--accent-gold-border)' }}
-                      onClick={() => setShowDeleteConfirm(false)}
-                      style={{ padding: '10px 22px', background: 'none', border: '1px solid var(--accent-gold-border-lo)', borderRadius: '10px', color: 'rgba(212,175,55,0.6)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', fontFamily: "'Anek Latin', sans-serif" }}
-                    >
-                      {t('danger.cancel')}
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px', fontFamily: "'Anek Latin', sans-serif", lineHeight: 1.6 }}>
-                    {t('danger.delete_description')}
-                  </p>
-                  <motion.button
-                    whileHover={{ background: 'var(--destructive-hover-bg)', borderColor: 'var(--destructive)', color: 'var(--destructive)' }}
-                    onClick={() => setShowDeleteConfirm(true)}
-                    style={{ padding: '10px 22px', background: 'none', border: '1px solid var(--destructive-bg)', borderRadius: '10px', color: 'var(--destructive)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', fontFamily: "'Anek Latin', sans-serif", transition: 'all 0.2s' }}
-                  >
-                    {t('danger.delete_btn')}
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px', fontFamily: "'Anek Latin', sans-serif", lineHeight: 1.6 }}>
+              {t('danger.delete_description')}
+            </p>
+            <motion.button
+              whileHover={{ background: 'var(--destructive-hover-bg)', borderColor: 'var(--destructive)' }}
+              onClick={() => { setDeleteError(''); setShowDeleteConfirm(true) }}
+              style={{ padding: '10px 22px', background: 'none', border: '1px solid var(--destructive-bg)', borderRadius: '10px', color: 'var(--destructive)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', fontFamily: "'Anek Latin', sans-serif", transition: 'all 0.2s' }}
+            >
+              {t('danger.delete_btn')}
+            </motion.button>
           </div>
+
+          <DeleteAccountModal
+            isOpen={showDeleteConfirm}
+            onClose={() => { setShowDeleteConfirm(false); setDeleteError('') }}
+            onConfirm={confirmDelete}
+            loading={deleteLoading}
+            error={deleteError}
+            isVendor={user?.isVendor ?? false}
+          />
 
         </motion.div>
 

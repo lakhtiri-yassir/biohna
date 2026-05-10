@@ -5,9 +5,8 @@ import prisma from '@/lib/prisma.js'
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { email, password, fullName } = body
+    const { email, password, fullName, role = 'CLIENT', storeName, storeAddress } = body
 
-    // Validation
     if (!email || !password || !fullName) {
       return NextResponse.json(
         { success: false, error: 'Email, password, and full name are required' },
@@ -15,7 +14,6 @@ export async function POST(request) {
       )
     }
 
-    // Split fullName into firstName and lastName
     const nameParts = fullName.trim().split(' ')
     const firstName = nameParts[0] || ''
     const lastName = nameParts.slice(1).join(' ') || ''
@@ -27,11 +25,14 @@ export async function POST(request) {
       )
     }
 
-    // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
-    })
+    if (role === 'VENDOR' && !storeName) {
+      return NextResponse.json(
+        { success: false, error: 'Store name is required for vendor accounts' },
+        { status: 400 }
+      )
+    }
 
+    const existingUser = await prisma.user.findFirst({ where: { email, deletedAt: null } })
     if (existingUser) {
       return NextResponse.json(
         { success: false, error: 'User already exists with this email' },
@@ -39,41 +40,75 @@ export async function POST(request) {
       )
     }
 
-    // Hash password
+    // Check if a soft-deleted account exists with this email — reuse its row
+    const deletedUser = await prisma.user.findFirst({ where: { email, deletedAt: { not: null } } })
+
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    // Create user and settings in a transaction
     const result = await prisma.$transaction(async (tx) => {
-      const user = await tx.user.create({
-        data: {
-          email,
-          passwordHash: hashedPassword,
-          firstName,
-          lastName
-        }
-      })
+      let user
 
-      const settings = await tx.userSettings.create({
-        data: {
-          userId: user.id,
-          language: 'fr',
-          currency: 'MAD',
-          notificationsEnabled: true
-        }
-      })
+      if (deletedUser) {
+        // Restore the soft-deleted row so we don't violate the unique email constraint
+        user = await tx.user.update({
+          where: { id: deletedUser.id },
+          data: {
+            passwordHash: hashedPassword,
+            firstName,
+            lastName,
+            role,
+            deletedAt: null,
+          }
+        })
 
-      return { user, settings }
+        // Reset or create settings
+        await tx.userSettings.upsert({
+          where: { userId: user.id },
+          create: { userId: user.id, language: 'fr', currency: 'MAD', notificationsEnabled: true },
+          update: { language: 'fr', currency: 'MAD', notificationsEnabled: true },
+        })
+      } else {
+        user = await tx.user.create({
+          data: {
+            email,
+            passwordHash: hashedPassword,
+            firstName,
+            lastName,
+            role,
+          }
+        })
+
+        await tx.userSettings.create({
+          data: {
+            userId: user.id,
+            language: 'fr',
+            currency: 'MAD',
+            notificationsEnabled: true
+          }
+        })
+      }
+
+      let vendor = null
+      if (role === 'VENDOR') {
+        vendor = await tx.vendor.upsert({
+          where: { userId: user.id },
+          create: { userId: user.id, storeName, storeAddress: storeAddress || null },
+          update: { storeName, storeAddress: storeAddress || null },
+        })
+      }
+
+      return { user, vendor }
     })
 
-    // Return success (don't include password in response)
-    const { password: _, ...userWithoutPassword } = result.user
-    
     return NextResponse.json({
       success: true,
       data: {
         user: {
-          ...userWithoutPassword,
-          settings: result.settings
+          id: result.user.id,
+          email: result.user.email,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
+          role: result.user.role,
         }
       }
     })

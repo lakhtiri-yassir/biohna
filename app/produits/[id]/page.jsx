@@ -498,7 +498,26 @@ export default function ProductDetail() {
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveModal('panier')}
+                onClick={() => {
+                  const cartItem = {
+                    id: product.id,
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    qty: quantity,
+                    category: product.category?.name ?? '',
+                    vendorId: product.vendor.id,
+                    vendor: product.vendor.storeName,
+                  }
+                  const existing = JSON.parse(localStorage.getItem('biohna_cart') || '[]')
+                  const idx = existing.findIndex(it => it.id === product.id)
+                  if (idx >= 0) {
+                    existing[idx].qty += quantity
+                  } else {
+                    existing.push(cartItem)
+                  }
+                  localStorage.setItem('biohna_cart', JSON.stringify(existing))
+                  setActiveModal('panier')
+                }}
                 style={{
                   flex: 1,
                   padding: '0 28px',

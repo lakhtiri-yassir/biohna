@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/ilyas/Documents/Biohna/src/pages/**)",
+      "Read(//c/Users/ilyas/Documents/Biohna/src/**)",
+      "Read(//c/Users/ilyas/Documents/Biohna/**)"
+    ]
+  }
+}

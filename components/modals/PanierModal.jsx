@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import { useDirection } from '../../hooks/useDirection.js'
 
 // Cart starts empty - no hardcoded sample data
 
-function CartItem({ item, onQty }) {
+function CartItem({ item, onQty, onRemove }) {
   return (
     <div
       style={{ display:'grid', gridTemplateColumns:'66px 1fr auto', gap:'14px', alignItems:'center', padding:'14px 26px', borderBottom:'1px solid var(--border-subtle)', transition:'background 0.2s' }}
@@ -37,6 +37,7 @@ function CartItem({ item, onQty }) {
         <span style={{ fontSize:'15px', fontWeight:700, color:'var(--accent-gold)' }}>{item.price}</span>
         <motion.button
           whileHover={{ background:'var(--destructive-hover-bg)', color:'var(--destructive)' }}
+          onClick={() => onRemove(item.id)}
           style={{ width:'22px', height:'22px', borderRadius:'6px', background:'var(--destructive-bg)', border:'1px solid var(--destructive-bg)', color:'var(--destructive)', fontSize:'11px', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer' }}
         >🗑</motion.button>
       </div>
@@ -52,7 +53,25 @@ export default function PanierModal() {
   const router = useRouter()
   const isOpen = activeModal === 'panier'
 
-  const updateQty = (id, delta) => setItems(prev => prev.map(it => it.id===id ? { ...it, qty:Math.max(1, it.qty+delta) } : it))
+  // Sync from localStorage every time the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const saved = localStorage.getItem('biohna_cart')
+      setItems(saved ? JSON.parse(saved) : [])
+    }
+  }, [isOpen])
+
+  const persist = (next) => {
+    setItems(next)
+    localStorage.setItem('biohna_cart', JSON.stringify(next))
+  }
+
+  const updateQty = (id, delta) =>
+    persist(items.map(it => it.id === id ? { ...it, qty: Math.max(1, it.qty + delta) } : it))
+
+  const removeItem = (id) => persist(items.filter(it => it.id !== id))
+
+  const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0)
 
   return (
     <AnimatePresence>
@@ -97,7 +116,7 @@ export default function PanierModal() {
                   </p>
                 </div>
               ) : (
-                items.map(it => <CartItem key={it.id} item={it} onQty={updateQty} />)
+                items.map(it => <CartItem key={it.id} item={it} onQty={updateQty} onRemove={removeItem} />)
               )}
             </div>
 
@@ -105,14 +124,14 @@ export default function PanierModal() {
             {items.length > 0 && (
               <div style={{ padding:'18px 26px 26px', borderTop:'1px solid var(--border-subtle)' }}>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px' }}>
-                  <span>{t('panier.subtotal')}</span><span>MAD 0</span>
+                  <span>{t('panier.subtotal')}</span><span>MAD {subtotal.toFixed(2)}</span>
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:'13px', color:'var(--text-muted)', marginBottom:'16px' }}>
                   <span>{t('panier.shipping')}</span><span style={{ color:'var(--accent-gold)' }}>{t('panier.shipping_free')}</span>
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderTop:'1px solid var(--border-subtle)', paddingTop:'14px', marginBottom:'18px' }}>
                   <span style={{ fontWeight:700, fontSize:'15px', color:'var(--text-primary)' }}>{t('panier.total')}</span>
-                  <span style={{ fontFamily:"'Anton SC', var(--font-display), sans-serif", fontSize:'24px', color:'var(--accent-gold)' }}>MAD 0</span>
+                  <span style={{ fontFamily:"'Anton SC', var(--font-display), sans-serif", fontSize:'24px', color:'var(--accent-gold)' }}>MAD {subtotal.toFixed(2)}</span>
                 </div>
                 <motion.button
                   whileHover={{ y:-2, boxShadow:'0 8px 32px rgba(212,175,55,0.4)' }}

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -13,46 +12,34 @@ export default function CategoriesModal() {
   const isOpen = activeModal === 'categories'
   const close = () => setActiveModal(null)
 
-  const [categories, setCategories] = useState([])
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    if (isOpen && categories.length === 0) {
-      fetchCategories()
-    }
-  }, [isOpen])
-
-  async function fetchCategories() {
-    try {
-      setLoading(true)
-      const response = await fetch('/api/categories')
-      const data = await response.json()
-      
-      if (data.success) {
-        setCategories(data.data)
-      }
-    } catch (error) {
-      console.error('Failed to fetch categories:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Transform API categories into sections format
   const SECTIONS = [
     {
       label: t('categories.sections.featured_label'),
-      items: [{ icon:'/assets/star.svg', name: t('categories.items.featured'), count:18, featured:true }],
+      items: [{ icon: '/assets/star.svg', nameKey: 'categories.items.featured', count: 18, featured: true }],
     },
     {
-      label: t('categories.sections.all_categories'),
-      items: categories.map(category => ({
-        icon: '/assets/category.svg', // Default icon for all categories
-        name: category.name,
-        count: category.productCount || 0,
-        categoryId: category.id
-      }))
-    }
+      label: t('categories.sections.food_label'),
+      items: [
+        { icon: '/assets/ruche.svg',  nameKey: 'categories.items.honey',   count: 12 },
+        { icon: '/assets/wheat.svg',  nameKey: 'categories.items.grains',  count: 8  },
+        { icon: '/assets/nuts.svg',   nameKey: 'categories.items.nuts',    count: 6  },
+        { icon: '/assets/cheese.svg', nameKey: 'categories.items.butters', count: 5  },
+      ],
+    },
+    {
+      label: t('categories.sections.spices_label'),
+      items: [
+        { icon: '/assets/spice.svg', nameKey: 'categories.items.spices', count: 9 },
+        { icon: '/assets/tea.svg',   nameKey: 'categories.items.herbs',  count: 7 },
+      ],
+    },
+    {
+      label: t('categories.sections.beauty_label'),
+      items: [
+        { icon: '/assets/olive.svg', nameKey: 'categories.items.oils', count: 11 },
+        { icon: '/assets/soap.svg',  nameKey: 'categories.items.soap',  count: 8  },
+      ],
+    },
   ]
 
   function CatCard({ item, onClose }) {
@@ -82,7 +69,7 @@ export default function CategoriesModal() {
       >
         <img src={item.icon} alt="" style={{ width: item.featured?'60px':'58px', height: item.featured?'60px':'58px', objectFit:'contain', flexShrink:0 }} />
         <div style={{ flex:1, minWidth:0 }}>
-          <p style={{ fontSize:'14px', fontWeight:600, color:'var(--text-primary)', marginBottom:'2px' }}>{item.name}</p>
+          <p style={{ fontSize:'14px', fontWeight:600, color:'var(--text-primary)', marginBottom:'2px' }}>{t(item.nameKey)}</p>
           <p style={{ fontSize:'11px', color:'var(--text-muted)' }}>{t('categories.products_count', { count: item.count })}</p>
         </div>
         <span style={{ color:'var(--text-muted)', fontSize:'13px', flexShrink:0 }}>›</span>

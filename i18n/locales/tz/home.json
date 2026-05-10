@@ -11,12 +11,12 @@
   "featured": {
     "label": "ⵉⵄⵊⴱⴰⵏ ⵏⵏⵖ",
     "heading": "ⵉⵎⵏⵥⴰⵡⵏ ⵉⵙⵜⴰⵢⵏ",
-    "see_all": "← ⵙⵏⴼⵍ ⵉⵎⵏⵥⴰⵡⵏ"
+    "see_all": "ⵙⵏⴼⵍ ⵉⵎⵏⵥⴰⵡⵏ"
   },
   "cooperatives": {
     "label": "ⵉⵎⵓⵔⴰⵔⵏ ⵏⵏⵖ",
     "heading": "ⵜⵉⵎⵙⵏⵜⴰⵢⵉⵏ",
-    "visit_btn": "ⵙⵙⵏ ⵜⴰⵎⵙⵏⵜⴰⵢⵜ ←",
+    "visit_btn": "ⵙⵙⵏ ⵜⴰⵎⵙⵏⵜⴰⵢⵜ",
     "count": "{{count}} ⵜⵉⵎⵙⵏⵜⴰⵢⵉⵏ",
     "bestseller_label": "ⴰⵎⵏⵥⵉ ⴰⵎⵣⵡⴰⵔⵓ"
   },

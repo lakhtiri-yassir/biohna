@@ -56,11 +56,12 @@ export default function Login() {
 
     try {
       const result = await login(email, password)
-      
+
       if (result?.error) {
-        setError(result.error)
+        setError('Email ou mot de passe incorrect.')
       } else {
         router.push('/')
+        router.refresh()
       }
     } catch (error) {
       console.error('Login error:', error)

@@ -191,7 +191,7 @@ function FeaturedCarousel({ isNarrow, t }) {
 
             return (
               <motion.div
-                key={prodIdx}
+                key={offset}
                 initial={{
                   x: (offset + direction) * STRIDE,
                   scale,
@@ -288,7 +288,7 @@ function FeaturedCarousel({ isNarrow, t }) {
       </div>
 
       {/* Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', padding: isNarrow ? '0 16px' : '0 48px' }}>
+      <div dir="ltr" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', padding: isNarrow ? '0 16px' : '0 48px' }}>
         <motion.button
           whileHover={{ background: 'var(--accent-gold-bg)', borderColor: 'var(--accent-gold-border)' }}
           whileTap={{ scale: 0.9 }}
@@ -336,7 +336,7 @@ function FeaturedCarousel({ isNarrow, t }) {
 
       {/* CTA */}
       <div style={{ textAlign: 'center', marginTop: '48px', padding: isNarrow ? '0 16px' : '0 48px' }}>
-        <motion.div whileHover={{ borderColor: 'var(--accent-gold)', background: 'var(--accent-gold-bg)' }} style={{ display: 'inline-block', borderRadius: '50px', border: '1.5px solid var(--border-subtle)' }}>
+        <motion.div whileHover={{ borderColor: 'var(--accent-gold)', background: 'var(--accent-gold-bg)' }} whileTap={{ borderColor: 'var(--accent-gold)', background: 'var(--accent-gold-bg)' }} style={{ display: 'inline-block', borderRadius: '50px', border: '1.5px solid var(--border-subtle)' }}>
           <Link href="/produits" style={{
             padding: '16px 40px', borderRadius: '50px',
             border: 'none', background: 'transparent', backdropFilter: 'blur(8px)',
@@ -366,33 +366,40 @@ const BG_GRADIENTS = [
 ]
 
 /* ── Progress ring ───────────────────────────────── */
-function ProgressRing({ duration, active, onComplete }) {
+function ProgressRing({ duration, paused, onComplete }) {
   const R = 10
   const C = 2 * Math.PI * R
   const [progress, setProgress] = useState(0)
   const startRef = useRef(null)
   const rafRef = useRef(null)
+  const progressRef = useRef(0)
+  const onCompleteRef = useRef(onComplete)
+  useEffect(() => { onCompleteRef.current = onComplete })
 
   useEffect(() => {
-    if (!active) { setProgress(0); return }
-    startRef.current = performance.now()
+    if (paused) {
+      cancelAnimationFrame(rafRef.current)
+      return
+    }
+    // Resume from wherever we paused by back-calculating start time
+    startRef.current = performance.now() - progressRef.current * duration
     function tick(now) {
-      const elapsed = now - startRef.current
-      const p = Math.min(elapsed / duration, 1)
+      const p = Math.min((now - startRef.current) / duration, 1)
+      progressRef.current = p
       setProgress(p)
       if (p < 1) rafRef.current = requestAnimationFrame(tick)
-      else onComplete()
+      else onCompleteRef.current()
     }
     rafRef.current = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [active, duration])
+  }, [paused, duration])
 
   return (
     <svg width="26" height="26" style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%) rotate(-90deg)', flexShrink: 0 }}>
       <circle cx="13" cy="13" r={R} fill="none" stroke="rgba(212,175,55,0.15)" strokeWidth="2" />
       <circle cx="13" cy="13" r={R} fill="none" stroke="#d4af37" strokeWidth="2"
         strokeDasharray={C} strokeDashoffset={C * (1 - progress)}
-        strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.05s linear' }} />
+        strokeLinecap="round" />
     </svg>
   )
 }
@@ -446,8 +453,10 @@ function CooperativeSpotlight({ isNarrow, t }) {
       setLoading(false)
     }
   }
-  const pausedRef = useRef(false)
   const sidebarRef = useRef(null)
+  const [paused, setPaused] = useState(false)
+  const activeIdxRef = useRef(activeIdx)
+  useEffect(() => { activeIdxRef.current = activeIdx }, [activeIdx])
   const DURATION = 8000
 
   const coop = cooperatives[activeIdx] || {}
@@ -483,9 +492,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
   }
 
   function onRingComplete() {
-    if (!pausedRef.current) {
-      goTo((activeIdx + 1) % cooperatives.length)
-    }
+    goTo((activeIdxRef.current + 1) % cooperatives.length)
   }
 
   const STAGGER_SPRING = { type: 'spring', stiffness: 280, damping: 26 }
@@ -602,8 +609,8 @@ function CooperativeSpotlight({ isNarrow, t }) {
                   }}
                 >
                   {t('cooperatives.visit_btn')}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 5 5 12 12 19"/>
                   </svg>
                 </motion.button>
               </motion.div>
@@ -616,8 +623,8 @@ function CooperativeSpotlight({ isNarrow, t }) {
         {/* Sidebar index — desktop: absolute overlay, mobile: horizontal scroll strip */}
         {!isNarrow && (
         <div
-          onMouseEnter={() => { pausedRef.current = true }}
-          onMouseLeave={() => { pausedRef.current = false }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
           style={{
             position: 'absolute', right: 0, top: 0, bottom: 0,
             zIndex: 10, width: '280px',
@@ -662,7 +669,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
               return (
                 <motion.div
                   key={c.id}
-                  onClick={() => { pausedRef.current = true; goTo(i) }}
+                  onClick={() => goTo(i)}
                   animate={{ background: isActive ? 'var(--accent-gold-bg)' : 'transparent' }}
                   transition={{ duration: 0.3 }}
                   style={{
@@ -676,7 +683,7 @@ function CooperativeSpotlight({ isNarrow, t }) {
                   {isActive && (
                     <ProgressRing
                       duration={DURATION}
-                      active={!pausedRef.current}
+                      paused={paused}
                       onComplete={onRingComplete}
                       key={`ring-${activeIdx}`}
                     />
@@ -945,15 +952,11 @@ export default function Home() {
 
       {/* ── MARQUEE ────────────────────────────────── */}
       <div style={{ overflow: 'hidden', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)', background: 'var(--accent-gold-bg)', padding: '26px 0' }}>
-        <div style={{ display: 'flex', gap: '60px', animation: `${isRTL ? 'marquee-rtl' : 'marquee'} 30s linear infinite`, whiteSpace: 'nowrap' }}>
-          {['Miel Beldi','◆','Huile d\'Argan','◆','Savon Beldi','◆','Couscous Maison','◆','Ghee Artisanal','◆','Amlou','◆','Msemen','◆','Ras el Hanout','◆','Miel Beldi','◆','Huile d\'Argan','◆','Savon Beldi','◆','Couscous Maison','◆','Ghee Artisanal','◆','Amlou','◆','Msemen','◆','Ras el Hanout','◆'].map((item, i) => (
-            <span key={i} style={{
-              fontFamily: "'Anton SC', sans-serif",
-              fontSize: item === '◆' ? '20px' : '17px', letterSpacing: '4px',
-              color: item === '◆' ? 'var(--accent-gold)' : 'var(--text-muted)',
-              textTransform: 'uppercase',
-            }}>{item}</span>
-          ))}
+        <div dir="ltr" style={{ display: 'flex', gap: '60px', animation: `${isRTL ? 'marquee-rtl' : 'marquee'} 30s linear infinite`, whiteSpace: 'nowrap' }}>
+          {[...t('marquee.items', { returnObjects: true }), ...t('marquee.items', { returnObjects: true })].flatMap((item, i) => [
+            <span key={`sep-${i}`} style={{ fontFamily: isRTL ? "'Noto Kufi Arabic', sans-serif" : "'Anton SC', sans-serif", fontSize: '20px', letterSpacing: isRTL ? '0' : '4px', color: 'var(--accent-gold)', fontWeight: 700 }}>◆</span>,
+            <span key={`item-${i}`} style={{ fontFamily: isRTL ? "'Noto Kufi Arabic', sans-serif" : "'Anton SC', sans-serif", fontSize: isRTL ? '15px' : '17px', letterSpacing: isRTL ? '0' : '4px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: isRTL ? 700 : 400 }}>{item}</span>,
+          ])}
         </div>
       </div>
 
@@ -1085,14 +1088,14 @@ export default function Home() {
                   {t('family.join_btn')}
                 </span>
                 <motion.div
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: isRTL ? -4 : 4 }}
                   style={{
                     width: '44px', height: '44px', borderRadius: '50%',
                     background: 'var(--accent-gold)', display: 'flex', alignItems: 'center',
                     justifyContent: 'center', color: 'var(--bg-base)',
                   }}
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: isRTL ? 'scaleX(-1)' : 'none' }}>
                     <line x1="5" y1="12" x2="19" y2="12"/>
                     <polyline points="12 5 19 12 12 19"/>
                   </svg>

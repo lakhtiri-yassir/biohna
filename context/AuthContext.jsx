@@ -84,12 +84,14 @@ function AuthProviderInner({ children }) {
     fullName: session.user.fullName,
     phone: session.user.phone || '',
     picture: session.user.picture || null,
-    avatar: session.user.picture, // alias for compatibility
-    avatarUrl: session.user.picture, // alias for compatibility
+    avatar: session.user.picture,
+    avatarUrl: session.user.picture,
     banner: session.user.banner || null,
     bannerUrl: session.user.banner || null,
-    initials: session.user.fullName ? 
-      session.user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 
+    role: session.user.role || 'CLIENT',
+    isVendor: session.user.role === 'VENDOR',
+    initials: session.user.fullName ?
+      session.user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() :
       '??',
     settings: session.user.settings || {
       language: 'fr',

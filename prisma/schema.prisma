@@ -11,6 +11,11 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum UserRole {
+  CLIENT
+  VENDOR
+}
+
 model User {
   id           String    @id @default(cuid())
   firstName    String
@@ -19,6 +24,7 @@ model User {
   phone        String?
   passwordHash String?
   picture      String?
+  role         UserRole  @default(CLIENT)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   deletedAt    DateTime?
@@ -27,6 +33,7 @@ model User {
   orders    Order[]
   reviews   ProductReview[]
   addresses Address[]
+  vendor    Vendor?
 
   @@map("user")
 }
@@ -47,6 +54,7 @@ model UserSettings {
 
 model Vendor {
   id             String   @id @default(cuid())
+  userId         String?  @unique
   storeName      String
   storeAddress   String?
   storePhone     String?
@@ -54,6 +62,7 @@ model Vendor {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
+  user       User?       @relation(fields: [userId], references: [id])
   products   Product[]
   orderItems OrderItem[]
 

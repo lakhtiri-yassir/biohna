@@ -204,7 +204,7 @@ function StepAccount({ role, onNext, formData, setFormData, loading, error }) {
             <input 
               className="si-input" 
               type="text" 
-              placeholder="Your full name"
+              placeholder={t('signin.full_name')}
               value={formData.fullName}
               onChange={(e) => updateFormData('fullName', e.target.value)}
               required
@@ -289,7 +289,7 @@ function StepAccount({ role, onNext, formData, setFormData, loading, error }) {
           whileHover={{ y:-2, boxShadow:'0 8px 36px rgba(212,175,55,0.4)' }}
           whileTap={{ scale:0.98 }}
           type="submit"
-          disabled={loading || !formData.email || !formData.password || !formData.fullName}
+          disabled={loading || !formData.email || !formData.password || !formData.confirmPassword || !formData.fullName}
           style={{ 
             width:'100%', 
             padding:'16px', 
@@ -312,7 +312,7 @@ function StepAccount({ role, onNext, formData, setFormData, loading, error }) {
   )
 }
 
-function StepCandidature({ onSubmit, loading, error }) {
+function StepCandidature({ onSubmit, loading, error, formData, setFormData }) {
   const { t } = useTranslation('auth')
   const { flip } = useDirection()
   const [files, setFiles] = useState([])
@@ -320,6 +320,10 @@ function StepCandidature({ onSubmit, loading, error }) {
 
   function handleFiles(incoming) {
     setFiles(prev => [...prev, ...Array.from(incoming)])
+  }
+
+  function updateField(field, value) {
+    setFormData(prev => ({ ...prev, [field]: value }))
   }
 
   const inputStyle = {
@@ -352,7 +356,7 @@ function StepCandidature({ onSubmit, loading, error }) {
             <span style={iconPos}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><path d="M3 9l1-4h16l1 4"/><path d="M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
             </span>
-            <input className="si-input" type="text" placeholder={t('signin.coop_name_placeholder')} style={inputStyle} />
+            <input className="si-input" type="text" placeholder={t('signin.coop_name_placeholder')} value={formData.storeName} onChange={e => updateField('storeName', e.target.value)} required style={inputStyle} />
           </div>
         </div>
 
@@ -362,7 +366,7 @@ function StepCandidature({ onSubmit, loading, error }) {
             <span style={iconPos}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
             </span>
-            <input className="si-input" type="text" placeholder={t('signin.region_placeholder')} style={inputStyle} />
+            <input className="si-input" type="text" placeholder={t('signin.region_placeholder')} value={formData.storeAddress} onChange={e => updateField('storeAddress', e.target.value)} style={inputStyle} />
           </div>
         </div>
 
@@ -432,20 +436,20 @@ function StepCandidature({ onSubmit, loading, error }) {
           whileHover={{ y:-2, boxShadow:'0 8px 36px rgba(212,175,55,0.4)' }}
           whileTap={{ scale:0.98 }}
           type="submit"
-          disabled={loading}
-          style={{ 
-            width:'100%', 
-            padding:'16px', 
-            background: loading ? 'var(--border-subtle)' : 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))', 
-            border:'none', 
-            borderRadius:'14px', 
-            fontWeight:700, 
-            fontSize:'16px', 
-            color:'var(--bg-base)', 
-            cursor: loading ? 'not-allowed' : 'pointer', 
-            boxShadow:'0 4px 24px rgba(212,175,55,0.3)', 
+          disabled={loading || !formData.storeName}
+          style={{
+            width:'100%',
+            padding:'16px',
+            background: (loading || !formData.storeName) ? 'var(--border-subtle)' : 'linear-gradient(135deg, var(--accent-gold), var(--accent-amber))',
+            border:'none',
+            borderRadius:'14px',
+            fontWeight:700,
+            fontSize:'16px',
+            color:'var(--bg-base)',
+            cursor: (loading || !formData.storeName) ? 'not-allowed' : 'pointer',
+            boxShadow:'0 4px 24px rgba(212,175,55,0.3)',
             fontFamily:"'Anek Latin', var(--font-body), sans-serif",
-            opacity: loading ? 0.6 : 1
+            opacity: (loading || !formData.storeName) ? 0.6 : 1
           }}
         >
           {loading ? 'Submitting...' : t('signin.submit_application')}
@@ -505,7 +509,9 @@ export default function SignIn() {
     fullName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    storeName: '',
+    storeAddress: '',
   })
   
   const router = useRouter()
@@ -547,7 +553,10 @@ export default function SignIn() {
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
-          password: formData.password
+          password: formData.password,
+          role: role === 'vendor' ? 'VENDOR' : 'CLIENT',
+          storeName: formData.storeName || undefined,
+          storeAddress: formData.storeAddress || undefined,
         })
       })
 
@@ -566,9 +575,10 @@ export default function SignIn() {
           setSubmitted(true)
         } else {
           router.push('/')
+          router.refresh()
         }
       } else {
-        setError('Compte créé mais connexion échouée. Veuillez vous connecter.')
+        setError('Compte créé mais connexion échouée. Veuillez vous connecter manuellement.')
         setTimeout(() => router.push('/login'), 2000)
       }
     } catch (error) {
@@ -684,7 +694,7 @@ export default function SignIn() {
                 error={error}
               />
             ) : (
-              <StepCandidature onSubmit={handleStep3Submit} loading={loading} error={error} />
+              <StepCandidature onSubmit={handleStep3Submit} loading={loading} error={error} formData={formData} setFormData={setFormData} />
             )}
           </AnimatePresence>
 

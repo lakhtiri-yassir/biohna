@@ -1,6 +1,6 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ModalProvider } from "@/context/ModalContext";
@@ -9,7 +9,23 @@ import CategoriesModal from "@/components/modals/CategoriesModal";
 import ContactModal from "@/components/modals/ContactModal";
 import FavoritesModal from "@/components/modals/FavoritesModal";
 import VendeurModal from "@/components/modals/VendeurModal";
+import LanguagePicker from "@/components/LanguagePicker";
 import "@/i18n/index.js"; // Initialize i18n
+
+const NAVBAR_PATHS = ['/', '/vendeurs', '/profile', '/produits', '/favoris', '/cart'];
+
+function FloatingLanguagePicker() {
+  const pathname = usePathname();
+  const hasNavbar = NAVBAR_PATHS.includes(pathname) ||
+    pathname.startsWith('/vendeurs/') ||
+    pathname.startsWith('/produits/');
+  if (hasNavbar) return null;
+  return (
+    <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 2000 }}>
+      <LanguagePicker />
+    </div>
+  );
+}
 
 /* Fixed background orbs — rendered once, never re-mount */
 function BgOrbs() {
@@ -71,23 +87,22 @@ function BgOrbs() {
 
 export default function Providers({ children }) {
   return (
-    <SessionProvider>
-      <ThemeProvider>
-        <AuthProvider>
-          <ModalProvider>
-          <BgOrbs />
+    <ThemeProvider>
+      <AuthProvider>
+        <ModalProvider>
+        <BgOrbs />
+        <FloatingLanguagePicker />
 
-          {/* Modals are portalled outside the page flow */}
-          <PanierModal />
-          <CategoriesModal />
-          <ContactModal />
-          <FavoritesModal />
-          <VendeurModal />
+        {/* Modals are portalled outside the page flow */}
+        <PanierModal />
+        <CategoriesModal />
+        <ContactModal />
+        <FavoritesModal />
+        <VendeurModal />
 
-          {children}
-          </ModalProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </SessionProvider>
+        {children}
+        </ModalProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
